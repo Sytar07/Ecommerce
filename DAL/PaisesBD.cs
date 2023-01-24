@@ -68,7 +68,7 @@ namespace DAL
 
             }
 
-            return entityUsers;
+            return entity;
         }
     }
 }
