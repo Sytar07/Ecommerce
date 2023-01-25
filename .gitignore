@@ -7,3 +7,6 @@
 /CORE/obj
 /WEB/bin
 /DAL/obj
+/WEB/obj
+/FRONT/bin/Debug/net6.0
+/FRONT/obj
