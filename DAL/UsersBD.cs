@@ -66,7 +66,7 @@ namespace DAL
                 }
                 finally
                 {
-                    // SI chuta le damos adelante. COMMIT
+                    // SI funciona la transaccion le damos adelante. COMMIT
                     sqlTransaction.Commit();
                 }
 
