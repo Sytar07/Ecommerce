@@ -147,9 +147,16 @@
         {
             // Aqui hago cosas.
             ididentifier_i = 0;
-            name_nv = "";
+            id_producto_nv = "";
+            nombre_nv = "";
+            stock_nv = "";
+            descripcion_nv = "";
+            precio_nv = "";
+            owner_nv = "";
+            fecha_creacion_nv = "";
+            fecha_modificacion_nv = "";
 
-        }
+    }
 
     }
     public class EntityProductos

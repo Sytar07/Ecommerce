@@ -119,9 +119,14 @@
         {
             // Aqui hago cosas.
             ididentifier_i = 0;
-            name_nv = "";
+            id_imagen_nv = "";
+            path_nv = "";
+            tipo_nv = "";
+            owner_nv = "";
+            fecha_creacion_nv = "";
+            fecha_modificacion_nv = "";
 
-        }
+    }
 
     }
     public class EntityImagenes

@@ -121,8 +121,14 @@
             // Aqui hago cosas.
             ididentifier_i = 0;
             name_nv = "";
+            id_FPA_nv = "";
+            name_nv = "";
+            type_nv = "";
+            Owner_nv = "";
+            Created_Date_nv = "";
+            Mod_Date_nv = "";
 
-        }
+    }
 
     }
     public class EntityFormasPagos
