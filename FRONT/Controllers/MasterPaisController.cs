@@ -17,22 +17,26 @@ namespace FRONT.Controllers
         public IActionResult Index()
         {
             EntityPaises Paises = new EntityPaises();
-            Paises.list = new List<EntityPais>()
+            Paises.lista = new List<EntityPais>()
             {
-                new EntityPais(1,"ESPAÑA"),
-                new EntityPais(2,"FRANCIA"),
-                new EntityPais(3,"SUECIA"),
-                new EntityPais(4,"DINAMARCA"),
-                new EntityPais(5,"MEXICO"),
-                new EntityPais(6,"PORTUGAL"),
+                new EntityPais()
+                {
+                    ididentifier_i=1,
+                    name_nv="ESP"
+                },
             };
 
-            return View(Paises.list);
+            return View(Paises.lista);
         }
         public IActionResult Details(int id)
         {
 
-            return View(new EntityPais(id, "ESPAÑA"));
+            return View(new EntityPais()
+            {
+                ididentifier_i = 1,
+                name_nv = "ESP"
+            }
+            );
         }
 
         public IActionResult Privacy()

@@ -41,10 +41,10 @@ namespace DAL
                     while (reader.Read())
                     {
                         // Añado las formas de pago encontradas a la lista de entidades
-                        entityFormasPago.entityFormasPago.Add(new EntityFormasPago
+                        entityFormasPago.lista.Add(new EntityFormaPago
                         {
                             ididentifier_i = (int)reader["ID"],
-                            id_FPA = (int)reader["ID_FPA"],
+                            id_FPA_nv = (string)reader["ID_FPA"],
                             name = (string)reader["Name"],
                             type = (string)reader["Type"],
                             owner = (string)reader["Owner"],

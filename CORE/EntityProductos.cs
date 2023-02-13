@@ -1,6 +1,6 @@
 ﻿namespace ECOMMERCE.CORE
 {
-    public class EntityProductos : ICommonEntity
+    public class EntityProducto : ICommonEntity
     {
         public int ididentifier_i {
             get{
@@ -41,16 +41,16 @@
             }
         }
 
-        public string stock_nv
+        public double stock_f
         {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _stock_nv;
+                return _stock_f;
             }
             set
             {
-                _stock_nv = value;
+                _stock_f = value;
             }
         }
 
@@ -67,57 +67,58 @@
             }
         }
 
-        public string precio_nv
+        public double precio_f
         {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _precio_nv;
+                return _precio_f;
             }
             set
             {
-                _precio_nv = value;
+                _precio_f = value;
             }
         }
 
-        public string owner_nv
+        public string Owner_nv
         {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _owner_nv;
+                return _Owner_nv;
             }
             set
             {
-                _owner_nv = value;
+                _Owner_nv = value;
             }
         }
 
-        public string fecha_creacion_nv
+        public DateTime? FechaCreacion_dt
         {
             get
             {
-                // Comprobaciones tipo/null/etc..
-                return _fecha_creacion_nv;
+                return _FechaCreacion_dt;
             }
             set
             {
-                _fecha_creacion_nv = value;
+
+                _FechaCreacion_dt = value;
             }
         }
 
-        public string fecha_modificacion_nv
+        public DateTime? FechaModificacion_dt
         {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _fecha_modificacion_nv;
+                return _FechaModificacion_dt;
             }
             set
             {
-                _fecha_modificacion_nv = value;
+                _FechaModificacion_dt = value;
             }
         }
+   
 
         public bool delete
         {
@@ -136,38 +137,38 @@
         private int _ididentifier_i;
         private string _id_producto_nv;
         private string _nombre_nv;
-        private string _stock_nv;
+        private double _stock_f;
         private string _descripcion_nv;
-        private string _precio_nv;
-        private string _owner_nv;
-        private string _fecha_creacion_nv;
-        private string _fecha_modificacion_nv;
+        private double _precio_f;
+        private string _Owner_nv;
+        private DateTime? _FechaCreacion_dt;
+        private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
-        public void Init()
+        public EntityProducto()
         {
             // Aqui hago cosas.
             ididentifier_i = 0;
             id_producto_nv = "";
             nombre_nv = "";
-            stock_nv = "";
+            stock_f = 0;
             descripcion_nv = "";
-            precio_nv = "";
-            owner_nv = "";
-            fecha_creacion_nv = "";
-            fecha_modificacion_nv = "";
+            precio_f = 0;
+            Owner_nv = "";
+            FechaCreacion_dt = DateTime.MinValue;
+            FechaModificacion_dt = DateTime.MinValue;
 
-    }
+        }
 
     }
     public class EntityProductos
     {
-        public IList<EntityProducto> entityProductos;
+        public IList<EntityProducto> lista;
 
         public EntityProductos()
         {
-            if (entityProductos == null)
+            if (lista == null)
             {
-                entityProductos = new List<EntityProducto>();
+                lista = new List<EntityProducto>();
             }
         }
     }

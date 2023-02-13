@@ -1,6 +1,6 @@
 ﻿namespace ECOMMERCE.CORE
 {
-    public class EntityImagenes : ICommonEntity
+    public class EntityImagen : ICommonEntity
     {
         public int ididentifier_i {
             get{
@@ -22,7 +22,7 @@
         public string id_imagen_nv { 
             get{
                 // Comprobaciones tipo/null/etc..
-                return _id_imagen;
+                return _id_imagen_nv;
             }
             set{
                 _id_imagen_nv = value;
@@ -67,29 +67,41 @@
             }
         }
 
-        public string fecha_creacion_nv
+        public DateTime? FechaCreacion_dt
+        {
+            get
+            {
+                return _FechaCreacion_dt;
+            }
+            set
+            {
+
+                _FechaCreacion_dt = value;
+            }
+        }
+        public string Owner_nv
         {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _fecha_creacion_nv;
+                return _owner_nv;
             }
             set
             {
-                _fecha_creacion_nv = value;
+                _owner_nv = value;
             }
         }
 
-        public string fecha_modificacion_nv
+        public DateTime? FechaModificacion_dt
         {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _fecha_modificacion_nv;
+                return _FechaModificacion_dt;
             }
             set
             {
-                _fecha_modificacion_nv = value;
+                _FechaModificacion_dt = value;
             }
         }
 
@@ -112,10 +124,10 @@
         private string _path_nv;
         private string _tipo_nv;
         private string _owner_nv;
-        private string _fecha_creacion_nv;
-        private string _fecha_modificacion_nv;
+        private DateTime? _FechaCreacion_dt;
+        private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
-        public void Init()
+        public  EntityImagen()
         {
             // Aqui hago cosas.
             ididentifier_i = 0;
@@ -123,21 +135,21 @@
             path_nv = "";
             tipo_nv = "";
             owner_nv = "";
-            fecha_creacion_nv = "";
-            fecha_modificacion_nv = "";
+            FechaCreacion_dt = DateTime.MinValue;
+            FechaModificacion_dt = DateTime.MinValue;
 
-    }
+        }
 
     }
     public class EntityImagenes
     {
-        public IList<EntityImagen> entityImagenes;
+        public IList<EntityImagen> lista;
 
         public EntityImagenes()
         {
-            if (entityImagenes == null)
+            if (lista == null)
             {
-                entityImagenes = new List<EntityImagen>();
+                lista = new List<EntityImagen>();
             }
         }
     }

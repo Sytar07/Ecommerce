@@ -1,6 +1,6 @@
 ﻿namespace ECOMMERCE.CORE
 {
-    public class EntityFormasPago : ICommonEntity
+    public class EntityFormaPago : ICommonEntity
     {
         public int ididentifier_i {
             get{
@@ -68,32 +68,31 @@
             }
         }
 
-        public string Created_Date_nv
+        public DateTime? FechaCreacion_dt
+        {
+            get
+            {
+                return _FechaCreacion_dt;
+            }
+            set
+            {
+
+                _FechaCreacion_dt = value;
+            }
+        }
+
+        public DateTime? FechaModificacion_dt
         {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _Created_Date_nv;
+                return _FechaModificacion_dt;
             }
             set
             {
-                _Created_Date_nv = value;
+                _FechaModificacion_dt = value;
             }
         }
-
-        public string Mod_Date_nv
-        {
-            get
-            {
-                // Comprobaciones tipo/null/etc..
-                return _Mod_Dater_nv;
-            }
-            set
-            {
-                _Mod_Date_nv = value;
-            }
-        }
-
 
         public bool delete
         {
@@ -113,10 +112,10 @@
         private string _name_nv;
         private string _type_nv;
         private string _Owner_nv;
-        private string _Created_Date_nv;
-        private string _Mod_Date_nv;
+        private DateTime? _FechaCreacion_dt;
+        private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
-        public void Init()
+        public  EntityFormaPago()
         {
             // Aqui hago cosas.
             ididentifier_i = 0;
@@ -125,21 +124,21 @@
             name_nv = "";
             type_nv = "";
             Owner_nv = "";
-            Created_Date_nv = "";
-            Mod_Date_nv = "";
+            FechaCreacion_dt = DateTime.MinValue;
+            FechaModificacion_dt = DateTime.MinValue;
+
+        }
 
     }
-
-    }
-    public class EntityFormasPagos
+    public class EntityFormasPago
     {
-        public IList<EntityFormasPago> entityFormasPagos;
+        public IList<EntityFormasPago> lista;
 
-        public EntityFormasPagos()
+        public EntityFormasPago()
         {
-            if (entityFormasPagos == null)
+            if (lista == null)
             {
-                entityFormasPagos = new List<EntityFormasPago();
+                lista = new List<EntityFormasPago>();
             }
         }
     }

@@ -158,6 +158,8 @@
         private DateTime? _FechaCreacion_dt;
         private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
+
+        // JAT: contructor
         public EntityDireccion()
         {
             // JAT: iniciador/ constructor. 
@@ -178,13 +180,13 @@
 
     public class EntityDirecciones
     {
-        public IList<EntityDireccion> entityDirecciones;
+        public IList<EntityDireccion> lista;
 
         public EntityDirecciones()
         {
-            if (entityDirecciones == null)
+            if (lista == null)
             {
-                entityDirecciones = new List<EntityDireccion>();
+                lista = new List<EntityDireccion>();
             }
         }
     }

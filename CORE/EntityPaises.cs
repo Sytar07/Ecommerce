@@ -1,6 +1,6 @@
 ﻿namespace ECOMMERCE.CORE
 {
-    public class EntityPaises : ICommonEntity
+    public class EntityPais : ICommonEntity
     {
         public int ididentifier_i {
             get{
@@ -41,7 +41,7 @@
             }
         }
 
-        public string owner_nv
+        public string Owner_nv
         {
             get
             {
@@ -54,32 +54,31 @@
             }
         }
 
-                public string fecha_creacion_nv
+        public DateTime? FechaCreacion_dt
+        {
+            get
+            {
+                return _FechaCreacion_dt;
+            }
+            set
+            {
+
+                _FechaCreacion_dt = value;
+            }
+        }
+
+        public DateTime? FechaModificacion_dt
         {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _fecha_creacion_nv;
+                return _FechaModificacion_dt;
             }
             set
             {
-                _fecha_creacion_nv = value;
+                _FechaModificacion_dt = value;
             }
         }
-
-                public string fecha_modificacion_nv
-        {
-            get
-            {
-                // Comprobaciones tipo/null/etc..
-                return _fecha_modificacion_nv;
-            }
-            set
-            {
-                _fecha_modificacion_nv = value;
-            }
-        }
-
 
         public bool delete
         {
@@ -99,32 +98,31 @@
         private string _Id_Country_nv;
         private string _name_nv;
         private string _email_nv;
-        private string _owner_nv
-        private string _fecha_creacion_nv
-        private string _fecha_modificacion_nv
+        private string _owner_nv;
+        private DateTime? _FechaCreacion_dt;
+        private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
-        public void Init()
+        public EntityPais()
         {
             // Aqui hago cosas.
             ididentifier_i = 0;
             Id_Country_nv = "";
             name_nv = "";
-            email_nv = "";
-            owner_nv = "";
-            fecha_creacion_nv = "";
-            fecha_modificacion_nv = "";
+            Owner_nv = "";
+            FechaCreacion_dt = DateTime.MinValue;
+            FechaModificacion_dt = DateTime.MinValue;
         }
 
     }
     public class EntityPaises
     {
-        public IList<EntityPais> entityPaises;
-
+        public IList<EntityPais> lista;
+       
         public EntityPaises()
         {
-            if (entityPaises == null)
+            if (lista == null)
             {
-                entityPaises = new List<EntityPais>();
+                lista = new List<EntityPais>();
             }
         }
     }

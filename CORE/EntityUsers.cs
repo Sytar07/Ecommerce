@@ -53,6 +53,44 @@
                 _email_nv = value;
             }
         }
+        public string Owner_nv
+        {
+            get
+            {
+                // Comprobaciones tipo/null/etc..
+                return _Owner_nv;
+            }
+            set
+            {
+                _Owner_nv = value;
+            }
+        }
+
+        public DateTime? FechaCreacion_dt
+        {
+            get
+            {
+                return _FechaCreacion_dt;
+            }
+            set
+            {
+
+                _FechaCreacion_dt = value;
+            }
+        }
+
+        public DateTime? FechaModificacion_dt
+        {
+            get
+            {
+                // Comprobaciones tipo/null/etc..
+                return _FechaModificacion_dt;
+            }
+            set
+            {
+                _FechaModificacion_dt = value;
+            }
+        }
         public bool delete
         {
             get
@@ -71,26 +109,33 @@
         private string _name_nv;
         private string _fullname_nv;
         private string _email_nv;
+        private string _Owner_nv;
+        private DateTime? _FechaCreacion_dt;
+        private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
-        public void Init()
+        public EntityUser()
         {
             // Aqui hago cosas.
             ididentifier_i = 0;
             name_nv = "";
             fullname_nv = "";
             email_nv = "";
+            Owner_nv = "";
+            FechaCreacion_dt = DateTime.MinValue;
+            FechaModificacion_dt = DateTime.MinValue;
+
         }
 
     }
     public class EntityUsers
     {
-        public IList<EntityUser> entityUsers;
+        public IList<EntityUser> lista;
 
         public EntityUsers()
         {
-            if (entityUsers == null)
+            if (lista == null)
             {
-                entityUsers = new List<EntityUser>();
+                lista = new List<EntityUser>();
             }
         }
     }

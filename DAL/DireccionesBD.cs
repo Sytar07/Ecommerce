@@ -41,18 +41,18 @@ namespace DAL
                     while (reader.Read())
                     {
                         // Añado las direcciones encontradas a la lista de entidades
-                        entityDirecciones.entityDirecciones.Add(new EntityDirecciones
+                        entityDirecciones.entityDirecciones.Add(new EntityDireccion
                         {
                             ididentifier_i = (int)reader["ID"],
-                            id_direccion = (int)reader["ID_Direccion"],
+                            direccion_nv = (string)reader["Direccion"],
                             calle_nv = (string)reader["Calle"],
-                            numero_nv = (int)reader["Numero"],
+                            numero_i = (int)reader["Numero"],
                             puerta_nv = (string)reader["Puerta"],
                             ciudad_nv = (string)reader["Ciudad"],
                             pais_nv = (string)reader["Pais"],
-                            owner_nv = (string)reader["Owner"],
-                            fecha_creacion_nv = (DateTime)reader["Fecha_Creacion"],
-                            fecha_modificacion_nv = (DateTime)reader["Fecha_Modificacion"],
+                            Owner_nv = (string)reader["Owner"],                            
+                            FechaCreacion_dt = (DateTime)reader["Fecha_Creacion"],
+                            FechaModificacion_dt = (DateTime)reader["Fecha_Modificacion"],
                         });
 
                         Console.WriteLine((int)reader["ID"]);
