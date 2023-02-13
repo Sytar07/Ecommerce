@@ -1,6 +1,6 @@
 ﻿namespace ECOMMERCE.CORE
 {
-    public class EntityPaises : ICommonEntity
+    public class EntityImagenes : ICommonEntity
     {
         public int ididentifier_i {
             get{
@@ -19,25 +19,38 @@
             } 
         }
 
-        public string Id_Country_nv { 
+        public string id_imagen_nv { 
             get{
                 // Comprobaciones tipo/null/etc..
-                return _Id_Country_nv;
+                return _id_imagen;
             }
             set{
-                _Id_Country_nv=value;
+                _id_imagen_nv = value;
             } 
         }
 
-        public string name_nv {
+        public string path_nv {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _name_nv;
+                return _path_nv;
             }
             set
             {
-                _name_nv = value;
+                _path_nv = value;
+            }
+        }
+
+        public string tipo_nv
+        {
+            get
+            {
+                // Comprobaciones tipo/null/etc..
+                return _tipo_nv;
+            }
+            set
+            {
+                _tipo_nv = value;
             }
         }
 
@@ -54,7 +67,7 @@
             }
         }
 
-                public string fecha_creacion_nv
+        public string fecha_creacion_nv
         {
             get
             {
@@ -67,7 +80,7 @@
             }
         }
 
-                public string fecha_modificacion_nv
+        public string fecha_modificacion_nv
         {
             get
             {
@@ -79,7 +92,6 @@
                 _fecha_modificacion_nv = value;
             }
         }
-
 
         public bool delete
         {
@@ -96,35 +108,36 @@
 
 
         private int _ididentifier_i;
-        private string _Id_Country_nv;
-        private string _name_nv;
-        private string _email_nv;
-        private string _owner_nv
-        private string _fecha_creacion_nv
-        private string _fecha_modificacion_nv
+        private string _id_imagen_nv;
+        private string _path_nv;
+        private string _tipo_nv;
+        private string _owner_nv;
+        private string _fecha_creacion_nv;
+        private string _fecha_modificacion_nv;
         private bool _delete_b;
         public void Init()
         {
             // Aqui hago cosas.
             ididentifier_i = 0;
-            Id_Country_nv = "";
-            name_nv = "";
-            email_nv = "";
+            id_imagen_nv = "";
+            path_nv = "";
+            tipo_nv = "";
             owner_nv = "";
             fecha_creacion_nv = "";
             fecha_modificacion_nv = "";
-        }
 
     }
-    public class EntityPaises
-    {
-        public IList<EntityPais> entityPaises;
 
-        public EntityPaises()
+    }
+    public class EntityImagenes
+    {
+        public IList<EntityImagen> entityImagenes;
+
+        public EntityImagenes()
         {
-            if (entityPaises == null)
+            if (entityImagenes == null)
             {
-                entityPaises = new List<EntityPais>();
+                entityImagenes = new List<EntityImagen>();
             }
         }
     }

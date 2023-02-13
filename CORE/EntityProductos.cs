@@ -1,6 +1,6 @@
 ﻿namespace ECOMMERCE.CORE
 {
-    public class EntityPaises : ICommonEntity
+    public class EntityProductos : ICommonEntity
     {
         public int ididentifier_i {
             get{
@@ -19,25 +19,64 @@
             } 
         }
 
-        public string Id_Country_nv { 
+        public string id_producto_nv { 
             get{
                 // Comprobaciones tipo/null/etc..
-                return _Id_Country_nv;
+                return _id_producto_nv;
             }
             set{
-                _Id_Country_nv=value;
+                _id_producto_nv = value;
             } 
         }
 
-        public string name_nv {
+        public string nombre_nv {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _name_nv;
+                return _nombre_nv;
             }
             set
             {
-                _name_nv = value;
+                _nombre_nv = value;
+            }
+        }
+
+        public string stock_nv
+        {
+            get
+            {
+                // Comprobaciones tipo/null/etc..
+                return _stock_nv;
+            }
+            set
+            {
+                _stock_nv = value;
+            }
+        }
+
+        public string descripcion_nv
+        {
+            get
+            {
+                // Comprobaciones tipo/null/etc..
+                return _descripcion_nv;
+            }
+            set
+            {
+                _descripcion_nv = value;
+            }
+        }
+
+        public string precio_nv
+        {
+            get
+            {
+                // Comprobaciones tipo/null/etc..
+                return _precio_nv;
+            }
+            set
+            {
+                _precio_nv = value;
             }
         }
 
@@ -54,7 +93,7 @@
             }
         }
 
-                public string fecha_creacion_nv
+        public string fecha_creacion_nv
         {
             get
             {
@@ -67,7 +106,7 @@
             }
         }
 
-                public string fecha_modificacion_nv
+        public string fecha_modificacion_nv
         {
             get
             {
@@ -79,7 +118,6 @@
                 _fecha_modificacion_nv = value;
             }
         }
-
 
         public bool delete
         {
@@ -96,35 +134,40 @@
 
 
         private int _ididentifier_i;
-        private string _Id_Country_nv;
-        private string _name_nv;
-        private string _email_nv;
-        private string _owner_nv
-        private string _fecha_creacion_nv
-        private string _fecha_modificacion_nv
+        private string _id_producto_nv;
+        private string _nombre_nv;
+        private string _stock_nv;
+        private string _descripcion_nv;
+        private string _precio_nv;
+        private string _owner_nv;
+        private string _fecha_creacion_nv;
+        private string _fecha_modificacion_nv;
         private bool _delete_b;
         public void Init()
         {
             // Aqui hago cosas.
             ididentifier_i = 0;
-            Id_Country_nv = "";
-            name_nv = "";
-            email_nv = "";
+            id_producto_nv = "";
+            nombre_nv = "";
+            stock_nv = "";
+            descripcion_nv = "";
+            precio_nv = "";
             owner_nv = "";
             fecha_creacion_nv = "";
             fecha_modificacion_nv = "";
-        }
 
     }
-    public class EntityPaises
-    {
-        public IList<EntityPais> entityPaises;
 
-        public EntityPaises()
+    }
+    public class EntityProductos
+    {
+        public IList<EntityProducto> entityProductos;
+
+        public EntityProductos()
         {
-            if (entityPaises == null)
+            if (entityProductos == null)
             {
-                entityPaises = new List<EntityPais>();
+                entityProductos = new List<EntityProducto>();
             }
         }
     }

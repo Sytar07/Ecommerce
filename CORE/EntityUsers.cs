@@ -77,7 +77,8 @@
             // Aqui hago cosas.
             ididentifier_i = 0;
             name_nv = "";
-
+            fullname_nv = "";
+            email_nv = "";
         }
 
     }
