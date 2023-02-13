@@ -2,8 +2,10 @@
 {
     public class EntityFormaPago : ICommonEntity
     {
-        public int ididentifier_i {
-            get{
+        public int ididentifier_i
+        {
+            get
+            {
                 // Comprobaciones tipo/null/etc..
                 if (_ididentifier_i == -1)
                 {
@@ -14,21 +16,25 @@
                     return _ididentifier_i;
                 }
             }
-            set{
-                _ididentifier_i=value;
-            } 
+            set
+            {
+                _ididentifier_i = value;
+            }
         }
 
-        public string name_nv { 
-            get{
+        public string name_nv
+        {
+            get
+            {
                 // Comprobaciones tipo/null/etc..
                 return _name_nv;
             }
-            set{
-                _name_nv=value;
-            } 
+            set
+            {
+                _name_nv = value;
+            }
         }
-        
+
         public string type_nv
         {
             get
@@ -101,7 +107,7 @@
         private DateTime? _FechaCreacion_dt;
         private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
-        public  EntityFormaPago()
+        public EntityFormaPago()
         {
             // Aqui hago cosas.
             ididentifier_i = 0;
@@ -127,5 +133,5 @@
         }
     }
 
-    
+
 }
