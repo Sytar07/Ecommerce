@@ -19,19 +19,6 @@
             } 
         }
 
-        public string id_FPA_nv
-        {
-            get
-            {
-                // Comprobaciones tipo/null/etc..
-                return _id_FPA_nv;
-            }
-            set
-            {
-                _id_FPA_nv = value;
-            }
-        }
-
         public string name_nv { 
             get{
                 // Comprobaciones tipo/null/etc..
@@ -108,7 +95,6 @@
         }
 
         private int _ididentifier_i;
-        private string _id_FPA_nv;
         private string _name_nv;
         private string _type_nv;
         private string _Owner_nv;
@@ -120,8 +106,6 @@
             // Aqui hago cosas.
             ididentifier_i = 0;
             name_nv = "";
-            id_FPA_nv = "";
-            name_nv = "";
             type_nv = "";
             Owner_nv = "";
             FechaCreacion_dt = DateTime.MinValue;
@@ -132,13 +116,13 @@
     }
     public class EntityFormasPago
     {
-        public IList<EntityFormasPago> lista;
+        public IList<EntityFormaPago> lista;
 
         public EntityFormasPago()
         {
             if (lista == null)
             {
-                lista = new List<EntityFormasPago>();
+                lista = new List<EntityFormaPago>();
             }
         }
     }

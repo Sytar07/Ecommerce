@@ -43,16 +43,15 @@ namespace DAL
                         // Añado las formas de pago encontradas a la lista de entidades
                         entityFormasPago.lista.Add(new EntityFormaPago
                         {
-                            ididentifier_i = (int)reader["ID"],
-                            id_FPA_nv = (string)reader["ID_FPA"],
-                            name = (string)reader["Name"],
-                            type = (string)reader["Type"],
-                            owner = (string)reader["Owner"],
-                            created_date = (DateTime)reader["Fecha_Creacion"],
-                            mod_date = (DateTime)reader["Fecha_Modificacion"],
+                            ididentifier_i = (int)reader["ID_FPA"],
+                            name_nv = (string)reader["Name"],
+                            type_nv = (string)reader["Type"],
+                            Owner_nv = (string)reader["Owner"],
+                            FechaCreacion_dt = (DateTime)reader["Fecha_Creacion"],
+                            FechaModificacion_dt = (DateTime)reader["Fecha_Modificacion"],
                         });
 
-                        Console.WriteLine((int)reader["ID"]);
+                        Console.WriteLine((int)reader["ID_FPA"]);
                     }
                     // Cierro el READER
                     reader.Close();
