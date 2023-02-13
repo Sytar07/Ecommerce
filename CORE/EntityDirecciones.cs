@@ -1,10 +1,10 @@
 ﻿namespace ECOMMERCE.CORE
 {
-    public class EntityDirecciones : ICommonEntity
+    // JAT: Entidad principal: en singular. Hereda de Interfaz!
+    public class EntityDireccion : ICommonEntity
     {
         public int ididentifier_i {
-            get{
-                // Comprobaciones tipo/null/etc..
+            get{                
                 if (_ididentifier_i == -1)
                 {
                     return 0;
@@ -19,13 +19,14 @@
             } 
         }
 
-        public string id_direccion_nv { 
+        public string direccion_nv
+        { 
             get{
                 // Comprobaciones tipo/null/etc..
-                return _id_direccion_nv;
+                return _direccion_nv;
             }
             set{
-                _id_direccion_nv = value;
+                _direccion_nv = value;
             } 
         }
 
@@ -42,15 +43,15 @@
             }
         }
 
-        public string numero_nv {
+        public int? numero_i {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _numero_nv;
+                return _numero_i;
             }
             set
             {
-                _numero_nv = value;
+                _numero_i = value;
             }
         }
 
@@ -106,29 +107,29 @@
             }
         }
 
-        public string FechaCreacion_nv
+        public DateTime? FechaCreacion_dt
         {
             get
-            {
-                // Comprobaciones tipo/null/etc..
-                return _FechaCreacion_nv;
+            {                
+                return _FechaCreacion_dt;
             }
             set
             {
-                _FechaCreacion_nv = value;
+                
+                _FechaCreacion_dt = value;                
             }
         }
 
-        public string FechaModificacion_nv
+        public DateTime? FechaModificacion_dt
         {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _FechaModificacion_nv;
+                return _FechaModificacion_dt;
             }
             set
             {
-                _FechaModificacion_nv = value;
+                _FechaModificacion_dt = value;
             }
         }
 
@@ -147,33 +148,34 @@
 
 
         private int _ididentifier_i;
-        private string _id_direccion_nv;
+        private string _direccion_nv;
         private string _calle_nv;
-        private string _numero_nv;
+        private int? _numero_i;
         private string _puerta_nv;
         private string _ciudad_nv;
         private string _pais_nv;
         private string _Owner_nv;
-        private string _FechaCreacion_nv;
-        private string _FechaModificacion_nv;
+        private DateTime? _FechaCreacion_dt;
+        private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
-        public void Init()
+        public EntityDireccion()
         {
-            // Aqui hago cosas.
+            // JAT: iniciador/ constructor. 
             ididentifier_i = 0;
-            id_direccion_nv = "";
+            direccion_nv = "";
             calle_nv = "";
-            numero_nv = "";
+            numero_i = null;
             puerta_nv = "";
             ciudad_nv = "";
             pais_nv = "";
             Owner_nv = "";
-            FechaCreacion_nv = "";
-            FechaModificacion_nv = "";
+            FechaCreacion_dt = DateTime.MinValue;
+            FechaModificacion_dt = DateTime.MinValue;
 
         }
 
     }
+
     public class EntityDirecciones
     {
         public IList<EntityDireccion> entityDirecciones;
