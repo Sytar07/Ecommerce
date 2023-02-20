@@ -4,9 +4,12 @@
 
 /.vs
 /BLL/obj
+/BLL/bin
 /CORE/obj
-/WEB/bin
+/CORE/bin
 /DAL/obj
-/WEB/obj
-/FRONT/bin/Debug/net6.0
+/DAL/bin
+/FRONT/bin/
 /FRONT/obj
+/WEB
+
