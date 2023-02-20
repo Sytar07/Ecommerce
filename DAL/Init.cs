@@ -11,6 +11,9 @@ namespace ECOMMERCE.DAL
             foreach(CORE.EntityPais e in paisesBD.GETALLPAISES().list)
             {
                 Console.WriteLine("PAIS :" + e.ididentifier_i + " NOMBRE:" + e.name_nv);
+
+
+
             }
 
         }
