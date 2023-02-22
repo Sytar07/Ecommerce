@@ -41,7 +41,7 @@ namespace DAL
                     while (reader.Read())
                     {
                         // Añado las Imagenes encontradas a la lista de entidades
-                        entityImagenes.entityImagenes.Add(new EntityImagenes
+                        entityImagenes.lista.Add(new EntityImagen
                         {
                             ididentifier_i = (int)reader["ID"],
                             id_imagen = (int)reader["ID_Imagen"],

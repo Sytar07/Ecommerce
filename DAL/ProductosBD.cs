@@ -41,7 +41,7 @@ namespace DAL
                     while (reader.Read())
                     {
                         // Añado las Productos encontrados a la lista de entidades
-                        entityProductos.entityProductos.Add(new EntityProductos
+                        entityProductos.lista.Add(new EntityProducto
                         {
                             ididentifier_i = (int)reader["ID"],
                             id_producto = (int)reader["ID_Imagen"],
