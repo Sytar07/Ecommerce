@@ -1,7 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft;
-
-
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -44,9 +42,16 @@ namespace DAL
                     // LO LEO. 
                     while (reader.Read())
                     {
-                        // Añado los usuarios encontrados a la lista de entidades
-                        entity.list.Add(new EntityPais((int)reader["ID"], (string)reader["Nombre"]));
+                        // Añado los paises encontrados a la lista de entidades
+                        entityPaises.lista.Add(new EntityPais
 
+                        {
+                            ididentifier_i = (int)reader["ID_COUNTRY"],
+                            name_nv = (string)reader["NAME"],
+                            owner = (string)reader["OWNER"],
+                            fecha_creacion = (DateTime)reader["FECHA_CREACION"],
+                            fecha_modificacion = (DateTime)reader["FECHA_MODIFICACION"],
+                        });
                         Console.WriteLine((int)reader["ID"]);
                     }
                     // Cierro el READER

@@ -152,6 +152,15 @@ namespace ECOMMERCE.CORE
         private DateTime? _FechaCreacion_dt;
         private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
+        public int id_producto;
+        public string nombre;
+        public string descripcion;
+        public int stock;
+        public float precio;
+        public string owner;
+        public DateTime fecha_creacion;
+        public DateTime fecha_modificacion;
+
         public EntityProducto()
         {
             // Aqui hago cosas.

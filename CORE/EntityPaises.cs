@@ -110,6 +110,16 @@ namespace ECOMMERCE.CORE
         private DateTime? _FechaCreacion_dt;
         private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
+        public string direccion_nv;
+        public string calle_nv;
+        public int numero_i;
+        public string puerta_nv;
+        public string ciudad_nv;
+        public string pais_nv;
+        public string owner;
+        public DateTime fecha_creacion;
+        public DateTime fecha_modificacion;
+
         public EntityPais()
         {
             // Aqui hago cosas.

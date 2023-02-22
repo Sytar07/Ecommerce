@@ -43,13 +43,12 @@ namespace DAL
                         // Añado las Imagenes encontradas a la lista de entidades
                         entityImagenes.lista.Add(new EntityImagen
                         {
-                            ididentifier_i = (int)reader["ID"],
-                            id_imagen = (int)reader["ID_Imagen"],
-                            path = (string)reader["Path"],
-                            tipo = (string)reader["Tipo"],
-                            owner = (string)reader["Owner"],
-                            fecha_creacion = (DateTime)reader["Fecha_Creacion"],
-                            fecha_modificacion = (DateTime)reader["Fecha_Modificacion"],
+                            ididentifier_i = (int)reader["ID_IMAGEN"],
+                            path = (string)reader["PATH"],
+                            tipo = (string)reader["TIPO"],
+                            owner = (string)reader["OWNER"],
+                            fecha_creacion = (DateTime)reader["FECHA_CREACION"],
+                            fecha_modificacion = (DateTime)reader["FECHA_MODIFICACION"],
 
                         });
 

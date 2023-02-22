@@ -44,11 +44,11 @@ namespace DAL
                         entityFormasPago.lista.Add(new EntityFormaPago
                         {
                             ididentifier_i = (int)reader["ID_FPA"],
-                            name_nv = (string)reader["Name"],
-                            type_nv = (string)reader["Type"],
-                            Owner_nv = (string)reader["Owner"],
-                            FechaCreacion_dt = (DateTime)reader["Fecha_Creacion"],
-                            FechaModificacion_dt = (DateTime)reader["Fecha_Modificacion"],
+                            name_nv = (string)reader["NAME"],
+                            type_nv = (string)reader["TYPE"],
+                            Owner_nv = (string)reader["OWNER"],
+                            FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
+                            FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
                         });
 
                         Console.WriteLine((int)reader["ID_FPA"]);

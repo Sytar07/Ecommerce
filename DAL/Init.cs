@@ -1,4 +1,5 @@
 ﻿using DAL;
+using System;
 
 namespace ECOMMERCE.DAL
 {
@@ -8,7 +9,7 @@ namespace ECOMMERCE.DAL
         public void TESTPAISES() {
             PaisesBD paisesBD = new PaisesBD();
 
-            foreach(CORE.EntityPais e in paisesBD.GETALLPAISES().list)
+            foreach(CORE.EntityPais e in paisesBD.GETALLPAISES().lista)
             {
                 Console.WriteLine("PAIS :" + e.ididentifier_i + " NOMBRE:" + e.name_nv);
 

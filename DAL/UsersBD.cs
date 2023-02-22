@@ -43,12 +43,11 @@ namespace DAL
                     while (reader.Read())
                     {
                         // Añado los usuarios encontrados a la lista de entidades
-                        entityUsers.entityUsers.Add(new EntityUser
+                        entityUsers.lista.Add(new EntityUser
                         {
-                            ididentifier_i = (int)reader["ID"],
-                            name_nv = (string)reader["Nombre"],
-                            fullname_nv = (string)reader["NombreCompleto"],
-                            email_nv = (string)reader["Email"],
+                            ididentifier_i = (int)reader["ID_USER"],
+                            name_nv = (string)reader["NAME"],
+                            
                         });
 
                         Console.WriteLine((int)reader["ID"]);

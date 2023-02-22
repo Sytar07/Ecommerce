@@ -43,15 +43,14 @@ namespace DAL
                         // Añado las Productos encontrados a la lista de entidades
                         entityProductos.lista.Add(new EntityProducto
                         {
-                            ididentifier_i = (int)reader["ID"],
-                            id_producto = (int)reader["ID_Imagen"],
-                            nombre = (string)reader["ID_Imagen"],
-                            stock = (int)reader["Owner"],
-                            descripcion = (string)reader["Fecha_Creacion"],
-                            precio = (float)reader["Precio"],
-                            owner = (string)reader["Owner"],
-                            fecha_creacion = (DateTime)reader["Fecha_Creacion"],
-                            fecha_modificacion = (DateTime)reader["Fecha_Modificacion"],
+                            ididentifier_i = (int)reader["ID_PRODUCTO"],
+                            nombre = (string)reader["NOMBRE"],
+                            stock = (int)reader["STOCK"],
+                            descripcion = (string)reader["DESCRIPCION"],
+                            precio = (float)reader["PRECIO"],
+                            owner = (string)reader["OWNER"],
+                            fecha_creacion = (DateTime)reader["FECHA_CREACION"],
+                            fecha_modificacion = (DateTime)reader["FECHA_MODIFICACION"],
                             
 
                         });

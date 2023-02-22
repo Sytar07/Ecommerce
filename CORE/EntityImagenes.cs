@@ -135,6 +135,13 @@ namespace ECOMMERCE.CORE
         private DateTime? _FechaCreacion_dt;
         private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
+        public int id_imagen;
+        public string path;
+        public string tipo;
+        public string owner;
+        public DateTime fecha_creacion;
+        public DateTime fecha_modificacion;
+
         public  EntityImagen()
         {
             // Aqui hago cosas.
