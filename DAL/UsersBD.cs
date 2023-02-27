@@ -13,7 +13,7 @@ using ECOMMERCE.CORE;
 
 namespace DAL
 {
-    internal class UsersBD
+    public class UsersBD
     {
         public string cadenaConexion_BBDD { get; set; } = "Data Source=localhost\\sqlexpress;Initial Catalog=BASEDATOS;Persist Security Info=False;User ID=USER;Password=CLAVE;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;\"";
         

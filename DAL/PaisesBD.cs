@@ -11,17 +11,17 @@ using ECOMMERCE.CORE;
 
 namespace DAL
 {
-    
+
     /// <summary>
     /// 
     /// </summary>
-    internal class PaisesBD
+    public class PaisesBD
     {
         public string cadenaConexion_BBDD { get; set; } = "Data Source=localhost\\sqlexpress;Initial Catalog=BASEDATOS;Persist Security Info=False;User ID=USER;Password=CLAVE;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;\"";
         
         public EntityPaises GETALLPAISES()
         {
-            EntityPaises entity = new EntityPaises();
+            EntityPaises entityPaises = new EntityPaises();
 
             // declaro la conexion a BBDD
             using (SqlConnection connection = new SqlConnection(cadenaConexion_BBDD))
@@ -48,9 +48,9 @@ namespace DAL
                         {
                             ididentifier_i = (int)reader["ID_COUNTRY"],
                             name_nv = (string)reader["NAME"],
-                            owner = (string)reader["OWNER"],
-                            fecha_creacion = (DateTime)reader["FECHA_CREACION"],
-                            fecha_modificacion = (DateTime)reader["FECHA_MODIFICACION"],
+                            Owner_nv = (string)reader["OWNER"],
+                            FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
+                            FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
                         });
                         Console.WriteLine((int)reader["ID"]);
                     }
@@ -73,7 +73,7 @@ namespace DAL
 
             }
 
-            return entity;
+            return entityPaises;
         }
     }
 }

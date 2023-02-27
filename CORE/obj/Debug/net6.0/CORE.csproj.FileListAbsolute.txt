@@ -1,5 +1,0 @@
-C:\Proyectos VS\MVC\ECOMMERCE\CORE\obj\Debug\net6.0\CORE.csproj.AssemblyReference.cache
-C:\Proyectos VS\MVC\ECOMMERCE\CORE\obj\Debug\net6.0\CORE.GeneratedMSBuildEditorConfig.editorconfig
-C:\Proyectos VS\MVC\ECOMMERCE\CORE\obj\Debug\net6.0\CORE.AssemblyInfoInputs.cache
-C:\Proyectos VS\MVC\ECOMMERCE\CORE\obj\Debug\net6.0\CORE.AssemblyInfo.cs
-C:\Proyectos VS\MVC\ECOMMERCE\CORE\obj\Debug\net6.0\CORE.csproj.CoreCompileInputs.cache
