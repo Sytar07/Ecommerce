@@ -47,7 +47,8 @@ namespace DAL
                         {
                             ididentifier_i = (int)reader["ID_USER"],
                             name_nv = (string)reader["NAME"],
-                            
+                            rol1_nv = (string)reader["ADMIN"],
+                            rol2_nv = (string)reader["USER"],
                         });
 
                         Console.WriteLine((int)reader["ID"]);
