@@ -118,9 +118,14 @@ namespace ECOMMERCE.CORE
         private string _fullname_nv;
         private string _email_nv;
         private string _Owner_nv;
+        private string _rol1_nv;
+        private string _rol2_nv;
         private DateTime? _FechaCreacion_dt;
         private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
+        public string rol1_nv;
+        public string rol2_nv;
+
         public EntityUser()
         {
             // Aqui hago cosas.
@@ -129,6 +134,8 @@ namespace ECOMMERCE.CORE
             fullname_nv = "";
             email_nv = "";
             Owner_nv = "";
+            _rol1_nv = "";
+            _rol2_nv = "";
             FechaCreacion_dt = DateTime.MinValue;
             FechaModificacion_dt = DateTime.MinValue;
 
