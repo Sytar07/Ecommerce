@@ -44,11 +44,11 @@ namespace DAL
                         entityImagenes.lista.Add(new EntityImagen
                         {
                             ididentifier_i = (int)reader["ID_IMAGEN"],
-                            path = (string)reader["PATH"],
-                            tipo = (string)reader["TIPO"],
-                            owner = (string)reader["OWNER"],
-                            fecha_creacion = (DateTime)reader["FECHA_CREACION"],
-                            fecha_modificacion = (DateTime)reader["FECHA_MODIFICACION"],
+                            path_nv = (string)reader["PATH"],
+                            tipo_nv = (string)reader["TIPO"],
+                            Owner_nv = (string)reader["OWNER"],
+                            FechaCreacion_dt= (DateTime)reader["FECHA_CREACION"],
+                            FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
 
                         });
 

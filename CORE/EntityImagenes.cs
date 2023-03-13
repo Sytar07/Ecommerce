@@ -62,19 +62,7 @@ namespace ECOMMERCE.CORE
             }
         }
 
-        public string owner_nv
-        {
-            get
-            {
-                // Comprobaciones tipo/null/etc..
-                return _owner_nv;
-            }
-            set
-            {
-                _owner_nv = value;
-            }
-        }
-
+      
         public DateTime? FechaCreacion_dt
         {
             get
@@ -135,12 +123,8 @@ namespace ECOMMERCE.CORE
         private DateTime? _FechaCreacion_dt;
         private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
-        public int id_imagen;
-        public string path;
-        public string tipo;
-        public string owner;
-        public DateTime fecha_creacion;
-        public DateTime fecha_modificacion;
+
+
 
         public  EntityImagen()
         {
@@ -149,7 +133,7 @@ namespace ECOMMERCE.CORE
             id_imagen_nv = "";
             path_nv = "";
             tipo_nv = "";
-            owner_nv = "";
+            Owner_nv = "";
             FechaCreacion_dt = DateTime.MinValue;
             FechaModificacion_dt = DateTime.MinValue;
 
