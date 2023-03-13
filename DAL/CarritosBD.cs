@@ -44,11 +44,11 @@ namespace DAL
                         entityCarritos.lista.Add(new EntityCarrito
                         {
                             ididentifier_i = (int)reader["ID_Carrito"],
-                            ID_Usuario_i = (int)reader["ID_USUARIO"], 
+                            ID_usuario_i = (int)reader["ID_USUARIO"], 
                             ID_Producto_i = (int)reader["ID_PRODUCTO"],
                             nombre_nv = (string)reader["NOMBRE"],
-                            owner_nv = (string)reader["OWNER"],
-                            cantidad_nv = (string)reader["CANTIDAD"],
+                            Owner_nv = (string)reader["OWNER"],
+                            Cantidad_i = (int)reader["CANTIDAD"],
                             direccion_nv = (string)reader["DIRECCION"],
                             FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
                             FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],

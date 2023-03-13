@@ -27,13 +27,13 @@ namespace ECOMMERCE.CORE
             } 
         }
 
-        public string ID_Carrito_nv { 
+        public int ID_Carrito_i { 
             get{
                 // Comprobaciones tipo/null/etc..
-                return _ID_Carrito_nv;
+                return _ID_Carrito_i;
             }
             set{
-                _ID_Carrito_nv = value;
+                _ID_Carrito_i = value;
             } 
         }
 
@@ -64,16 +64,20 @@ namespace ECOMMERCE.CORE
             }
         }
 
+        public DateTime? FechaCreacion_dt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DateTime? FechaModificacion_dt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Owner_nv { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         private int _ididentifier_i;
         public int _ID_Carrito_i;
-        public DateTime fecha_inicio;
+        public bool _delete_b;
+        public DateTime? _FechaInicio_dt;
 
         public EntityConexion()
         {
             // Aqui hago cosas.
             ididentifier_i = 0;
-            Id_Carrito_nv = "";
+            ID_Carrito_i = 0;
             FechaInicio_dt = DateTime.MinValue;
         }
 

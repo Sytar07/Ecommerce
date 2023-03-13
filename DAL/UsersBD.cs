@@ -15,7 +15,7 @@ namespace DAL
 {
     public class UsersBD
     {
-        public string cadenaConexion_BBDD { get; set; } = "Data Source=localhost\\sqlexpress;Initial Catalog=BASEDATOS;Persist Security Info=False;User ID=USER;Password=CLAVE;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;\"";
+        public string cadenaConexion_BBDD { get; set; } = "Data Source=localhost\\sqlexpress;Initial Catalog=E-COMMERCE;Persist Security Info=False;User ID=sa;Password=sa;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;\"";
         
         public EntityUsers GETALLUSERS()
         {
@@ -51,7 +51,7 @@ namespace DAL
                             rol2_nv = (string)reader["USER"],
                         });
 
-                        Console.WriteLine((int)reader["ID"]);
+                        Console.WriteLine((int)reader["ID_USER"]);
                     }
                     // Cierro el READER
                     reader.Close();

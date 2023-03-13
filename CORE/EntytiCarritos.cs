@@ -37,16 +37,16 @@ namespace ECOMMERCE.CORE
             } 
         }
 
-        public string ID_usuario_nv
+        public int ID_usuario_i
         {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _ID_usuario_nv;
+                return _ID_Usuario_i;
             }
             set
             {
-                _ID_usuario_nv = value;
+                _ID_Usuario_i = value;
             }
         }
         public string direccion_nv
@@ -61,65 +61,65 @@ namespace ECOMMERCE.CORE
                 _direccion_nv = value;
             }
         }
-        public string FechaCreacion_nv
+        public DateTime? FechaCreacion_dt
         {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _FechaCreacion_nv;
+                return _FechaCreacion_dt;
             }
             set
             {
-                _FechaCreacion_nv = value;
+                _FechaCreacion_dt = value;
             }
         }
-        public string Fechamodificacion_nv
+        public DateTime? FechaModificacion_dt
         {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _Fechamodificacion_nv;
+                return _FechaModificacion_dt;
             }
             set
             {
-                _Fechamodificacion_nv = value;
+                _FechaModificacion_dt = value;
             }
         }
 
-        public string owner_nv
+        public string Owner_nv
         {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _owner_nv;
+                return _Owner_nv;
             }
             set
             {
-                _owner_nv = value;
+                _Owner_nv = value;
             }
         }
-        public string ID_Producto_nv
+        public int ID_Producto_i
         {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _ID_Producto_nv;
+                return _ID_Producto_i;
             }
             set
             {
-                _ID_Producto_nv = value;
+                _ID_Producto_i = value;
             }
         }
-        public string cantidad_nv
+        public int Cantidad_i
         {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _cantidad_nv;
+                return _Cantidad_i;
             }
             set
             {
-                _cantidad_nv = value;
+                _Cantidad_i = value;
             }
         }
         public bool delete
@@ -135,31 +135,27 @@ namespace ECOMMERCE.CORE
             }
         }
 
-        public int ID_Usuario_i { get; set; }
-        public int ID_Producto_i { get; set; }
-        public DateTime FechaCreacion_dt { get; set; }
-        public DateTime FechaModificacion_dt { get; set; }
-
         private int _ididentifier_i;
         private int _ID_Usuario_i;
+        private int _ID_Producto_i;
         private string _direccion_nv;
         private DateTime? _FechaCreacion_dt;
         private DateTime? _FechaModificacion_dt;
-        private int _owner_i;
+        private string _Owner_nv;
         private string _nombre_nv;
-        private int _ID_Producto_i;
-        private string _Cantidad_nv;
+        
+        private int _Cantidad_i;
         private bool _delete_b;
         
         public EntityCarrito()
         {
             // Aqui hago cosas.
             ididentifier_i = 0;
-            ID_Usuario_i = 0;
+            ID_usuario_i = 0;
             ID_Producto_i = 0;
             nombre_nv = "";
-            owner_nv = "";
-            cantidad_nv = "";
+            Owner_nv = "";
+            Cantidad_i= 0;
             direccion_nv = "";
             FechaCreacion_dt = DateTime.MinValue;
             FechaModificacion_dt = DateTime.MinValue;

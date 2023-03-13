@@ -13,8 +13,6 @@ namespace BLL.Controllers
     public class UsersController : ControllerBase
     {       
 
-        private readonly ILogger<UsersController> _logger;
-
 
         [HttpGet(Name = "GetAllUsers")]
         public IEnumerable<EntityUser> Get()
