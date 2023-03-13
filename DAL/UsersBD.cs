@@ -75,7 +75,6 @@ namespace DAL
 
             return entityUsers;
         }
-
         public EntityUser GETUSER(int id_user)
         {
             EntityUser entityUser = new EntityUser();
@@ -131,7 +130,6 @@ namespace DAL
 
             return entityUser;
         }
-
         public int DELETEUSER(EntityUser entityUser)
         {
 
@@ -221,8 +219,6 @@ namespace DAL
 
             return salida;
         }
-
-
         public int UPDATEUSER(EntityUser entityUser)
         {
             

@@ -1,0 +1,23 @@
+﻿@model ECOMMERCE.CORE.EntityPais
+@{
+    ViewBag.Title = "Paises Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header text-center">
+                <h1>PAIS</h1>
+            </div>
+            <div class="card-body text-center">
+                <h4>ID : @Model.ididentifier_i</h4>
+                <h4>NAME : @Model.name_nv</h4>
+            </div>
+            <div class="card-footer text-center">
+                <a href="#" class="btn btn-primary">Back</a>
+                <a href="#" class="btn btn-primary">Edit</a>
+                <a href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>

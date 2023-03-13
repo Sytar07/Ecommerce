@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ECOMMERCE.CORE;
-using ECOMMERCE.DAL;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using ECOMMERCE.DAL;
 using DAL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
@@ -17,12 +15,7 @@ namespace BLL.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        //[HttpGet(Name = "GetAllUsers")]
-        //public IEnumerable<EntityUser> GetAll()
-        //{
-        //    UsersBD users = new UsersBD();
-        //    return users.GETALLUSERS().lista;
-        //}
+        
 
         /// <summary>
         /// API: GetUser
