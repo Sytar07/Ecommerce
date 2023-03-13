@@ -48,7 +48,18 @@ namespace ECOMMERCE.CORE
                 _fullname_nv = value;
             }
         }
-
+        public int rol_i
+        {
+            get
+            {
+                // Comprobaciones tipo/null/etc..
+                return _rol_i;
+            }
+            set
+            {
+                _rol_i = value;
+            }
+        }
         public string email_nv
         {
             get
@@ -118,13 +129,11 @@ namespace ECOMMERCE.CORE
         private string _fullname_nv;
         private string _email_nv;
         private string _Owner_nv;
-        private string _rol1_nv;
-        private string _rol2_nv;
+        private int _rol_i;
         private DateTime? _FechaCreacion_dt;
         private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
-        public string rol1_nv;
-        public string rol2_nv;
+        
 
         public EntityUser()
         {
@@ -134,8 +143,7 @@ namespace ECOMMERCE.CORE
             fullname_nv = "";
             email_nv = "";
             Owner_nv = "";
-            _rol1_nv = "";
-            _rol2_nv = "";
+            _rol_i = 1;
             FechaCreacion_dt = DateTime.MinValue;
             FechaModificacion_dt = DateTime.MinValue;
 
