@@ -105,20 +105,10 @@ namespace ECOMMERCE.CORE
         private int _ididentifier_i;
         private string _Id_Country_nv;
         private string _name_nv;
-        private string _email_nv;
         private string _owner_nv;
         private DateTime? _FechaCreacion_dt;
         private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
-        public string direccion_nv;
-        public string calle_nv;
-        public int numero_i;
-        public string puerta_nv;
-        public string ciudad_nv;
-        public string pais_nv;
-        public string owner;
-        public DateTime fecha_creacion;
-        public DateTime fecha_modificacion;
 
         public EntityPais()
         {
