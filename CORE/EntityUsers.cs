@@ -115,7 +115,6 @@ namespace ECOMMERCE.CORE
 
         private int _ididentifier_i;
         private string _name_nv;
-        private string _fullname_nv;
         private string _email_nv;
         private string _Owner_nv;
         private int _rol_i;
