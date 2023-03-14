@@ -75,5 +75,143 @@ namespace DAL
 
             return entityPaises;
         }
+
+        public int DELETEPAIS(EntityPais entityPais)
+        {
+
+            int salida = 0;
+            using (SqlConnection connection = new SqlConnection(cadenaConexion_BBDD))
+            {
+                connection.Open();
+
+                SqlTransaction sqlTransaction = connection.BeginTransaction();
+                try
+                {
+                    SqlCommand command = new SqlCommand("CUD_PAIS", connection);
+                    command.Transaction = sqlTransaction; // LE pasamos la transaccion
+
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.ididentifier_i;
+                    command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
+                    command.Parameters.Add("@OWNER_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.Owner_nv;
+                    command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.Int).Value = entityPais.FechaCreacion_dt;
+                    command.Parameters.Add("@FECHA_MODIFICACION_DT", System.Data.SqlDbType.Int).Value = entityPais.FechaModificacion_dt;
+
+                    command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 1;
+
+                    command.Parameters.Add("@ID_RETURN", System.Data.SqlDbType.Int).Value = 0;
+                    command.Parameters["@ID_RETURN"].Direction = ParameterDirection.Output;
+                    command.ExecuteNonQuery();
+                    salida = int.Parse(command.Parameters["@ID_RETURN"].Value.ToString());
+
+                }
+
+                catch (Exception ex)
+                {
+                    // Ha fallado ROLLBACK a la transaccion
+                    salida = -1;
+                    sqlTransaction.Rollback();
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    // SI funciona la transaccion le damos adelante. COMMIT
+                    sqlTransaction.Commit();
+                }
+            }
+
+            return salida;
+        }
+        public int INSERTPAIS(EntityPais entityPais)
+        {
+
+            int salida = 0;
+            using (SqlConnection connection = new SqlConnection(cadenaConexion_BBDD))
+            {
+                connection.Open();
+                SqlTransaction sqlTransaction = connection.BeginTransaction();
+                try
+                {
+                    SqlCommand command = new SqlCommand("CUD_PAIS", connection);
+                    command.Transaction = sqlTransaction; // LE pasamos la transaccion
+
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.ididentifier_i;
+                    command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
+                    command.Parameters.Add("@OWNER_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.Owner_nv;
+                    command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.Int).Value = entityPais.FechaCreacion_dt;
+                    command.Parameters.Add("@FECHA_MODIFICACION_DT", System.Data.SqlDbType.Int).Value = entityPais.FechaModificacion_dt;
+
+                    command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
+
+                    command.Parameters.Add("@ID_RETURN", System.Data.SqlDbType.Int).Value = 0;
+                    command.Parameters["@ID_RETURN"].Direction = ParameterDirection.Output;
+                    command.ExecuteNonQuery();
+                    salida = int.Parse(command.Parameters["@ID_RETURN"].Value.ToString());
+
+                }
+
+                catch (Exception ex)
+                {
+                    // Ha fallado ROLLBACK a la transaccion
+                    salida = -1;
+                    sqlTransaction.Rollback();
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    // SI funciona la transaccion le damos adelante. COMMIT
+                    sqlTransaction.Commit();
+                }
+            }
+
+            return salida;
+        }
+        public int UPDATEPAIS(EntityPais entityPais)
+        {
+
+            int salida = 0;
+            using (SqlConnection connection = new SqlConnection(cadenaConexion_BBDD))
+            {
+                connection.Open();
+                SqlTransaction sqlTransaction = connection.BeginTransaction();
+                try
+                {
+                    SqlCommand command = new SqlCommand("CUD_PAIS", connection);
+                    command.Transaction = sqlTransaction; // LE pasamos la transaccion
+
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.ididentifier_i;
+                    command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
+                    command.Parameters.Add("@OWNER_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.Owner_nv;
+                    command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.Int).Value = entityPais.FechaCreacion_dt;
+                    command.Parameters.Add("@FECHA_MODIFICACION_DT", System.Data.SqlDbType.Int).Value = entityPais.FechaModificacion_dt;
+
+                    command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
+
+                    command.Parameters.Add("@ID_RETURN", System.Data.SqlDbType.Int).Value = 0;
+                    command.Parameters["@ID_RETURN"].Direction = ParameterDirection.Output;
+                    command.ExecuteNonQuery();
+                    salida = int.Parse(command.Parameters["@ID_RETURN"].Value.ToString());
+
+                }
+
+                catch (Exception ex)
+                {
+                    // Ha fallado ROLLBACK a la transaccion
+                    salida = -1;
+                    sqlTransaction.Rollback();
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    // SI funciona la transaccion le damos adelante. COMMIT
+                    sqlTransaction.Commit();
+                }
+            }
+
+            return salida;
+        }
+
     }
 }
