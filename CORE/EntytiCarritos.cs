@@ -138,13 +138,13 @@ namespace ECOMMERCE.CORE
         private int _ididentifier_i;
         private int _ID_Usuario_i;
         private int _ID_Producto_i;
+        private string _nombre_nv;
+        private string _Owner_nv;
+        private int _Cantidad_i;
         private string _direccion_nv;
         private DateTime? _FechaCreacion_dt;
         private DateTime? _FechaModificacion_dt;
-        private string _Owner_nv;
-        private string _nombre_nv;
         
-        private int _Cantidad_i;
         private bool _delete_b;
         
         public EntityCarrito()
