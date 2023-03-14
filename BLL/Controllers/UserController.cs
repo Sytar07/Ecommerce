@@ -56,13 +56,13 @@ namespace BLL.Controllers
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<EntityUser> Delete(EntityUser entityUser)
+        public ActionResult<EntityUser> Delete(int id)
         {
             UsersBD users = new UsersBD();
+            EntityUser entityUser = users.GETUSER(id);
+            users.DELETEUSER(entityUser);
 
-            var result = users.GETUSER(users.DELETEUSER(entityUser));
-            // TODO: Redireccionar a el listado
-            return CreatedAtAction(nameof(Get),null);
+            return CreatedAtAction(nameof(Get), new { id = entityUser.ididentifier_i }, entityUser);
         }
 
     }

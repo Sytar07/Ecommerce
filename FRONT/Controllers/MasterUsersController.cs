@@ -5,17 +5,22 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-
+using System.Threading.Tasks;
 
 namespace FRONT.Controllers
 {
-    public class MasterUserController : Controller
+    public class MasterUsersController : Controller
     {
-        private readonly ILogger<MasterUserController> _logger;
 
-        public MasterUserController(ILogger<MasterUserController> logger)
+        private const string apiUrlList = "https://localhost:7023/Users";
+        private const string apiUrlactions = "https://localhost:7023/User?id_user={0}";
+
+        private readonly ILogger<MasterUsersController> _logger;
+
+        public MasterUsersController(ILogger<MasterUsersController> logger)
         {
             _logger = logger;
         }
@@ -28,10 +33,10 @@ namespace FRONT.Controllers
         private static List<EntityUser> ListUsers()
         {
             List<EntityUser> entityusers = new List<EntityUser>();
-            string apiUrl = "https://localhost:44318/api/Users";
+           
 
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = client.GetAsync(apiUrl).Result;
+            HttpResponseMessage response = client.GetAsync(apiUrlList).Result;
             if (response.IsSuccessStatusCode)
             {
                 entityusers = JsonSerializer.Deserialize<List<EntityUser>>(response.Content.ReadAsStringAsync().Result);
@@ -41,16 +46,109 @@ namespace FRONT.Controllers
         }
 
 
-        public IActionResult Details(int id)
-        {
 
-            return View(new EntityUser()
-            {
-                ididentifier_i = 1,
-                name_nv = "ESP"
-            }
-            );
+        #region "Actions"
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            return View(User(id));
         }
+        private static EntityUser User(int id)
+        {
+            EntityUser entityuser = new EntityUser();
+            string apiUrl = string.Format(apiUrlactions,id);
+
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = client.GetAsync(apiUrl).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                entityuser = JsonSerializer.Deserialize<EntityUser>(response.Content.ReadAsStringAsync().Result);
+            }
+
+            return entityuser;
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(EntityUser entityUser)
+        {
+            if (ModelState.IsValid)
+            {
+                // Si es valido grabamos y salimos al Index.
+                SaveUser(entityUser).Wait();
+                return RedirectToAction("Index");
+            }
+            // en los demás casos mostramos en pantalla
+            return View(entityUser);
+        }
+        private static async Task<EntityUser> SaveUser(EntityUser entityUser)
+        {
+            string apiUrl = string.Format(apiUrlactions, entityUser.ididentifier_i);
+
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response =await client.PutAsJsonAsync(apiUrl,entityUser);
+            response.EnsureSuccessStatusCode();
+
+            entityUser = await response.Content.ReadFromJsonAsync<EntityUser>();
+
+            return entityUser;
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(EntityUser entityUser)
+        {
+            if (ModelState.IsValid)
+            {
+                // Si es valido grabamos y salimos al Index.
+                DeleteUser(entityUser).Wait();
+                return RedirectToAction("Index");
+            }
+            // en los demás casos mostramos en pantalla
+            return View("Edit",entityUser);
+        }
+        private static async Task<EntityUser> DeleteUser(EntityUser entityUser)
+        {
+            string apiUrl = string.Format(apiUrlactions, entityUser.ididentifier_i);
+
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.DeleteAsync(apiUrl);
+            response.EnsureSuccessStatusCode();
+
+            entityUser = await response.Content.ReadFromJsonAsync<EntityUser>();
+
+            return entityUser;
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(EntityUser entityUser)
+        {
+            if (ModelState.IsValid)
+            {
+                // Si es valido grabamos y salimos al Index.
+                CreateUser(entityUser).Wait();
+                return RedirectToAction("Index");
+            }
+            // en los demás casos mostramos en pantalla
+            return View("Edit", entityUser);
+        }
+        private static async Task<EntityUser> CreateUser(EntityUser entityUser)
+        {
+            string apiUrl = string.Format(apiUrlactions, entityUser.ididentifier_i);
+
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.PostAsJsonAsync(apiUrl,entityUser);
+            response.EnsureSuccessStatusCode();
+
+            entityUser = await response.Content.ReadFromJsonAsync<EntityUser>();
+
+            return entityUser;
+        }
+        #endregion
 
         public IActionResult Privacy()
         {

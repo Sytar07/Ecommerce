@@ -28,26 +28,19 @@ namespace DAL
                 // Abro la conexion
                 connection.Open();
                 // Declaro una transaccion
-                SqlTransaction sqlTransaction = connection.BeginTransaction();
                 try
                 {
-                    // Declaro un COMANDO para ejecutar un PROCEDIMIENTO ALMACENADO
                     SqlCommand command = new SqlCommand("GET_USERS", connection);
-                    command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    // parametro SIMPLE
-                    //command.Parameters.Add("@action", System.Data.SqlDbType.VarChar).Value = "GET";                    
-                    // EJECUTO EL COMANDO
                     var reader = command.ExecuteReader();
                     // LO LEO. 
                     while (reader.Read())
                     {
-                        // Añado los usuarios encontrados a la lista de entidades
                         entityUsers.lista.Add(new EntityUser
                         {
                             ididentifier_i = (int)reader["ID_USER"],
-                            fullname_nv = (string)reader["FULLNAME_NV"],
+                            name_nv = (string)reader["FULLNAME_NV"],
                             email_nv = (string)reader["EMAIL_NV"],
                             rol_i= (int)reader["ROL"],
                         });
@@ -61,14 +54,11 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    // Ha fallado ROLLBACK a la transaccion
-                    sqlTransaction.Rollback();
                     throw new Exception(ex.Message);
                 }
                 finally
                 {
-                    // SI funciona la transaccion le damos adelante. COMMIT
-                    sqlTransaction.Commit();
+
                 }
 
             }
@@ -104,7 +94,7 @@ namespace DAL
                         // Añado los usuarios encontrados a la lista de entidades
                         entityUser.ididentifier_i = (int)reader["ID_USER"];
                         entityUser.email_nv = (string)reader["EMAIL_NV"];
-                        entityUser.fullname_nv = (string)reader["FULLNAME_NV"];
+                        entityUser.name_nv = (string)reader["FULLNAME_NV"];
                         // Aqui falta el correo y los campos adicionales.
 
                         Console.WriteLine((int)reader["ID_USER"]);
@@ -146,7 +136,7 @@ namespace DAL
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityUser.ididentifier_i;
-                    command.Parameters.Add("@FULLNAME_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.fullname_nv;
+                    command.Parameters.Add("@FULLNAME_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.name_nv;
                     command.Parameters.Add("@EMAIL_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.email_nv;
                     command.Parameters.Add("@ROL", System.Data.SqlDbType.Int).Value = entityUser.rol_i;
 
@@ -162,9 +152,9 @@ namespace DAL
                 catch (Exception ex)
                 {
                     // Ha fallado ROLLBACK a la transaccion
-                    salida = -1;
                     sqlTransaction.Rollback();
                     throw new Exception(ex.Message);
+                    return -1;
                 }
                 finally
                 {
@@ -190,7 +180,7 @@ namespace DAL
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value =0;
-                    command.Parameters.Add("@FULLNAME_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.fullname_nv;
+                    command.Parameters.Add("@FULLNAME_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.name_nv;
                     command.Parameters.Add("@EMAIL_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.email_nv;
                     command.Parameters.Add("@ROL", System.Data.SqlDbType.Int).Value = entityUser.rol_i;
 
@@ -206,9 +196,9 @@ namespace DAL
                 catch (Exception ex)
                 {
                     // Ha fallado ROLLBACK a la transaccion
-                    salida = -1;
                     sqlTransaction.Rollback();
                     throw new Exception(ex.Message);
+                    return -1;
                 }
                 finally
                 {
@@ -234,7 +224,7 @@ namespace DAL
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityUser.ididentifier_i;
-                    command.Parameters.Add("@FULLNAME_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.fullname_nv;
+                    command.Parameters.Add("@FULLNAME_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.name_nv;
                     command.Parameters.Add("@EMAIL_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.email_nv;
                     command.Parameters.Add("@ROL", System.Data.SqlDbType.Int).Value = entityUser.rol_i;
 
@@ -250,9 +240,9 @@ namespace DAL
                 catch (Exception ex)
                 {
                     // Ha fallado ROLLBACK a la transaccion
-                    salida = -1;
                     sqlTransaction.Rollback();
                     throw new Exception(ex.Message);
+                    return -1;
                 }
                 finally
                 {

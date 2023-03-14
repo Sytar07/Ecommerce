@@ -37,17 +37,6 @@ namespace ECOMMERCE.CORE
             } 
         }
 
-        public string fullname_nv {
-            get
-            {
-                // Comprobaciones tipo/null/etc..
-                return _fullname_nv;
-            }
-            set
-            {
-                _fullname_nv = value;
-            }
-        }
         public int rol_i
         {
             get
@@ -140,7 +129,6 @@ namespace ECOMMERCE.CORE
             // Aqui hago cosas.
             ididentifier_i = 0;
             name_nv = "";
-            fullname_nv = "";
             email_nv = "";
             Owner_nv = "";
             _rol_i = 1;

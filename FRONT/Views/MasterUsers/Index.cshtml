@@ -1,6 +1,6 @@
 ﻿@model List<ECOMMERCE.CORE.EntityUser>
 @{
-    ViewBag.Title = "Paises List";
+    ViewBag.Title = "Users List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -17,12 +17,12 @@
             {
                 <tr>
                     <td>@user.ididentifier_i</td>
-                    <td>@user.fullname_nv</td>
+                    <td>@user.name_nv</td>
                     <td>@user.email_nv</td>
 
-                    <td class="text-center"><a href="#" class="btn btn-primary">View</a></td>
-                    <td class="text-center"><a href="#" class="btn btn-primary">Edit</a></td>
-                    <td class="text-center"><a href="#" class="btn btn-danger">Delete</a></td>
+                    <td class="text-center">
+                        <a class="btn btn-primary" asp-area="" asp-controller="MasterUsers" asp-action="Edit" asp-route-id="@user.ididentifier_i">Ficha</a>
+                    </td>
                 </tr>
             }
         </tbody>
