@@ -91,7 +91,7 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.ididentifier_i;
+                    command.Parameters.Add("@ID_COUNTRY", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
                     command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
                     command.Parameters.Add("@OWNER_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.Owner_nv;
                     command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.Int).Value = entityPais.FechaCreacion_dt;
@@ -136,7 +136,7 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.ididentifier_i;
+                    command.Parameters.Add("@ID_COUNTRY", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
                     command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
                     command.Parameters.Add("@OWNER_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.Owner_nv;
                     command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.Int).Value = entityPais.FechaCreacion_dt;
@@ -181,7 +181,7 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.ididentifier_i;
+                    command.Parameters.Add("@ID_COUNTRY", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
                     command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
                     command.Parameters.Add("@OWNER_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.Owner_nv;
                     command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.Int).Value = entityPais.FechaCreacion_dt;
