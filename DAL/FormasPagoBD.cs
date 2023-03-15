@@ -41,7 +41,7 @@ namespace DAL
                     while (reader.Read())
                     {
                         // Añado las formas de pago encontradas a la lista de entidades
-                        entityFormasPago.lista.Add(new EntityFormaPago
+                        entityFormasPago.lista.Add(new entityFormaPago
                         {
                             ididentifier_i = (int)reader["ID_FPA"],
                             name_nv = (string)reader["NAME"],
@@ -77,7 +77,7 @@ namespace DAL
             return entityFormasPago;
         }
 
-        public int DELETEFORMASPAGO(EntityFormasPago entityFormasPago)
+        public int DELETEFORMASPAGO(entityFormaPago entityFormaPago)
         {
 
             int salida = 0;
@@ -92,12 +92,12 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID_FPA", System.Data.SqlDbType.Int).Value = entityFormasPago.ididentifier_i;
-                    command.Parameters.Add("@NAME", System.Data.SqlDbType.NVarChar).Value = entityFormasPago.name_nv;
-                    command.Parameters.Add("@TYPE", System.Data.SqlDbType.NVarChar).Value = entityFormasPago.type_nv;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.Int).Value = entityFormasPago.Owner_nv;
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.Int).Value = entityFormasPago.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.Int).Value = entityFormasPago.FechaModificacion_dt;
+                    command.Parameters.Add("@ID_FPA", System.Data.SqlDbType.Int).Value = entityFormaPago.ididentifier_i;
+                    command.Parameters.Add("@NAME", System.Data.SqlDbType.NVarChar).Value = entityFormaPago.name_nv;
+                    command.Parameters.Add("@TYPE", System.Data.SqlDbType.NVarChar).Value = entityFormaPago.type_nv;
+                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.Int).Value = entityFormaPago.Owner_nv;
+                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.Int).Value = entityFormaPago.FechaCreacion_dt;
+                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.Int).Value = entityFormaPago.FechaModificacion_dt;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 1;
 
@@ -126,7 +126,7 @@ namespace DAL
 
             return salida;
         }
-        public int INSERTFORMASPAGO(EntityFormasPago entityFormasPago)
+        public int INSERTFORMASPAGO(entityFormaPago entityFormasPago)
         {
 
             int salida = 0;
@@ -172,7 +172,7 @@ namespace DAL
 
             return salida;
         }
-        public int UPDATEFORMASPAGO(EntityFormasPago entityFormasPago)
+        public int UPDATEFORMASPAGO(entityFormaPago entityFormasPago)
         {
 
             int salida = 0;

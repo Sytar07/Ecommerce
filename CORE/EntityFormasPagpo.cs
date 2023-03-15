@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ECOMMERCE.CORE
 {
-    public class EntityFormaPago : ICommonEntity
+    public class entityFormaPago : ICommonEntity
     {
         public int ididentifier_i
         {
@@ -115,7 +115,7 @@ namespace ECOMMERCE.CORE
         private DateTime? _FechaCreacion_dt;
         private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
-        public EntityFormaPago()
+        public entityFormaPago()
         {
             // Aqui hago cosas.
             ididentifier_i = 0;
@@ -130,13 +130,13 @@ namespace ECOMMERCE.CORE
     }
     public class EntityFormasPago
     {
-        public IList<EntityFormaPago> lista;
+        public IList<entityFormaPago> lista;
 
         public EntityFormasPago()
         {
             if (lista == null)
             {
-                lista = new List<EntityFormaPago>();
+                lista = new List<entityFormaPago>();
             }
         }
     }

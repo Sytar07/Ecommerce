@@ -131,7 +131,7 @@ namespace DAL
 
             return salida;
         }
-        public int INSERTDIRECCION(EntityDirecciones entityDirecciones)
+        public int INSERTDIRECCION(EntityDireccion entityDireccion)
         {
 
             int salida = 0;
@@ -145,16 +145,16 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID_DIRECCION", System.Data.SqlDbType.Int).Value = entityDirecciones.ididentifier_i;
-                    command.Parameters.Add("@DIRECCION", System.Data.SqlDbType.NVarChar).Value = entityDirecciones.direccion_nv;
-                    command.Parameters.Add("@CALLE", System.Data.SqlDbType.NVarChar).Value = entityDirecciones.calle_nv;
-                    command.Parameters.Add("@NUMERO", System.Data.SqlDbType.Int).Value = entityDirecciones.numero_i;
-                    command.Parameters.Add("@PUERTA", System.Data.SqlDbType.Int).Value = entityDirecciones.puerta_nv;
-                    command.Parameters.Add("@CIUDAD", System.Data.SqlDbType.Int).Value = entityDirecciones.ciudad_nv;
-                    command.Parameters.Add("@PAIS", System.Data.SqlDbType.Int).Value = entityDirecciones.pais_nv;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.Int).Value = entityDirecciones.Owner_nv;
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.Int).Value = entityDirecciones.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.Int).Value = entityDirecciones.FechaModificacion_dt;
+                    command.Parameters.Add("@ID_DIRECCION", System.Data.SqlDbType.Int).Value = entityDireccion.ididentifier_i;
+                    command.Parameters.Add("@DIRECCION", System.Data.SqlDbType.NVarChar).Value = entityDireccion.direccion_nv;
+                    command.Parameters.Add("@CALLE", System.Data.SqlDbType.NVarChar).Value = entityDireccion.calle_nv;
+                    command.Parameters.Add("@NUMERO", System.Data.SqlDbType.Int).Value = entityDireccion.numero_i;
+                    command.Parameters.Add("@PUERTA", System.Data.SqlDbType.Int).Value = entityDireccion.puerta_nv;
+                    command.Parameters.Add("@CIUDAD", System.Data.SqlDbType.Int).Value = entityDireccion.ciudad_nv;
+                    command.Parameters.Add("@PAIS", System.Data.SqlDbType.Int).Value = entityDireccion.pais_nv;
+                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.Int).Value = entityDireccion.Owner_nv;
+                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.Int).Value = entityDireccion.FechaCreacion_dt;
+                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.Int).Value = entityDireccion.FechaModificacion_dt;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 
@@ -181,7 +181,7 @@ namespace DAL
 
             return salida;
         }
-        public int UPDATEDIRECCION(EntityDirecciones entityDirecciones)
+        public int UPDATEDIRECCION(EntityDireccion entityDireccion)
         {
 
             int salida = 0;
@@ -195,16 +195,16 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID_DIRECCION", System.Data.SqlDbType.Int).Value = entityDirecciones.ididentifier_i;
-                    command.Parameters.Add("@DIRECCION", System.Data.SqlDbType.NVarChar).Value = entityDirecciones.direccion_nv;
-                    command.Parameters.Add("@CALLE", System.Data.SqlDbType.NVarChar).Value = entityDirecciones.calle_nv;
-                    command.Parameters.Add("@NUMERO", System.Data.SqlDbType.Int).Value = entityDirecciones.numero_i;
-                    command.Parameters.Add("@PUERTA", System.Data.SqlDbType.Int).Value = entityDirecciones.puerta_nv;
-                    command.Parameters.Add("@CIUDAD", System.Data.SqlDbType.Int).Value = entityDirecciones.ciudad_nv;
-                    command.Parameters.Add("@PAIS", System.Data.SqlDbType.Int).Value = entityDirecciones.pais_nv;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.Int).Value = entityDirecciones.Owner_nv;
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.Int).Value = entityDirecciones.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.Int).Value = entityDirecciones.FechaModificacion_dt;
+                    command.Parameters.Add("@ID_DIRECCION", System.Data.SqlDbType.Int).Value = entityDireccion.ididentifier_i;
+                    command.Parameters.Add("@DIRECCION", System.Data.SqlDbType.NVarChar).Value = entityDireccion.direccion_nv;
+                    command.Parameters.Add("@CALLE", System.Data.SqlDbType.NVarChar).Value = entityDireccion.calle_nv;
+                    command.Parameters.Add("@NUMERO", System.Data.SqlDbType.Int).Value = entityDireccion.numero_i;
+                    command.Parameters.Add("@PUERTA", System.Data.SqlDbType.Int).Value = entityDireccion.puerta_nv;
+                    command.Parameters.Add("@CIUDAD", System.Data.SqlDbType.Int).Value = entityDireccion.ciudad_nv;
+                    command.Parameters.Add("@PAIS", System.Data.SqlDbType.Int).Value = entityDireccion.pais_nv;
+                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.Int).Value = entityDireccion.Owner_nv;
+                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.Int).Value = entityDireccion.FechaCreacion_dt;
+                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.Int).Value = entityDireccion.FechaModificacion_dt;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 
