@@ -26,6 +26,25 @@ namespace ECOMMERCE.CORE
                 _ididentifier_i=value;
             } 
         }
+        public string? ip
+        {
+            get
+            {
+                // Comprobaciones tipo/null/etc..
+                if (_ididentifier_i == -1)
+                {
+                    return "";
+                }
+                else
+                {
+                    return  _ip;
+                }
+            }
+            set
+            {
+                _ip = value;
+            }
+        }
 
         public int ID_Carrito_i { 
             get{
@@ -71,6 +90,7 @@ namespace ECOMMERCE.CORE
         private int _ididentifier_i;
         public int _ID_Carrito_i;
         public bool _delete_b;
+        public string? _ip;
         public DateTime? _FechaInicio_dt;
 
         public EntityConexion()
@@ -79,6 +99,7 @@ namespace ECOMMERCE.CORE
             ididentifier_i = 0;
             ID_Carrito_i = 0;
             FechaInicio_dt = DateTime.MinValue;
+            ip = "";
         }
 
     }

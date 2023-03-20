@@ -42,7 +42,7 @@ namespace DAL
                             ididentifier_i = (int)reader["ID_USER"],
                             ID_Carrito_i = (int)reader["ID_Carrito"],
                             FechaInicio_dt = (DateTime)reader["Fecha_Inicio"],
-                            ip = (int)reader["ip"],
+                            ip = reader["ip"].ToString(),
                         });
 
                         Console.WriteLine((int)reader["ID_CONEXION"]);
@@ -95,7 +95,7 @@ namespace DAL
                         entityConexion.ididentifier_i = (int)reader["ID_USER"];
                         entityConexion.ID_Carrito_i = (int)reader["ID_CARRITO"];
                         entityConexion.FechaInicio_dt = (DateTime)reader["FECHA_INICIO"];
-                        entityConexion.ip = (int)reader["IP"];
+                        entityConexion.ip = reader["IP"].ToString();
 
                      // Aqui falta el correo y los campos adicionales.
 

@@ -18,7 +18,7 @@ namespace BLL.Controllers
     public class FormasPagoController : ControllerBase
     {
         [HttpGet(Name = "GetAllFormasPago")]
-        public IEnumerable<entityFormaPago> GetAll()
+        public IEnumerable<EntityFormaPago> GetAll()
         {
             FormasPagoBD formasPago = new FormasPagoBD();
             return formasPago.GETALLFORMASPAGO().lista;

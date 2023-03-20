@@ -80,6 +80,72 @@ namespace DAL
             return entityProductos;
         }
 
+        public EntityProducto GETPRODUCTO(int id)
+        {
+            EntityProducto entityProducto = new EntityProducto();
+
+            // declaro la conexion a BBDD
+            using (SqlConnection connection = new SqlConnection(cadenaConexion_BBDD))
+            {
+                // Abro la conexion
+                connection.Open();
+                // Declaro una transaccion
+                SqlTransaction sqlTransaction = connection.BeginTransaction();
+                try
+                {
+                    // Declaro un COMANDO para ejecutar un PROCEDIMIENTO ALMACENADO
+                    SqlCommand command = new SqlCommand("GETPRODUCTO", connection);
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = id;
+                    command.Transaction = sqlTransaction; // Le pasamos la transaccion
+
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    // parametro SIMPLE
+                    command.Parameters.Add("@action", System.Data.SqlDbType.VarChar).Value = "GET";
+                    // EJECUTO EL COMANDO
+                    var reader = command.ExecuteReader();
+                    // LO LEO. 
+                    while (reader.Read())
+                    {
+                        // Añado las Productos encontrados a la lista de entidades
+                        entityProducto= new EntityProducto
+                        {
+                            ididentifier_i = (int)reader["ID_PRODUCTO"],
+                            nombre_nv = (string)reader["NOMBRE"],
+                            stock_f = (int)reader["STOCK"],
+                            descripcion_nv = (string)reader["DESCRIPCION"],
+                            precio_f = (float)reader["PRECIO"],
+                            Owner_nv = (string)reader["OWNER"],
+                            FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
+                            FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
+
+
+
+                        });
+
+                        Console.WriteLine((int)reader["ID"]);
+                    }
+                    // Cierro el READER
+                    reader.Close();
+
+
+                }
+                catch (Exception ex)
+                {
+                    // Ha fallado ROLLBACK a la transaccion
+                    sqlTransaction.Rollback();
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    // SI funciona la transaccion le damos adelante. COMMIT
+                    sqlTransaction.Commit();
+                }
+
+            }
+
+            return entityProducto;
+        }
+
         public int DELETEPRODUCTO(EntityProducto entityProducto)
         {
 

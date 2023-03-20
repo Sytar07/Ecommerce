@@ -26,7 +26,7 @@ namespace BLL.Controllers
         public EntityProducto Get(int id_producto)
         {
             ProductosBD productos = new ProductosBD();
-            return productos.GETALLPRODUCTOS(id_producto);
+            return productos.GETPRODUCTO(id_producto);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace BLL.Controllers
         {
            ProductosBD productos = new ProductosBD();
             
-            var result= productos.GETALLPRODUCTOS(productos.INSERTPRODUCTO(entityProducto));
+            var result= productos.GETPRODUCTO(productos.INSERTPRODUCTO(entityProducto));
 
             return CreatedAtAction(nameof(Get), new { id = entityProducto.ididentifier_i }, entityProducto);
         }
@@ -48,7 +48,7 @@ namespace BLL.Controllers
         {
             ProductosBD productos = new ProductosBD();
 
-            var result = productos.GETALLPRODUCTOS(productos.INSERTPRODUCTO(entityProducto));
+            var result = productos.GETPRODUCTO(productos.INSERTPRODUCTO(entityProducto));
 
             return CreatedAtAction(nameof(Get), new { id = entityProducto.ididentifier_i }, entityProducto);
         }
@@ -60,7 +60,7 @@ namespace BLL.Controllers
         {
             ProductosBD productos = new ProductosBD();
 
-            EntityProducto entityProducto = productos.GETALLPRODUCTOS(id);
+            EntityProducto entityProducto = productos.GETPRODUCTO();
             productos.DELETEPRODUCTO(entityProducto);
             
             return CreatedAtAction(nameof(Get), new { id = entityProducto.ididentifier_i }, entityProducto);

@@ -41,7 +41,7 @@ namespace DAL
                     while (reader.Read())
                     {
                         // Añado las formas de pago encontradas a la lista de entidades
-                        entityFormasPago.lista.Add(new entityFormaPago
+                        entityFormasPago.lista.Add(new EntityFormaPago
                         {
                             ididentifier_i = (int)reader["ID_FPA"],
                             name_nv = (string)reader["NAME"],
@@ -77,7 +77,7 @@ namespace DAL
             return entityFormasPago;
         }
 
-        public int DELETEFORMASPAGO(entityFormaPago entityFormaPago)
+        public int DELETEFORMASPAGO(EntityFormaPago entityFormaPago)
         {
 
             int salida = 0;
@@ -126,7 +126,7 @@ namespace DAL
 
             return salida;
         }
-        public int INSERTFORMASPAGO(entityFormaPago entityFormasPago)
+        public int INSERTFORMASPAGO(EntityFormaPago entityFormasPago)
         {
 
             int salida = 0;
@@ -172,7 +172,7 @@ namespace DAL
 
             return salida;
         }
-        public int UPDATEFORMASPAGO(entityFormaPago entityFormasPago)
+        public int UPDATEFORMASPAGO(EntityFormaPago entityFormasPago)
         {
 
             int salida = 0;
