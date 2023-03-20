@@ -13,7 +13,7 @@ namespace BLL.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ConexionController : ControllerBase
+    public class DireccionController : ControllerBase
     {
         
 
@@ -22,48 +22,48 @@ namespace BLL.Controllers
         /// Espera un ID y resuelve con la entidad del usuario
         /// </summary>
         /// <returns></returns>
-        [HttpGet(Name = "GetConexion")]
-        public EntityConexion Get(int id_conexion)
+        [HttpGet(Name = "GetDireccion")]
+        public EntityDireccion Get(int id_Direccion)
         {
-            ConexionesBD conexiones = new ConexionesBD();
-            return conexiones.GETCONEXION(id_conexion);
+            DireccionesBD Direcciones = new DireccionesBD();
+            return Direcciones.GETALLDIRECCIONES(id_Direccion);
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<EntityConexion> Create(EntityConexion entityConexion)
+        public ActionResult<EntityDireccion> Create(EntityDireccion entityDireccion)
         {
-           ConexionesBD conexiones = new ConexionesBD();
+           DireccionesBD Direcciones = new DireccionesBD();
             
-            var result= conexiones.GETCONEXION(conexiones.INSERTCONEXION(entityConexion));
+            var result= Direcciones.GETDireccion(Direcciones.INSERTDireccion(entityDireccion));
 
-            return CreatedAtAction(nameof(Get), new { id = entityConexion.ididentifier_i }, entityConexion);
+            return CreatedAtAction(nameof(Get), new { id = entityDireccion.ididentifier_i }, entityDireccion);
         }
 
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<EntityConexion> Update(EntityConexion entityConexion)
+        public ActionResult<EntityDireccion> Update(EntityDireccion entityDireccion)
         {
-            ConexionesBD conexiones = new ConexionesBD();
+            DireccionesBD Direcciones = new DireccionesBD();
 
-            var result = conexiones.GETCONEXION(conexiones.INSERTCONEXION(entityConexion));
+            var result = Direcciones.GETDireccion(Direcciones.INSERTDireccion(entityDireccion));
 
-            return CreatedAtAction(nameof(Get), new { id = entityConexion.ididentifier_i }, entityConexion);
+            return CreatedAtAction(nameof(Get), new { id = entityDireccion.ididentifier_i }, entityDireccion);
         }
 
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<EntityConexion> Delete(int id)
+        public ActionResult<EntityDireccion> Delete(int id)
         {
-            ConexionesBD conexiones = new ConexionesBD();
+            DireccionesBD Direcciones = new DireccionesBD();
 
-            EntityConexion entityConexion = conexiones.GETCONEXION(id);
-            conexiones.DELETECONEXION(entityConexion);
+            EntityDireccion entityDireccion = Direcciones.GETDireccion(id);
+            Direcciones.DELETEDireccion(entityDireccion);
             
-            return CreatedAtAction(nameof(Get), new { id = entityConexion.ididentifier_i }, entityConexion);
+            return CreatedAtAction(nameof(Get), new { id = entityDireccion.ididentifier_i }, entityDireccion);
         }
 
     }

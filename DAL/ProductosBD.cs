@@ -117,10 +117,7 @@ namespace DAL
                             Owner_nv = (string)reader["OWNER"],
                             FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
                             FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
-
-
-
-                        });
+                        };
 
                         Console.WriteLine((int)reader["ID"]);
                     }
