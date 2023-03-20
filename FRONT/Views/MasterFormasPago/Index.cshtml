@@ -1,0 +1,30 @@
+﻿@model List<ECOMMERCE.CORE.EntityFormaPago>
+@{
+    ViewBag.Title = "fpas List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>              
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var fpa in Model)
+            {
+                <tr>
+                    <td>@fpa.ididentifier_i</td>
+                    <td>@fpa.name_nv</td>
+
+
+                    <td class="text-center">
+                        <a class="btn btn-primary" asp-area="" asp-controller="MasterFormasPago" asp-action="Edit" asp-route-id="@fpa.ididentifier_i">Ficha</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
