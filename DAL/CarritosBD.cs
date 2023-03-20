@@ -25,17 +25,11 @@ namespace DAL
                 // Abro la conexion
                 connection.Open();
                 // Declaro una transaccion
-                SqlTransaction sqlTransaction = connection.BeginTransaction();
                 try
                 {
-                    // Declaro un COMANDO para ejecutar un PROCEDIMIENTO ALMACENADO
-                    SqlCommand command = new SqlCommand("GETALLCARRITOS", connection);
-                    command.Transaction = sqlTransaction; // LE pasamos la transaccion
-
+                    SqlCommand command = new SqlCommand("GET_CARRITOS", connection);
+                
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    // parametro SIMPLE
-                    command.Parameters.Add("@action", System.Data.SqlDbType.VarChar).Value = "GET";                    
-                    // EJECUTO EL COMANDO
                     var reader = command.ExecuteReader();
                     // LO LEO. 
                     while (reader.Read())
@@ -54,7 +48,7 @@ namespace DAL
                             FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
                     });
 
-                        Console.WriteLine((int)reader["ID"]);
+                        Console.WriteLine((int)reader["ID_CARRITO"]);
                     }
                     // Cierro el READER
                     reader.Close();
@@ -63,14 +57,11 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    // Ha fallado ROLLBACK a la transaccion
-                    sqlTransaction.Rollback();
                     throw new Exception(ex.Message);
                 }
                 finally
                 {
-                    // SI funciona la transaccion le damos adelante. COMMIT
-                    sqlTransaction.Commit();
+
                 }
 
             }

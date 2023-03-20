@@ -25,17 +25,11 @@ namespace DAL
                 // Abro la conexion
                 connection.Open();
                 // Declaro una transaccion
-                SqlTransaction sqlTransaction = connection.BeginTransaction();
                 try
                 {
-                    // Declaro un COMANDO para ejecutar un PROCEDIMIENTO ALMACENADO
-                    SqlCommand command = new SqlCommand("GETALLIMAGENES", connection);
-                    command.Transaction = sqlTransaction; // Le pasamos la transaccion
-
+                    SqlCommand command = new SqlCommand("GET_IMAGENES", connection);
+                    
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    // parametro SIMPLE
-                    command.Parameters.Add("@action", System.Data.SqlDbType.VarChar).Value = "GET";                    
-                    // EJECUTO EL COMANDO
                     var reader = command.ExecuteReader();
                     // LO LEO. 
                     while (reader.Read())
@@ -52,12 +46,66 @@ namespace DAL
 
                         });
 
-                        Console.WriteLine((int)reader["ID"]);
+                        Console.WriteLine((int)reader["ID_IMAGEN"]);
                     }
                     // Cierro el READER
                     reader.Close();
 
                   
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                
+                }
+
+            }
+
+            return entityImagenes;
+        }
+        public EntityImagen GETIMAGEN(int id_imagen)
+        {
+            EntityImagen entityImagen = new EntityImagen();
+
+            // declaro la conexion a BBDD
+            using (SqlConnection connection = new SqlConnection(cadenaConexion_BBDD))
+            {
+
+                // Abro la conexion
+                connection.Open();
+                // Declaro una transaccion
+                SqlTransaction sqlTransaction = connection.BeginTransaction();
+                try
+                {
+                    // Declaro un COMANDO para ejecutar un PROCEDIMIENTO ALMACENADO
+                    SqlCommand command = new SqlCommand("GET_IMAGEN", connection);
+                    command.Transaction = sqlTransaction; // LE pasamos la transaccion
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = id_imagen;
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    // parametro SIMPLE
+                    //command.Parameters.Add("@action", System.Data.SqlDbType.VarChar).Value = "GET";                    
+                    // EJECUTO EL COMANDO
+                    var reader = command.ExecuteReader();
+                    // LO LEO. 
+                    while (reader.Read())
+                    {
+                        // Añado los usuarios encontrados a la lista de entidades
+                        entityImagen.ididentifier_i = (int)reader["ID_IMAGEN"];
+                        entityImagen.path_nv = (string)reader["PATH"];
+                        entityImagen.tipo_nv = (string)reader["TIPO"];
+                        entityImagen.Owner_nv = (string)reader["OWNER"];
+                        entityImagen.FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"];
+                        entityImagen.FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"];
+                        
+                        Console.WriteLine((int)reader["ID_IMAGEN"]);
+                    }
+                    // Cierro el READER
+                    reader.Close();
+
+
                 }
                 catch (Exception ex)
                 {
@@ -73,9 +121,8 @@ namespace DAL
 
             }
 
-            return entityImagenes;
+            return entityImagen;
         }
-
         public int DELETEIMAGEN(EntityImagen entityImagen)
         {
 
@@ -91,12 +138,12 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID_IMAGEN", System.Data.SqlDbType.Int).Value = entityImagen.id_imagen_nv;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityImagen.ididentifier_i;
                     command.Parameters.Add("@PATH", System.Data.SqlDbType.NVarChar).Value = entityImagen.path_nv;
                     command.Parameters.Add("@TIPO", System.Data.SqlDbType.NVarChar).Value = entityImagen.tipo_nv;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.Int).Value = entityImagen.Owner_nv;
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.Int).Value = entityImagen.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.Int).Value = entityImagen.FechaModificacion_dt;
+                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.NVarChar).Value = entityImagen.Owner_nv;
+                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaCreacion_dt;
+                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaModificacion_dt;
 
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 1;
@@ -138,12 +185,12 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID_IMAGEN", System.Data.SqlDbType.Int).Value = entityImagen.id_imagen_nv;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = 0;
                     command.Parameters.Add("@PATH", System.Data.SqlDbType.NVarChar).Value = entityImagen.path_nv;
                     command.Parameters.Add("@TIPO", System.Data.SqlDbType.NVarChar).Value = entityImagen.tipo_nv;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.Int).Value = entityImagen.Owner_nv;
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.Int).Value = entityImagen.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.Int).Value = entityImagen.FechaModificacion_dt;
+                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.NVarChar).Value = entityImagen.Owner_nv;
+                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaCreacion_dt;
+                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaModificacion_dt;
 
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
@@ -158,9 +205,9 @@ namespace DAL
                 catch (Exception ex)
                 {
                     // Ha fallado ROLLBACK a la transaccion
-                    salida = -1;
                     sqlTransaction.Rollback();
                     throw new Exception(ex.Message);
+                    return -1;
                 }
                 finally
                 {
@@ -188,9 +235,9 @@ namespace DAL
                     command.Parameters.Add("@ID_IMAGEN", System.Data.SqlDbType.Int).Value = entityImagen.id_imagen_nv;
                     command.Parameters.Add("@PATH", System.Data.SqlDbType.NVarChar).Value = entityImagen.path_nv;
                     command.Parameters.Add("@TIPO", System.Data.SqlDbType.NVarChar).Value = entityImagen.tipo_nv;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.Int).Value = entityImagen.Owner_nv;
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.Int).Value = entityImagen.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.Int).Value = entityImagen.FechaModificacion_dt;
+                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.NVarChar).Value = entityImagen.Owner_nv;
+                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaCreacion_dt;
+                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaModificacion_dt;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 
@@ -204,9 +251,9 @@ namespace DAL
                 catch (Exception ex)
                 {
                     // Ha fallado ROLLBACK a la transaccion
-                    salida = -1;
                     sqlTransaction.Rollback();
                     throw new Exception(ex.Message);
+                    return -1;
                 }
                 finally
                 {

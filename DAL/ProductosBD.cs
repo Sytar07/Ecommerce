@@ -25,17 +25,12 @@ namespace DAL
                 // Abro la conexion
                 connection.Open();
                 // Declaro una transaccion
-                SqlTransaction sqlTransaction = connection.BeginTransaction();
                 try
                 {
-                    // Declaro un COMANDO para ejecutar un PROCEDIMIENTO ALMACENADO
-                    SqlCommand command = new SqlCommand("GETALLPRODUCTOS", connection);
-                    command.Transaction = sqlTransaction; // Le pasamos la transaccion
-
+                
+                    SqlCommand command = new SqlCommand("GET_PRODUCTOS", connection);
+                
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    // parametro SIMPLE
-                    command.Parameters.Add("@action", System.Data.SqlDbType.VarChar).Value = "GET";                    
-                    // EJECUTO EL COMANDO
                     var reader = command.ExecuteReader();
                     // LO LEO. 
                     while (reader.Read())
@@ -56,7 +51,7 @@ namespace DAL
 
                     });
 
-                        Console.WriteLine((int)reader["ID"]);
+                        Console.WriteLine((int)reader["ID_PRODUCTO"]);
                     }
                     // Cierro el READER
                     reader.Close();
@@ -65,22 +60,18 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    // Ha fallado ROLLBACK a la transaccion
-                    sqlTransaction.Rollback();
                     throw new Exception(ex.Message);
                 }
                 finally
                 {
-                    // SI funciona la transaccion le damos adelante. COMMIT
-                    sqlTransaction.Commit();
+                    
                 }
 
             }
 
             return entityProductos;
         }
-
-        public EntityProducto GETPRODUCTO(int id)
+        public EntityProducto GETPRODUCTO(int id_producto)
         {
             EntityProducto entityProducto = new EntityProducto();
 
@@ -94,32 +85,28 @@ namespace DAL
                 try
                 {
                     // Declaro un COMANDO para ejecutar un PROCEDIMIENTO ALMACENADO
-                    SqlCommand command = new SqlCommand("GETPRODUCTO", connection);
-                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = id;
+                    SqlCommand command = new SqlCommand("GET_PRODUCTO", connection);
                     command.Transaction = sqlTransaction; // Le pasamos la transaccion
-
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = id_producto;
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     // parametro SIMPLE
-                    command.Parameters.Add("@action", System.Data.SqlDbType.VarChar).Value = "GET";
+                    //command.Parameters.Add("@action", System.Data.SqlDbType.VarChar).Value = "GET";
                     // EJECUTO EL COMANDO
                     var reader = command.ExecuteReader();
                     // LO LEO. 
                     while (reader.Read())
                     {
                         // Añado las Productos encontrados a la lista de entidades
-                        entityProducto= new EntityProducto
-                        {
-                            ididentifier_i = (int)reader["ID_PRODUCTO"],
-                            nombre_nv = (string)reader["NOMBRE"],
-                            stock_f = (int)reader["STOCK"],
-                            descripcion_nv = (string)reader["DESCRIPCION"],
-                            precio_f = (float)reader["PRECIO"],
-                            Owner_nv = (string)reader["OWNER"],
-                            FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
-                            FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
-                        };
+                        entityProducto.ididentifier_i = (int)reader["ID_PRODUCTO"];
+                        entityProducto.nombre_nv = (string)reader["NOMBRE"];
+                        entityProducto.stock_f = (int)reader["STOCK"];
+                        entityProducto.descripcion_nv = (string)reader["DESCRIPCION"];
+                        entityProducto.precio_f = (int)reader["PRECIO"];
+                        entityProducto.Owner_nv = (string)reader["OWNER"];
+                        entityProducto.FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"];
+                        entityProducto.FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"];
 
-                        Console.WriteLine((int)reader["ID"]);
+                        Console.WriteLine((int)reader["ID_PRODUCTO"]);
                     }
                     // Cierro el READER
                     reader.Close();
@@ -142,7 +129,6 @@ namespace DAL
 
             return entityProducto;
         }
-
         public int DELETEPRODUCTO(EntityProducto entityProducto)
         {
 
@@ -192,7 +178,6 @@ namespace DAL
 
             return salida;
         }
-  
         public int INSERTPRODUCTO(EntityProducto entityProducto)
         {
 
@@ -207,14 +192,14 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID_PRODUCTO", System.Data.SqlDbType.Int).Value = entityProducto.id_producto_nv;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = 0;
                     command.Parameters.Add("@NOMBRE", System.Data.SqlDbType.NVarChar).Value = entityProducto.nombre_nv;
-                    command.Parameters.Add("@STOCK", System.Data.SqlDbType.NVarChar).Value = entityProducto.stock_f;
-                    command.Parameters.Add("@DESCRIPCION", System.Data.SqlDbType.Int).Value = entityProducto.descripcion_nv;
+                    command.Parameters.Add("@STOCK", System.Data.SqlDbType.Int).Value = entityProducto.stock_f;
+                    command.Parameters.Add("@DESCRIPCION", System.Data.SqlDbType.NVarChar).Value = entityProducto.descripcion_nv;
                     command.Parameters.Add("@PRECIO", System.Data.SqlDbType.Int).Value = entityProducto.precio_f;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.Int).Value = entityProducto.Owner_nv;
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.Int).Value = entityProducto.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.Int).Value = entityProducto.FechaModificacion_dt;
+                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.NVarChar).Value = entityProducto.Owner_nv;
+                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityProducto.FechaCreacion_dt;
+                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityProducto.FechaModificacion_dt;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 
@@ -255,14 +240,14 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID_PRODUCTO", System.Data.SqlDbType.Int).Value = entityProducto.id_producto_nv;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityProducto.ididentifier_i;
                     command.Parameters.Add("@NOMBRE", System.Data.SqlDbType.NVarChar).Value = entityProducto.nombre_nv;
-                    command.Parameters.Add("@STOCK", System.Data.SqlDbType.NVarChar).Value = entityProducto.stock_f;
-                    command.Parameters.Add("@DESCRIPCION", System.Data.SqlDbType.Int).Value = entityProducto.descripcion_nv;
+                    command.Parameters.Add("@STOCK", System.Data.SqlDbType.Int).Value = entityProducto.stock_f;
+                    command.Parameters.Add("@DESCRIPCION", System.Data.SqlDbType.NVarChar).Value = entityProducto.descripcion_nv;
                     command.Parameters.Add("@PRECIO", System.Data.SqlDbType.Int).Value = entityProducto.precio_f;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.Int).Value = entityProducto.Owner_nv;
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.Int).Value = entityProducto.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.Int).Value = entityProducto.FechaModificacion_dt;
+                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.NVarChar).Value = entityProducto.Owner_nv;
+                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityProducto.FechaCreacion_dt;
+                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityProducto.FechaModificacion_dt;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 

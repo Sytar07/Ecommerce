@@ -29,22 +29,18 @@ namespace DAL
                 // Abro la conexion
                 connection.Open();
                 // Declaro una transaccion
-                SqlTransaction sqlTransaction = connection.BeginTransaction();
                 try
                 {
-                    // Declaro un COMANDO para ejecutar un PROCEDIMIENTO ALMACENADO
-                    SqlCommand command = new SqlCommand("GETPAISES", connection);
-                    command.Transaction = sqlTransaction; // LE pasamos la transaccion
-
+                
+                    SqlCommand command = new SqlCommand("GET_PAISES", connection);
+                
                     command.CommandType = System.Data.CommandType.StoredProcedure;                                 
-                    // EJECUTO EL COMANDO
                     var reader = command.ExecuteReader();
                     // LO LEO. 
                     while (reader.Read())
                     {
                         // Añado los paises encontrados a la lista de entidades
                         entityPaises.lista.Add(new EntityPais
-
                         {
                             ididentifier_i = (int)reader["ID_COUNTRY"],
                             name_nv = (string)reader["NAME"],
@@ -52,12 +48,66 @@ namespace DAL
                             FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
                             FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
                         });
-                        Console.WriteLine((int)reader["ID"]);
+                        Console.WriteLine((int)reader["ID_PAIS"]);
                     }
                     // Cierro el READER
                     reader.Close();
 
                   
+                }
+                catch (Exception ex)
+                {
+                    
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    
+                }
+
+            }
+
+            return entityPaises;
+        }
+        public EntityPais GETPAIS(int id_pais)
+        {
+            EntityPais EntityPais = new EntityPais();
+
+            // declaro la conexion a BBDD
+            using (SqlConnection connection = new SqlConnection(cadenaConexion_BBDD))
+            {
+
+                // Abro la conexion
+                connection.Open();
+                // Declaro una transaccion
+                SqlTransaction sqlTransaction = connection.BeginTransaction();
+                try
+                {
+                    // Declaro un COMANDO para ejecutar un PROCEDIMIENTO ALMACENADO
+                    SqlCommand command = new SqlCommand("GET_PAIS", connection);
+                    command.Transaction = sqlTransaction; // LE pasamos la transaccion
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = id_pais;
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    // parametro SIMPLE
+                    //command.Parameters.Add("@action", System.Data.SqlDbType.VarChar).Value = "GET";                    
+                    // EJECUTO EL COMANDO
+                    var reader = command.ExecuteReader();
+                    // LO LEO. 
+                    while (reader.Read())
+                    {
+                        // Añado los paises encontrados a la lista de entidades
+                        EntityPais.ididentifier_i = (int)reader["ID_COUNTRY"];
+                        EntityPais.name_nv = (string)reader["NAME"];
+                        EntityPais.Owner_nv = (string)reader["OWNER"];
+                        EntityPais.FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"];
+                        EntityPais.FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"];
+
+                        Console.WriteLine((int)reader["ID_USER"]);
+                    }
+                    // Cierro el READER
+                    reader.Close();
+
+
                 }
                 catch (Exception ex)
                 {
@@ -67,15 +117,14 @@ namespace DAL
                 }
                 finally
                 {
-                    // SI chuta le damos adelante. COMMIT
+                    // SI funciona la transaccion le damos adelante. COMMIT
                     sqlTransaction.Commit();
                 }
 
             }
 
-            return entityPaises;
+            return EntityPais;
         }
-
         public int DELETEPAIS(EntityPais entityPais)
         {
 
@@ -91,11 +140,11 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID_COUNTRY", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
                     command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
                     command.Parameters.Add("@OWNER_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.Owner_nv;
-                    command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.Int).Value = entityPais.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION_DT", System.Data.SqlDbType.Int).Value = entityPais.FechaModificacion_dt;
+                    command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaCreacion_dt;
+                    command.Parameters.Add("@FECHA_MODIFICACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaModificacion_dt;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 1;
 
@@ -136,11 +185,11 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID_COUNTRY", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
                     command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
                     command.Parameters.Add("@OWNER_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.Owner_nv;
-                    command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.Int).Value = entityPais.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION_DT", System.Data.SqlDbType.Int).Value = entityPais.FechaModificacion_dt;
+                    command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaCreacion_dt;
+                    command.Parameters.Add("@FECHA_MODIFICACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaModificacion_dt;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 
@@ -181,11 +230,11 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID_COUNTRY", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
                     command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
                     command.Parameters.Add("@OWNER_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.Owner_nv;
-                    command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.Int).Value = entityPais.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION_DT", System.Data.SqlDbType.Int).Value = entityPais.FechaModificacion_dt;
+                    command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaCreacion_dt;
+                    command.Parameters.Add("@FECHA_MODIFICACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaModificacion_dt;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 

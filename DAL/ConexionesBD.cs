@@ -138,9 +138,9 @@ namespace DAL
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID_USER", System.Data.SqlDbType.Int).Value = entityConexion.ididentifier_i;
-                    command.Parameters.Add("@ID_CARRITO", System.Data.SqlDbType.NVarChar).Value = entityConexion.ID_Carrito_i;
-                    command.Parameters.Add("@FECHA_INICIO", System.Data.SqlDbType.NVarChar).Value = entityConexion.FechaInicio_dt;
-                    command.Parameters.Add("@IP", System.Data.SqlDbType.Int).Value = entityConexion.ip;
+                    command.Parameters.Add("@ID_CARRITO", System.Data.SqlDbType.Int).Value = entityConexion.ID_Carrito_i;
+                    command.Parameters.Add("@FECHA_INICIO", System.Data.SqlDbType.DateTime).Value = entityConexion.FechaInicio_dt;
+                    command.Parameters.Add("@IP", System.Data.SqlDbType.NVarChar).Value = entityConexion.ip;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 1;
 
@@ -182,9 +182,9 @@ namespace DAL
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID_USER", System.Data.SqlDbType.Int).Value = entityConexion.ididentifier_i;
-                    command.Parameters.Add("@ID_CARRITO", System.Data.SqlDbType.NVarChar).Value = entityConexion.ID_Carrito_i;
-                    command.Parameters.Add("@FECHA_INICIO", System.Data.SqlDbType.NVarChar).Value = entityConexion.FechaInicio_dt;
-                    command.Parameters.Add("@IP", System.Data.SqlDbType.Int).Value = entityConexion.ip;
+                    command.Parameters.Add("@ID_CARRITO", System.Data.SqlDbType.Int).Value = entityConexion.ID_Carrito_i;
+                    command.Parameters.Add("@FECHA_INICIO", System.Data.SqlDbType.DateTime).Value = entityConexion.FechaInicio_dt;
+                    command.Parameters.Add("@IP", System.Data.SqlDbType.NVarChar).Value = entityConexion.ip;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 
@@ -225,10 +225,10 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID_USER", System.Data.SqlDbType.Int).Value = entityConexion.ididentifier_i;
-                    command.Parameters.Add("@ID_CARRITO", System.Data.SqlDbType.NVarChar).Value = entityConexion.ID_Carrito_i;
-                    command.Parameters.Add("@FECHA_INICIO", System.Data.SqlDbType.NVarChar).Value = entityConexion.FechaInicio_dt;
-                    command.Parameters.Add("@IP", System.Data.SqlDbType.Int).Value = entityConexion.ip;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityConexion.ididentifier_i;
+                    command.Parameters.Add("@ID_CARRITO", System.Data.SqlDbType.Int).Value = entityConexion.ID_Carrito_i;
+                    command.Parameters.Add("@FECHA_INICIO", System.Data.SqlDbType.DateTime).Value = entityConexion.FechaInicio_dt;
+                    command.Parameters.Add("@IP", System.Data.SqlDbType.NVarChar).Value = entityConexion.ip;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 
