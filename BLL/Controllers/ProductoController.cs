@@ -59,8 +59,7 @@ namespace BLL.Controllers
         public ActionResult<EntityProducto> Delete(int id)
         {
             ProductosBD productos = new ProductosBD();
-
-            EntityProducto entityProducto = productos.GETPRODUCTO();
+            EntityProducto entityProducto = productos.GETPRODUCTO(id);
             productos.DELETEPRODUCTO(entityProducto);
             
             return CreatedAtAction(nameof(Get), new { id = entityProducto.ididentifier_i }, entityProducto);

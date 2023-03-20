@@ -13,7 +13,7 @@ namespace BLL.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ConexionController : ControllerBase
+    public class ImagenController : ControllerBase
     {
         
 
@@ -22,48 +22,48 @@ namespace BLL.Controllers
         /// Espera un ID y resuelve con la entidad del usuario
         /// </summary>
         /// <returns></returns>
-        [HttpGet(Name = "GetConexion")]
-        public EntityConexion Get(int id_conexion)
+        [HttpGet(Name = "GetImagen")]
+        public EntityImagen Get(int id_imagen)
         {
-            ConexionesBD conexiones = new ConexionesBD();
-            return conexiones.GETCONEXION(id_conexion);
+            ImagenesBD imagenes = new ImagenesBD();
+            return imagenes.GETIMAGEN(id_imagen);
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<EntityConexion> Create(EntityConexion entityConexion)
+        public ActionResult<EntityImagen> Create(EntityImagen EntityImagen)
         {
-           ConexionesBD conexiones = new ConexionesBD();
+           ImagenesBD imagenes = new ImagenesBD();
             
-            var result= conexiones.GETCONEXION(conexiones.INSERTCONEXION(entityConexion));
+            var result= imagenes.GETIMAGEN(imagenes.INSERTIMAGEN(EntityImagen));
 
-            return CreatedAtAction(nameof(Get), new { id = entityConexion.ididentifier_i }, entityConexion);
+            return CreatedAtAction(nameof(Get), new { id = EntityImagen.ididentifier_i }, EntityImagen);
         }
 
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<EntityConexion> Update(EntityConexion entityConexion)
+        public ActionResult<EntityImagen> Update(EntityImagen EntityImagen)
         {
-            ConexionesBD conexiones = new ConexionesBD();
+            ImagenesBD imagenes = new ImagenesBD();
 
-            var result = conexiones.GETCONEXION(conexiones.INSERTCONEXION(entityConexion));
+            var result = imagenes.GETIMAGEN(imagenes.INSERTIMAGEN(EntityImagen));
 
-            return CreatedAtAction(nameof(Get), new { id = entityConexion.ididentifier_i }, entityConexion);
+            return CreatedAtAction(nameof(Get), new { id = EntityImagen.ididentifier_i }, EntityImagen);
         }
 
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<EntityConexion> Delete(int id)
+        public ActionResult<EntityImagen> Delete(int id)
         {
-            ConexionesBD conexiones = new ConexionesBD();
+            ImagenesBD imagenes = new ImagenesBD();
 
-            EntityConexion entityConexion = conexiones.GETCONEXION(id);
-            conexiones.DELETECONEXION(entityConexion);
+            EntityImagen EntityImagen = imagenes.GETIMAGEN(id);
+            imagenes.DELETEIMAGEN(EntityImagen);
             
-            return CreatedAtAction(nameof(Get), new { id = entityConexion.ididentifier_i }, entityConexion);
+            return CreatedAtAction(nameof(Get), new { id = EntityImagen.ididentifier_i }, EntityImagen);
         }
 
     }

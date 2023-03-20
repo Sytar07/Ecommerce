@@ -26,7 +26,7 @@ namespace BLL.Controllers
         public EntityPais Get(int id_pais)
         {
             PaisesBD paises = new PaisesBD();
-            return paises.GETALLPAISES(id_pais);
+            return paises.GETPAIS(id_pais);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace BLL.Controllers
         {
            PaisesBD paises = new PaisesBD();
             
-            var result= paises.GETALLPAISES(paises.INSERTPAIS(entityPais));
+            var result= paises.GETPAIS(paises.INSERTPAIS(entityPais));
 
             return CreatedAtAction(nameof(Get), new { id = entityPais.ididentifier_i }, entityPais);
         }
@@ -48,7 +48,7 @@ namespace BLL.Controllers
         {
             PaisesBD paises = new PaisesBD();
 
-            var result = paises.GETALLPAISES(paises.INSERTPAIS(entityPais));
+            var result = paises.GETPAIS(paises.INSERTPAIS(entityPais));
 
             return CreatedAtAction(nameof(Get), new { id = entityPais.ididentifier_i }, entityPais);
         }
@@ -60,7 +60,7 @@ namespace BLL.Controllers
         {
             PaisesBD paises = new PaisesBD();
 
-            EntityPais entityPais = paises.DELETEPAIS(id);
+            EntityPais entityPais = paises.GETPAIS(id);
             paises.DELETEPAIS(entityPais);
             
             return CreatedAtAction(nameof(Get), new { id = entityPais.ididentifier_i }, entityPais);

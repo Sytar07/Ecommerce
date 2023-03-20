@@ -26,7 +26,7 @@ namespace BLL.Controllers
         public EntityDireccion Get(int id_Direccion)
         {
             DireccionesBD Direcciones = new DireccionesBD();
-            return Direcciones.GETALLDIRECCIONES(id_Direccion);
+            return Direcciones.GETDIRECCION(id_Direccion);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace BLL.Controllers
         {
            DireccionesBD Direcciones = new DireccionesBD();
             
-            var result= Direcciones.GETDireccion(Direcciones.INSERTDireccion(entityDireccion));
+            var result= Direcciones.GETDIRECCION(Direcciones.INSERTDIRECCION(entityDireccion));
 
             return CreatedAtAction(nameof(Get), new { id = entityDireccion.ididentifier_i }, entityDireccion);
         }
@@ -48,7 +48,7 @@ namespace BLL.Controllers
         {
             DireccionesBD Direcciones = new DireccionesBD();
 
-            var result = Direcciones.GETDireccion(Direcciones.INSERTDireccion(entityDireccion));
+            var result = Direcciones.GETDIRECCION(Direcciones.INSERTDIRECCION(entityDireccion));
 
             return CreatedAtAction(nameof(Get), new { id = entityDireccion.ididentifier_i }, entityDireccion);
         }
@@ -60,8 +60,8 @@ namespace BLL.Controllers
         {
             DireccionesBD Direcciones = new DireccionesBD();
 
-            EntityDireccion entityDireccion = Direcciones.GETDireccion(id);
-            Direcciones.DELETEDireccion(entityDireccion);
+            EntityDireccion entityDireccion = Direcciones.GETDIRECCION(id);
+            Direcciones.DELETEDIRECCION(entityDireccion);
             
             return CreatedAtAction(nameof(Get), new { id = entityDireccion.ididentifier_i }, entityDireccion);
         }

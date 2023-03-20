@@ -23,34 +23,34 @@ namespace BLL.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet(Name = "GetFormaPago")]
-        public EntityFormasPago Get(int id_conexion)
+        public EntityFormaPago Get(int id_fpa)
         {
             FormasPagoBD formasPago = new FormasPagoBD();
-            return formasPago.GETALLFORMASPAGO(id_formapago);
+            return formasPago.GETFORMAPAGO(id_fpa);
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<EntityFormasPago> Create(EntityFormasPago entityFormaPago)
+        public ActionResult<EntityFormaPago> Create(EntityFormaPago entityFormaPago)
         {
            FormasPagoBD formasPago = new FormasPagoBD();
             
-            var result= formasPago.GETALLFORMASPAGO(formasPago.INSERTFORMASPAGO(entityFormaPago));
+            var result= formasPago.GETFORMAPAGO(formasPago.INSERTFORMAPAGO(entityFormaPago));
 
-            return CreatedAtAction(nameof(Get), new { id = entityFormaPago.id_formapago }, entityFormaPago);
+            return CreatedAtAction(nameof(Get), new { id = entityFormaPago.ididentifier_i }, entityFormaPago);
         }
 
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<EntityFormasPago> Update(EntityFormasPago entityFormaPago)
+        public ActionResult<EntityFormaPago> Update(EntityFormaPago entityFormaPago)
         {
             FormasPagoBD formasPago = new FormasPagoBD();
 
-            var result = formasPago.GETALLFORMASPAGO(formasPago.INSERTFORMASPAGO(entityFormaPago));
+            var result = formasPago.GETFORMAPAGO(formasPago.UPDATEFORMAPAGO(entityFormaPago));
 
-            return CreatedAtAction(nameof(Get), new { id = entityFormaPago.id_formapago }, entityFormaPago);
+            return CreatedAtAction(nameof(Get), new { id = entityFormaPago.ididentifier_i }, entityFormaPago);
         }
 
         [HttpDelete]
@@ -60,10 +60,10 @@ namespace BLL.Controllers
         {
             FormasPagoBD formasPago = new FormasPagoBD();
 
-            EntityFormasPago entityFormaPago = formasPago.GETALLFORMASPAGO(id);
-            formasPago.DELETEFORMASPAGO(entityFormaPago);
+            EntityFormaPago entityFormaPago = formasPago.GETFORMAPAGO(id);
+            formasPago.DELETEFORMAPAGO(entityFormaPago);
             
-            return CreatedAtAction(nameof(Get), new { id = entityFormaPago.id_formapago }, entityFormaPago);
+            return CreatedAtAction(nameof(Get), new { id = entityFormaPago.ididentifier_i }, entityFormaPago);
         }
 
     }
