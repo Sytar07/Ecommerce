@@ -83,6 +83,9 @@ namespace ECOMMERCE.CORE
             }
         }
 
+        public DateTime? FechaCreacion_dt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DateTime? FechaModificacion_dt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Owner_nv { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         private int _ididentifier_i;
         public int _ID_Carrito_i;
