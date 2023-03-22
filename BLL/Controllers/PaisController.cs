@@ -22,7 +22,7 @@ namespace BLL.Controllers
         /// Espera un ID y resuelve con la entidad del usuario
         /// </summary>
         /// <returns></returns>
-        [HttpGet(Name = "GetPais")] 
+        [HttpGet] 
         public EntityPais Get(int id_pais)
         {
             PaisesBD paises = new PaisesBD();

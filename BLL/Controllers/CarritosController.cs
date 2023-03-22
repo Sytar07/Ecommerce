@@ -17,7 +17,7 @@ namespace BLL.Controllers
     [Route("[controller]")]
     public class CarritosController : ControllerBase
     {
-        [HttpGet(Name = "GetAllControllers")]
+        [HttpGet]
         public IEnumerable<EntityCarrito> GetAll()
         {
             CarritosBD carritos = new CarritosBD();

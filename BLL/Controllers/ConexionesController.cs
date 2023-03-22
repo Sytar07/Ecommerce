@@ -17,7 +17,7 @@ namespace BLL.Controllers
     [Route("[controller]")]
     public class ConexionesController : ControllerBase
     {
-        [HttpGet(Name = "GetAllControllers")]
+        [HttpGet]
         public IEnumerable<EntityConexion> GetAll()
         {
             ConexionesBD conexiones = new ConexionesBD();

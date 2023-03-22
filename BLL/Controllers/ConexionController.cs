@@ -22,7 +22,7 @@ namespace BLL.Controllers
         /// Espera un ID y resuelve con la entidad del usuario
         /// </summary>
         /// <returns></returns>
-        [HttpGet(Name = "GetConexion")]
+        [HttpGet]
         public EntityConexion Get(int id_conexion)
         {
             ConexionesBD conexiones = new ConexionesBD();
