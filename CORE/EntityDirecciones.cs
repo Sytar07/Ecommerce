@@ -89,31 +89,19 @@ namespace ECOMMERCE.CORE
             }
         }
 
-        public string pais_nv
+        public int pais_i
         {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _pais_nv;
+                return _pais_i;
             }
             set
             {
-                _pais_nv = value;
+                _pais_i = value;
             }
         }
 
-        public string Owner_nv
-        {
-            get
-            {
-                // Comprobaciones tipo/null/etc..
-                return _Owner_nv;
-            }
-            set
-            {
-                _Owner_nv = value;
-            }
-        }
 
         public DateTime? FechaCreacion_dt
         {
@@ -161,8 +149,7 @@ namespace ECOMMERCE.CORE
         private int? _numero_i;
         private string _puerta_nv;
         private string _ciudad_nv;
-        private string _pais_nv;
-        private string _Owner_nv;
+        private int _pais_i;
         private DateTime? _FechaCreacion_dt;
         private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
@@ -177,8 +164,8 @@ namespace ECOMMERCE.CORE
             numero_i = null;
             puerta_nv = "";
             ciudad_nv = "";
-            pais_nv = "";
-            Owner_nv = "";
+            pais_i = 0;
+            
             FechaCreacion_dt = DateTime.MinValue;
             FechaModificacion_dt = DateTime.MinValue;
 

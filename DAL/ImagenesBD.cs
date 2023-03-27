@@ -40,7 +40,7 @@ namespace DAL
                             ididentifier_i = (int)reader["ID_IMAGEN"],
                             path_nv = (string)reader["PATH"],
                             tipo_nv = (string)reader["TIPO"],
-                            Owner_nv = (string)reader["OWNER"],
+                            
                             FechaCreacion_dt= (DateTime)reader["FECHA_CREACION"],
                             FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
 
@@ -96,7 +96,6 @@ namespace DAL
                         entityImagen.ididentifier_i = (int)reader["ID_IMAGEN"];
                         entityImagen.path_nv = (string)reader["PATH"];
                         entityImagen.tipo_nv = (string)reader["TIPO"];
-                        entityImagen.Owner_nv = (string)reader["OWNER"];
                         entityImagen.FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"];
                         entityImagen.FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"];
                         
@@ -141,7 +140,6 @@ namespace DAL
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityImagen.ididentifier_i;
                     command.Parameters.Add("@PATH", System.Data.SqlDbType.NVarChar).Value = entityImagen.path_nv;
                     command.Parameters.Add("@TIPO", System.Data.SqlDbType.NVarChar).Value = entityImagen.tipo_nv;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.NVarChar).Value = entityImagen.Owner_nv;
                     command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaCreacion_dt;
                     command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaModificacion_dt;
 
@@ -188,7 +186,7 @@ namespace DAL
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = 0;
                     command.Parameters.Add("@PATH", System.Data.SqlDbType.NVarChar).Value = entityImagen.path_nv;
                     command.Parameters.Add("@TIPO", System.Data.SqlDbType.NVarChar).Value = entityImagen.tipo_nv;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.NVarChar).Value = entityImagen.Owner_nv;
+                    
                     command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaCreacion_dt;
                     command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaModificacion_dt;
 
@@ -235,7 +233,7 @@ namespace DAL
                     command.Parameters.Add("@ID_IMAGEN", System.Data.SqlDbType.Int).Value = entityImagen.id_imagen_nv;
                     command.Parameters.Add("@PATH", System.Data.SqlDbType.NVarChar).Value = entityImagen.path_nv;
                     command.Parameters.Add("@TIPO", System.Data.SqlDbType.NVarChar).Value = entityImagen.tipo_nv;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.NVarChar).Value = entityImagen.Owner_nv;
+                    
                     command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaCreacion_dt;
                     command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaModificacion_dt;
 

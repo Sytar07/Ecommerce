@@ -44,7 +44,7 @@ namespace DAL
                         {
                             ididentifier_i = (int)reader["ID_COUNTRY"],
                             name_nv = (string)reader["NAME"],
-                            Owner_nv = (string)reader["OWNER"],
+                            
                             FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
                             FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
                         });
@@ -98,7 +98,6 @@ namespace DAL
                         // Añado los paises encontrados a la lista de entidades
                         EntityPais.ididentifier_i = (int)reader["ID_COUNTRY"];
                         EntityPais.name_nv = (string)reader["NAME"];
-                        EntityPais.Owner_nv = (string)reader["OWNER"];
                         EntityPais.FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"];
                         EntityPais.FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"];
 
@@ -142,7 +141,6 @@ namespace DAL
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
                     command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
-                    command.Parameters.Add("@OWNER_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.Owner_nv;
                     command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaCreacion_dt;
                     command.Parameters.Add("@FECHA_MODIFICACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaModificacion_dt;
 
@@ -187,7 +185,6 @@ namespace DAL
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
                     command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
-                    command.Parameters.Add("@OWNER_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.Owner_nv;
                     command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaCreacion_dt;
                     command.Parameters.Add("@FECHA_MODIFICACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaModificacion_dt;
 
@@ -232,7 +229,6 @@ namespace DAL
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
                     command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
-                    command.Parameters.Add("@OWNER_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.Owner_nv;
                     command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaCreacion_dt;
                     command.Parameters.Add("@FECHA_MODIFICACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaModificacion_dt;
 

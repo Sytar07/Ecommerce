@@ -41,7 +41,7 @@ namespace DAL
                             ID_usuario_i = (int)reader["ID_USUARIO"], 
                             ID_Producto_i = (int)reader["ID_PRODUCTO"],
                             nombre_nv = (string)reader["NOMBRE"],
-                            Owner_nv = (string)reader["OWNER"],
+                            
                             Cantidad_i = (int)reader["CANTIDAD"],
                             direccion_nv = (string)reader["DIRECCION"],
                             FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],

@@ -61,18 +61,7 @@ namespace ECOMMERCE.CORE
                 _email_nv = value;
             }
         }
-        public string Owner_nv
-        {
-            get
-            {
-                // Comprobaciones tipo/null/etc..
-                return _Owner_nv;
-            }
-            set
-            {
-                _Owner_nv = value;
-            }
-        }
+      
 
         public DateTime? FechaCreacion_dt
         {
@@ -116,7 +105,7 @@ namespace ECOMMERCE.CORE
         private int _ididentifier_i;
         private string _name_nv;
         private string _email_nv;
-        private string _Owner_nv;
+        
         private int _rol_i;
         private DateTime? _FechaCreacion_dt;
         private DateTime? _FechaModificacion_dt;
@@ -129,7 +118,7 @@ namespace ECOMMERCE.CORE
             ididentifier_i = 0;
             name_nv = "";
             email_nv = "";
-            Owner_nv = "";
+            
             _rol_i = 1;
             FechaCreacion_dt = DateTime.MinValue;
             FechaModificacion_dt = DateTime.MinValue;

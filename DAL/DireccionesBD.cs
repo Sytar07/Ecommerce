@@ -44,8 +44,8 @@ namespace DAL
                             numero_i = (int)reader["NUMERO"],
                             puerta_nv = (string)reader["PUERTA"],
                             ciudad_nv = (string)reader["CIUDAD"],
-                            pais_nv = (string)reader["PAIS"],
-                            Owner_nv = (string)reader["OWNER"],                            
+                            pais_i = (int)reader["PAIS"],
+                                                        
                             FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
                             FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
 
@@ -103,8 +103,7 @@ namespace DAL
                         entityDireccion.numero_i = (int)reader["NUMERO"];
                         entityDireccion.puerta_nv = (string)reader["PUERTA"];
                         entityDireccion.ciudad_nv = (string)reader["CIUDAD"];
-                        entityDireccion.pais_nv = (string)reader["PAIS"];
-                        entityDireccion.Owner_nv = (string)reader["OWNER"];
+                        entityDireccion.pais_i = (int)reader["PAIS"];
                         entityDireccion.FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"];
                         entityDireccion.FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"];
                         // Aqui falta el correo y los campos adicionales.
@@ -153,8 +152,8 @@ namespace DAL
                     command.Parameters.Add("@NUMERO", System.Data.SqlDbType.Int).Value = entityDireccion.numero_i;
                     command.Parameters.Add("@PUERTA", System.Data.SqlDbType.NVarChar).Value = entityDireccion.puerta_nv;
                     command.Parameters.Add("@CIUDAD", System.Data.SqlDbType.NVarChar).Value = entityDireccion.ciudad_nv;
-                    command.Parameters.Add("@PAIS", System.Data.SqlDbType.NVarChar).Value = entityDireccion.pais_nv;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.NVarChar).Value = entityDireccion.Owner_nv;
+                    command.Parameters.Add("@PAIS", System.Data.SqlDbType.NVarChar).Value = entityDireccion.pais_i;
+                    
                     command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityDireccion.FechaCreacion_dt;
                     command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityDireccion.FechaModificacion_dt;
 
@@ -203,8 +202,8 @@ namespace DAL
                     command.Parameters.Add("@NUMERO", System.Data.SqlDbType.Int).Value = entityDireccion.numero_i;
                     command.Parameters.Add("@PUERTA", System.Data.SqlDbType.NVarChar).Value = entityDireccion.puerta_nv;
                     command.Parameters.Add("@CIUDAD", System.Data.SqlDbType.NVarChar).Value = entityDireccion.ciudad_nv;
-                    command.Parameters.Add("@PAIS", System.Data.SqlDbType.NVarChar).Value = entityDireccion.pais_nv;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.NVarChar).Value = entityDireccion.Owner_nv;
+                    command.Parameters.Add("@PAIS", System.Data.SqlDbType.NVarChar).Value = entityDireccion.pais_i;
+                    
                     command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityDireccion.FechaCreacion_dt;
                     command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityDireccion.FechaModificacion_dt;
 
@@ -253,8 +252,8 @@ namespace DAL
                     command.Parameters.Add("@NUMERO", System.Data.SqlDbType.Int).Value = entityDireccion.numero_i;
                     command.Parameters.Add("@PUERTA", System.Data.SqlDbType.NVarChar).Value = entityDireccion.puerta_nv;
                     command.Parameters.Add("@CIUDAD", System.Data.SqlDbType.NVarChar).Value = entityDireccion.ciudad_nv;
-                    command.Parameters.Add("@PAIS", System.Data.SqlDbType.NVarChar).Value = entityDireccion.pais_nv;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.NVarChar).Value = entityDireccion.Owner_nv;
+                    command.Parameters.Add("@PAIS", System.Data.SqlDbType.NVarChar).Value = entityDireccion.pais_i;
+                    
                     command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityDireccion.FechaCreacion_dt;
                     command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityDireccion.FechaModificacion_dt;
 

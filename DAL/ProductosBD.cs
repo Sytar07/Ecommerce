@@ -43,7 +43,7 @@ namespace DAL
                             stock_f = (int)reader["STOCK"],
                             descripcion_nv = (string)reader["DESCRIPCION"],
                             precio_f = (float)reader["PRECIO"],
-                            Owner_nv = (string)reader["OWNER"],
+                            
                             FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
                             FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
 
@@ -102,7 +102,6 @@ namespace DAL
                         entityProducto.stock_f = (int)reader["STOCK"];
                         entityProducto.descripcion_nv = (string)reader["DESCRIPCION"];
                         entityProducto.precio_f = (int)reader["PRECIO"];
-                        entityProducto.Owner_nv = (string)reader["OWNER"];
                         entityProducto.FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"];
                         entityProducto.FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"];
 
@@ -149,7 +148,6 @@ namespace DAL
                     command.Parameters.Add("@STOCK", System.Data.SqlDbType.NVarChar).Value = entityProducto.stock_f;
                     command.Parameters.Add("@DESCRIPCION", System.Data.SqlDbType.Int).Value = entityProducto.descripcion_nv;
                     command.Parameters.Add("@PRECIO", System.Data.SqlDbType.Int).Value = entityProducto.precio_f;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.Int).Value = entityProducto.Owner_nv;
                     command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.Int).Value = entityProducto.FechaCreacion_dt;
                     command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.Int).Value = entityProducto.FechaModificacion_dt;
 
@@ -197,7 +195,6 @@ namespace DAL
                     command.Parameters.Add("@STOCK", System.Data.SqlDbType.Int).Value = entityProducto.stock_f;
                     command.Parameters.Add("@DESCRIPCION", System.Data.SqlDbType.NVarChar).Value = entityProducto.descripcion_nv;
                     command.Parameters.Add("@PRECIO", System.Data.SqlDbType.Int).Value = entityProducto.precio_f;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.NVarChar).Value = entityProducto.Owner_nv;
                     command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityProducto.FechaCreacion_dt;
                     command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityProducto.FechaModificacion_dt;
 
@@ -245,7 +242,6 @@ namespace DAL
                     command.Parameters.Add("@STOCK", System.Data.SqlDbType.Int).Value = entityProducto.stock_f;
                     command.Parameters.Add("@DESCRIPCION", System.Data.SqlDbType.NVarChar).Value = entityProducto.descripcion_nv;
                     command.Parameters.Add("@PRECIO", System.Data.SqlDbType.Int).Value = entityProducto.precio_f;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.NVarChar).Value = entityProducto.Owner_nv;
                     command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityProducto.FechaCreacion_dt;
                     command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityProducto.FechaModificacion_dt;
 

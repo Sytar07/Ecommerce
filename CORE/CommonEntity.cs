@@ -15,7 +15,6 @@ namespace ECOMMERCE.CORE
         public int ididentifier_i { get; set; }
         public DateTime? FechaCreacion_dt { get; set; }
         public DateTime? FechaModificacion_dt { get; set; }
-        public string Owner_nv { get; set; }
 
         #endregion
 

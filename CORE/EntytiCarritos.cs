@@ -86,18 +86,7 @@ namespace ECOMMERCE.CORE
             }
         }
 
-        public string Owner_nv
-        {
-            get
-            {
-                // Comprobaciones tipo/null/etc..
-                return _Owner_nv;
-            }
-            set
-            {
-                _Owner_nv = value;
-            }
-        }
+      
         public int ID_Producto_i
         {
             get
@@ -139,7 +128,7 @@ namespace ECOMMERCE.CORE
         private int _ID_Usuario_i;
         private int _ID_Producto_i;
         private string _nombre_nv;
-        private string _Owner_nv;
+        
         private int _Cantidad_i;
         private string _direccion_nv;
         private DateTime? _FechaCreacion_dt;
@@ -154,7 +143,7 @@ namespace ECOMMERCE.CORE
             ID_usuario_i = 0;
             ID_Producto_i = 0;
             nombre_nv = "";
-            Owner_nv = "";
+            
             Cantidad_i= 0;
             direccion_nv = "";
             FechaCreacion_dt = DateTime.MinValue;

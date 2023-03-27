@@ -40,7 +40,7 @@ namespace DAL
                             ididentifier_i = (int)reader["ID_FPA"],
                             name_nv = (string)reader["NAME"],
                             type_nv = (string)reader["TYPE"],
-                            Owner_nv = (string)reader["OWNER"],
+                            
                             FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
                             FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
 
@@ -96,7 +96,6 @@ namespace DAL
                         entityFormaPago.ididentifier_i = (int)reader["ID_FPA"];
                         entityFormaPago.name_nv = (string)reader["NAME"];
                         entityFormaPago.type_nv = (string)reader["TYPE"];
-                        entityFormaPago.Owner_nv = (string)reader["OWNER"];
                         entityFormaPago.FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"];
                         entityFormaPago.FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"];
                         // Aqui falta el correo y los campos adicionales.
@@ -142,7 +141,6 @@ namespace DAL
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityFormaPago.ididentifier_i;
                     command.Parameters.Add("@NAME", System.Data.SqlDbType.NVarChar).Value = entityFormaPago.name_nv;
                     command.Parameters.Add("@TYPE", System.Data.SqlDbType.NVarChar).Value = entityFormaPago.type_nv;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.NVarChar).Value = entityFormaPago.Owner_nv;
                     command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityFormaPago.FechaCreacion_dt;
                     command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityFormaPago.FechaModificacion_dt;
 
@@ -188,7 +186,6 @@ namespace DAL
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = 0;
                     command.Parameters.Add("@NAME", System.Data.SqlDbType.NVarChar).Value = entityFormaPago.name_nv;
                     command.Parameters.Add("@TYPE", System.Data.SqlDbType.NVarChar).Value = entityFormaPago.type_nv;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.NVarChar).Value = entityFormaPago.Owner_nv;
                     command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityFormaPago.FechaCreacion_dt;
                     command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityFormaPago.FechaModificacion_dt;
 
@@ -234,7 +231,6 @@ namespace DAL
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityFormaPago.ididentifier_i;
                     command.Parameters.Add("@NAME", System.Data.SqlDbType.NVarChar).Value = entityFormaPago.name_nv;
                     command.Parameters.Add("@TYPE", System.Data.SqlDbType.NVarChar).Value = entityFormaPago.type_nv;
-                    command.Parameters.Add("@OWNER", System.Data.SqlDbType.NVarChar).Value = entityFormaPago.Owner_nv;
                     command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityFormaPago.FechaCreacion_dt;
                     command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityFormaPago.FechaModificacion_dt;
 
