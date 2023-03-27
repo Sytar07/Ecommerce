@@ -122,6 +122,13 @@ namespace FRONT.Controllers
             return entityUser;
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            EntityUser entityUser  =   new EntityUser();
+
+            return View(entityUser);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -136,6 +143,7 @@ namespace FRONT.Controllers
             // en los demás casos mostramos en pantalla
             return View("Edit", entityUser);
         }
+
         private static async Task<EntityUser> CreateUser(EntityUser entityUser)
         {
             string apiUrl = string.Format(apiUrlactions, entityUser.ididentifier_i);

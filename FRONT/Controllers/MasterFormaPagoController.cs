@@ -16,7 +16,7 @@ namespace FRONT.Controllers
     {
 
         private const string apiUrlList = "https://localhost:7023/FormasPago";
-        private const string apiUrlactions = "https://localhost:7023/FormasPago?id={0}";
+        private const string apiUrlactions = "https://localhost:7023/FormaPago?id={0}";
 
         private readonly ILogger<MasterFormasPagoController> _logger;
 
@@ -27,10 +27,10 @@ namespace FRONT.Controllers
 
         public IActionResult Index()
         {
-            List<EntityFormaPago> EntityFormaPagoList = ListUsers();
+            List<EntityFormaPago> EntityFormaPagoList = ListFormaPagos();
             return View(EntityFormaPagoList);
         }
-        private static List<EntityFormaPago> ListUsers()
+        private static List<EntityFormaPago> ListFormaPagos()
         {
             List<EntityFormaPago> EntityFormaPagos = new List<EntityFormaPago>();
 
@@ -52,9 +52,9 @@ namespace FRONT.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            return View(User(id));
+            return View(FormaPago(id));
         }
-        private static EntityFormaPago User(int id)
+        private static EntityFormaPago FormaPago(int id)
         {
             EntityFormaPago EntityFormaPago = new EntityFormaPago();
             string apiUrl = string.Format(apiUrlactions, id);
@@ -77,13 +77,13 @@ namespace FRONT.Controllers
             if (ModelState.IsValid)
             {
                 // Si es valido grabamos y salimos al Index.
-                SaveUser(EntityFormaPago).Wait();
+                SaveFormaPago(EntityFormaPago).Wait();
                 return RedirectToAction("Index");
             }
             // en los demás casos mostramos en pantalla
             return View(EntityFormaPago);
         }
-        private static async Task<EntityFormaPago> SaveUser(EntityFormaPago EntityFormaPago)
+        private static async Task<EntityFormaPago> SaveFormaPago(EntityFormaPago EntityFormaPago)
         {
             string apiUrl = string.Format(apiUrlactions, EntityFormaPago.ididentifier_i);
 
@@ -103,13 +103,13 @@ namespace FRONT.Controllers
             if (ModelState.IsValid)
             {
                 // Si es valido grabamos y salimos al Index.
-                DeleteUser(EntityFormaPago).Wait();
+                DeleteFormaPago(EntityFormaPago).Wait();
                 return RedirectToAction("Index");
             }
             // en los demás casos mostramos en pantalla
             return View("Edit", EntityFormaPago);
         }
-        private static async Task<EntityFormaPago> DeleteUser(EntityFormaPago EntityFormaPago)
+        private static async Task<EntityFormaPago> DeleteFormaPago(EntityFormaPago EntityFormaPago)
         {
             string apiUrl = string.Format(apiUrlactions, EntityFormaPago.ididentifier_i);
 
@@ -122,7 +122,13 @@ namespace FRONT.Controllers
             return EntityFormaPago;
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            EntityFormaPago entityFormaPago = new EntityFormaPago();
 
+            return View(entityFormaPago);
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(EntityFormaPago EntityFormaPago)
@@ -130,13 +136,13 @@ namespace FRONT.Controllers
             if (ModelState.IsValid)
             {
                 // Si es valido grabamos y salimos al Index.
-                CreateUser(EntityFormaPago).Wait();
+                CreateFormaPago(EntityFormaPago).Wait();
                 return RedirectToAction("Index");
             }
             // en los demás casos mostramos en pantalla
             return View("Edit", EntityFormaPago);
         }
-        private static async Task<EntityFormaPago> CreateUser(EntityFormaPago EntityFormaPago)
+        private static async Task<EntityFormaPago> CreateFormaPago(EntityFormaPago EntityFormaPago)
         {
             string apiUrl = string.Format(apiUrlactions, EntityFormaPago.ididentifier_i);
 
