@@ -16,7 +16,7 @@ namespace FRONT.Controllers
     {
 
         private const string apiUrlList = "https://localhost:7023/FormasPago";
-        private const string apiUrlactions = "https://localhost:7023/FormaPago?id={0}";
+        private const string apiUrlactions = "https://localhost:7023/FormaPago?id_fpa={0}";
 
         private readonly ILogger<MasterFormasPagoController> _logger;
 
@@ -96,6 +96,12 @@ namespace FRONT.Controllers
             return EntityFormaPago;
         }
 
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return View(FormaPago(id));
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(EntityFormaPago EntityFormaPago)

@@ -13,7 +13,7 @@ namespace DAL
 {
     public class FormasPagoBD
     {
-        public string cadenaConexion_BBDD { get; set; } = "Data Source=ROCINANTE\\SQLEXPRESS;User ID=sa;Password=sa;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        public string cadenaConexion_BBDD { get; set; } = "Data Source=ROCINANTE\\SQLEXPRESS;Initial Catalog=DEV_MARKET_3;User ID=sa;Password=sa;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         public EntityFormasPago GETALLFORMASPAGO()
         {
@@ -39,10 +39,8 @@ namespace DAL
                         {
                             ididentifier_i = (int)reader["ID_FPA"],
                             name_nv = (string)reader["NAME"],
-                            type_nv = (string)reader["TYPE"],
-                            
-                            FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
-                            FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
+                            type_i = (short)reader["TYPE"],
+            
 
                     });
 
@@ -77,12 +75,12 @@ namespace DAL
                 // Abro la conexion
                 connection.Open();
                 // Declaro una transaccion
-                SqlTransaction sqlTransaction = connection.BeginTransaction();
+
                 try
                 {
                     // Declaro un COMANDO para ejecutar un PROCEDIMIENTO ALMACENADO
                     SqlCommand command = new SqlCommand("GET_FORMAPAGO", connection);
-                    command.Transaction = sqlTransaction; // LE pasamos la transaccion
+
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = id_fpa;
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     // parametro SIMPLE
@@ -95,9 +93,7 @@ namespace DAL
                         // Añado las formas de pago encontradas a la lista de entidades
                         entityFormaPago.ididentifier_i = (int)reader["ID_FPA"];
                         entityFormaPago.name_nv = (string)reader["NAME"];
-                        entityFormaPago.type_nv = (string)reader["TYPE"];
-                        entityFormaPago.FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"];
-                        entityFormaPago.FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"];
+                        entityFormaPago.type_i = (short)reader["TYPE"];
                         // Aqui falta el correo y los campos adicionales.
 
                         Console.WriteLine((int)reader["ID_FPA"]);
@@ -110,13 +106,13 @@ namespace DAL
                 catch (Exception ex)
                 {
                     // Ha fallado ROLLBACK a la transaccion
-                    sqlTransaction.Rollback();
+                    
                     throw new Exception(ex.Message);
                 }
                 finally
                 {
                     // SI funciona la transaccion le damos adelante. COMMIT
-                    sqlTransaction.Commit();
+                    
                 }
 
             }
@@ -134,15 +130,14 @@ namespace DAL
                 SqlTransaction sqlTransaction = connection.BeginTransaction();
                 try
                 {
-                    SqlCommand command = new SqlCommand("CUD_FORMAPAGO", connection);
+                    SqlCommand command = new SqlCommand("CUD_FORMASPAGO", connection);
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityFormaPago.ididentifier_i;
                     command.Parameters.Add("@NAME", System.Data.SqlDbType.NVarChar).Value = entityFormaPago.name_nv;
-                    command.Parameters.Add("@TYPE", System.Data.SqlDbType.NVarChar).Value = entityFormaPago.type_nv;
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityFormaPago.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityFormaPago.FechaModificacion_dt;
+                    command.Parameters.Add("@TYPE", System.Data.SqlDbType.SmallInt).Value = entityFormaPago.type_i;
+
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 1;
 
@@ -179,15 +174,14 @@ namespace DAL
                 SqlTransaction sqlTransaction = connection.BeginTransaction();
                 try
                 {
-                    SqlCommand command = new SqlCommand("CUD_FORMAPAGO", connection);
+                    SqlCommand command = new SqlCommand("CUD_FORMASPAGO", connection);
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = 0;
                     command.Parameters.Add("@NAME", System.Data.SqlDbType.NVarChar).Value = entityFormaPago.name_nv;
-                    command.Parameters.Add("@TYPE", System.Data.SqlDbType.NVarChar).Value = entityFormaPago.type_nv;
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityFormaPago.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityFormaPago.FechaModificacion_dt;
+                    command.Parameters.Add("@TYPE", System.Data.SqlDbType.SmallInt).Value = entityFormaPago.type_i;
+
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 
@@ -224,15 +218,13 @@ namespace DAL
                 SqlTransaction sqlTransaction = connection.BeginTransaction();
                 try
                 {
-                    SqlCommand command = new SqlCommand("CUD_FORMAPAGO", connection);
+                    SqlCommand command = new SqlCommand("CUD_FORMASPAGO", connection);
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityFormaPago.ididentifier_i;
                     command.Parameters.Add("@NAME", System.Data.SqlDbType.NVarChar).Value = entityFormaPago.name_nv;
-                    command.Parameters.Add("@TYPE", System.Data.SqlDbType.NVarChar).Value = entityFormaPago.type_nv;
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityFormaPago.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityFormaPago.FechaModificacion_dt;
+                    command.Parameters.Add("@TYPE", System.Data.SqlDbType.SmallInt).Value = entityFormaPago.type_i;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 

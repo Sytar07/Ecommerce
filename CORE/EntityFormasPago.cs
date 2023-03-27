@@ -43,16 +43,16 @@ namespace ECOMMERCE.CORE
             }
         }
 
-        public string type_nv
+        public short type_i
         {
             get
             {
                 // Comprobaciones tipo/null/etc..
-                return _type_nv;
+                return _type_i;
             }
             set
             {
-                _type_nv = value;
+                _type_i = value;
             }
         }
 
@@ -99,7 +99,7 @@ namespace ECOMMERCE.CORE
 
         private int _ididentifier_i;
         private string _name_nv;
-        private string _type_nv;
+        private short _type_i;
         
         private DateTime? _FechaCreacion_dt;
         private DateTime? _FechaModificacion_dt;
@@ -109,7 +109,7 @@ namespace ECOMMERCE.CORE
             // Aqui hago cosas.
             ididentifier_i = 0;
             name_nv = "";
-            type_nv = "";
+            type_i = 0;
             
             FechaCreacion_dt = DateTime.MinValue;
             FechaModificacion_dt = DateTime.MinValue;
