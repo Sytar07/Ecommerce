@@ -1,0 +1,32 @@
+﻿@model List<ECOMMERCE.CORE.EntityImagen>
+@{
+    ViewBag.Title = "Imagenes List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-responsive">
+    <a class="btn btn-primary" asp-area="" asp-controller="MasterImagenes" asp-action="Create" >Crear</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Path</th>              
+                <th>Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Imagen in Model)
+            {
+                <tr>
+                    <td>@Imagen.ididentifier_i</td>
+                    <td>@Imagen.path_nv</td>
+                    <td>@Imagen.tipo_nv</td>
+
+                    <td class="text-center">
+                        <a class="btn btn-primary" asp-area="" asp-controller="MasterImagenes" asp-action="Edit" asp-route-id="@Imagen.ididentifier_i">Ficha</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
