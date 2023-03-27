@@ -1,0 +1,39 @@
+﻿@model List<ECOMMERCE.CORE.EntityDireccion>
+@{
+    ViewBag.Title = "Direcciones List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-responsive">
+    <a class="btn btn-primary" asp-area="" asp-controller="MasterDirecciones" asp-action="Create" >Crear</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>dirección</th>              
+                <th>calle</th>
+                <th>numero</th>
+                <th>ciudad</th>
+                <th>Pais</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Direccion in Model)
+            {
+                <tr>
+                    <td>@Direccion.ididentifier_i</td>
+                    <td>@Direccion.direccion_nv</td>
+                    <td>@Direccion.calle_nv</td>
+                    <td>@Direccion.numero_i</td>
+                    <td>@Direccion.ciudad_nv</td>
+                    <td>@Direccion.pais_nv</td>
+                    
+
+                    <td class="text-center">
+                        <a class="btn btn-primary" asp-area="" asp-controller="MasterDirecciones" asp-action="Edit" asp-route-id="@Direccion.ididentifier_i">Ficha</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

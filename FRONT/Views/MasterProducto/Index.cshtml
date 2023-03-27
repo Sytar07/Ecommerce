@@ -1,0 +1,41 @@
+﻿@model List<ECOMMERCE.CORE.EntityProducto>
+@{
+    ViewBag.Title = "Productos List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-responsive">
+    <a class="btn btn-primary" asp-area="" asp-controller="MasterProductos" asp-action="Create" >Crear</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>              
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Stock</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Producto in Model)
+            {
+                <tr>
+                    <td>@Producto.ididentifier_i</td>
+                    <td>@Producto.nombre_nv</td>
+                    <td>@Producto.descripcion_nv</td>
+
+                    <td>@Producto.precio_f</td>
+                    <td>@Producto.stock_f</td>
+
+                    
+                    
+
+                    <td class="text-center">
+                        <a class="btn btn-primary" asp-area="" asp-controller="MasterProductos" asp-action="Edit" asp-route-id="@Producto.ididentifier_i">Ficha</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
