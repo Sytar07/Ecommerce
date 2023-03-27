@@ -17,7 +17,7 @@ namespace BLL.Controllers
     [Route("[controller]")]
     public class PaisesController : ControllerBase
     {
-        [HttpGet(Name = "GetAllControllers")]
+        [HttpGet(Name = "GetAllPaises")]
         public IEnumerable<EntityPais> GetAll()
         {
             PaisesBD paises = new PaisesBD();

@@ -17,7 +17,7 @@ namespace BLL.Controllers
     [Route("[controller]")]
     public class ProductosController : ControllerBase
     {
-        [HttpGet(Name = "GetAllControllers")]
+        [HttpGet(Name = "GetAllProductos")]
         public IEnumerable<EntityProducto> GetAll()
         {
             ProductosBD productos = new ProductosBD();
