@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ECOMMERCE.CORE
 {
-    public class EntityProducto : ICommonEntity
+    public class EntityProducto
     {
+        [Display(Name = "Código")]
         public int ididentifier_i {
             get{
                 // Comprobaciones tipo/null/etc..
@@ -27,16 +30,7 @@ namespace ECOMMERCE.CORE
             } 
         }
 
-        public string id_producto_nv { 
-            get{
-                // Comprobaciones tipo/null/etc..
-                return _id_producto_nv;
-            }
-            set{
-                _id_producto_nv = value;
-            } 
-        }
-
+        [Display(Name = "Nombre")]
         public string nombre_nv {
             get
             {
@@ -49,6 +43,7 @@ namespace ECOMMERCE.CORE
             }
         }
 
+        [Display(Name = "Stock")]
         public int stock_f
         {
             get
@@ -62,6 +57,7 @@ namespace ECOMMERCE.CORE
             }
         }
 
+        [Display(Name = "Descripción")]
         public string descripcion_nv
         {
             get
@@ -75,6 +71,7 @@ namespace ECOMMERCE.CORE
             }
         }
 
+        [Display(Name = "Precio")]
         public decimal precio_f
         {
             get
@@ -89,32 +86,6 @@ namespace ECOMMERCE.CORE
         }
 
        
-
-        public DateTime? FechaCreacion_dt
-        {
-            get
-            {
-                return _FechaCreacion_dt;
-            }
-            set
-            {
-
-                _FechaCreacion_dt = value;
-            }
-        }
-
-        public DateTime? FechaModificacion_dt
-        {
-            get
-            {
-                // Comprobaciones tipo/null/etc..
-                return _FechaModificacion_dt;
-            }
-            set
-            {
-                _FechaModificacion_dt = value;
-            }
-        }
    
 
         public bool delete
@@ -138,8 +109,6 @@ namespace ECOMMERCE.CORE
         private string _descripcion_nv;
         private decimal _precio_f;
         
-        private DateTime? _FechaCreacion_dt;
-        private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
 
 
@@ -148,14 +117,12 @@ namespace ECOMMERCE.CORE
         {
             // Aqui hago cosas.
             ididentifier_i = 0;
-            id_producto_nv = "";
+            
             nombre_nv = "";
             stock_f = 0;
             descripcion_nv = "";
             precio_f = 0;
             
-            FechaCreacion_dt = DateTime.MinValue;
-            FechaModificacion_dt = DateTime.MinValue;
 
         }
 

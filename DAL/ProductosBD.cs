@@ -43,13 +43,9 @@ namespace DAL
                             stock_f = (int)reader["STOCK"],
                             descripcion_nv = (string)reader["DESCRIPCION"],
                             precio_f = (decimal)reader["PRECIO"],
-                            
-                            FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
-                            FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
+                                                 
 
-                                                  
-
-                    });
+                        });
 
                         Console.WriteLine((int)reader["ID_PRODUCTO"]);
                     }

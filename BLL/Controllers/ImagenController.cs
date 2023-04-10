@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.Routing;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using System.Net.Http.Headers;
+using System.Net.Http;
+using System;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BLL.Controllers
 {
@@ -15,8 +19,8 @@ namespace BLL.Controllers
     [Route("[controller]")]
     public class ImagenController : ControllerBase
     {
-        
 
+         
         /// <summary>
         /// API: GetUser
         /// Espera un ID y resuelve con la entidad del usuario
@@ -46,6 +50,9 @@ namespace BLL.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<EntityImagen> Update(EntityImagen EntityImagen)
         {
+
+            
+            
             ImagenesBD imagenes = new ImagenesBD();
 
             var result = imagenes.GETIMAGEN(imagenes.UPDATEIMAGEN(EntityImagen));
@@ -68,3 +75,5 @@ namespace BLL.Controllers
 
     }
 }
+
+

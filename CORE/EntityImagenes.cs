@@ -1,15 +1,20 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ECOMMERCE.CORE
 {
-    public class EntityImagen : ICommonEntity
+    public class EntityImagen
     {
+        [Display(Name = "Código")]
         public int ididentifier_i {
             get{
                 // Comprobaciones tipo/null/etc..
@@ -27,6 +32,7 @@ namespace ECOMMERCE.CORE
             } 
         }
 
+        [Display(Name = "Código Producto")]
         public int id_producto
         {
             get
@@ -46,6 +52,8 @@ namespace ECOMMERCE.CORE
                 _id_producto = value;
             }
         }
+
+        [Display(Name = "Ruta URL")]
         public string path_nv {
             get
             {
@@ -58,6 +66,7 @@ namespace ECOMMERCE.CORE
             }
         }
 
+        [Display(Name = "Tipo o Categoria")]
         public string tipo_nv
         {
             get
@@ -71,34 +80,7 @@ namespace ECOMMERCE.CORE
             }
         }
 
-      
-        public DateTime? FechaCreacion_dt
-        {
-            get
-            {
-                return _FechaCreacion_dt;
-            }
-            set
-            {
-
-                _FechaCreacion_dt = value;
-            }
-        }
-      
-
-        public DateTime? FechaModificacion_dt
-        {
-            get
-            {
-                // Comprobaciones tipo/null/etc..
-                return _FechaModificacion_dt;
-            }
-            set
-            {
-                _FechaModificacion_dt = value;
-            }
-        }
-
+        public IFormFile? imagen { get; set; }
         public bool delete
         {
             get
@@ -118,11 +100,7 @@ namespace ECOMMERCE.CORE
         private int _id_producto;
         private string _tipo_nv;
         
-        private DateTime? _FechaCreacion_dt;
-        private DateTime? _FechaModificacion_dt;
         private bool _delete_b;
-
-
 
         public  EntityImagen()
         {
@@ -131,8 +109,6 @@ namespace ECOMMERCE.CORE
             path_nv = "";
             tipo_nv = "";
             id_producto = 0;
-            FechaCreacion_dt = DateTime.MinValue;
-            FechaModificacion_dt = DateTime.MinValue;
 
         }
 

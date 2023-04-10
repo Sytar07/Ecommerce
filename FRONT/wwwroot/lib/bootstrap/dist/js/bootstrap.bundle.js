@@ -2089,7 +2089,7 @@
     var scaleY = 1;
 
     if (isHTMLElement(element) && includeScale) {
-      // Fallback to 1 in case both values are `0`
+      // FallVolver a 1 in case both values are `0`
       scaleX = rect.width / element.offsetWidth || 1;
       scaleY = rect.height / element.offsetHeight || 1;
     }
@@ -2136,7 +2136,7 @@
 
     if (parent.contains(child)) {
       return true;
-    } // then fallback to custom implementation with Shadow DOM support
+    } // then fallVolver a custom implementation with Shadow DOM support
     else if (rootNode && isShadowRoot(rootNode)) {
         var next = child;
 

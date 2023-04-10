@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ECOMMERCE.CORE
 {
-    public class EntityConexion : ICommonEntity
+    public class EntityConexion 
     {
+        [Display(Name = "Código")]
         public int ididentifier_i {
             get{
                 // Comprobaciones tipo/null/etc..
@@ -26,6 +29,8 @@ namespace ECOMMERCE.CORE
                 _ididentifier_i=value;
             } 
         }
+        
+        [Display(Name = "IP")]
         public string? ip
         {
             get
@@ -56,7 +61,7 @@ namespace ECOMMERCE.CORE
             } 
         }
 
-     
+        [Display(Name = "Fecha Inicio")]
         public DateTime? FechaInicio_dt
         {
             get
@@ -82,9 +87,6 @@ namespace ECOMMERCE.CORE
                 _delete_b = value;
             }
         }
-
-        public DateTime? FechaCreacion_dt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime? FechaModificacion_dt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 
         private int _ididentifier_i;

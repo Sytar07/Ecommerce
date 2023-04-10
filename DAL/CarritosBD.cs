@@ -44,8 +44,7 @@ namespace DAL
                             
                             Cantidad_i = (int)reader["CANTIDAD"],
                             direccion_nv = (string)reader["DIRECCION"],
-                            FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
-                            FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
+
                     });
 
                         Console.WriteLine((int)reader["ID_CARRITO"]);

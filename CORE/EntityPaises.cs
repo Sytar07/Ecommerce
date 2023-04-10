@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ECOMMERCE.CORE
 {
-    public class EntityPais : ICommonEntity
+    public class EntityPais
     {
+        [Display(Name = "Código")]
         public int ididentifier_i {
             get{
                 // Comprobaciones tipo/null/etc..
@@ -27,16 +30,8 @@ namespace ECOMMERCE.CORE
             } 
         }
 
-        public string Id_Country_nv { 
-            get{
-                // Comprobaciones tipo/null/etc..
-                return _Id_Country_nv;
-            }
-            set{
-                _Id_Country_nv=value;
-            } 
-        }
 
+        [Display(Name = "Nombre")]
         public string name_nv {
             get
             {
@@ -50,33 +45,6 @@ namespace ECOMMERCE.CORE
         }
 
       
-
-        public DateTime? FechaCreacion_dt
-        {
-            get
-            {
-                return _FechaCreacion_dt;
-            }
-            set
-            {
-
-                _FechaCreacion_dt = value;
-            }
-        }
-
-        public DateTime? FechaModificacion_dt
-        {
-            get
-            {
-                // Comprobaciones tipo/null/etc..
-                return _FechaModificacion_dt;
-            }
-            set
-            {
-                _FechaModificacion_dt = value;
-            }
-        }
-
         public bool delete
         {
             get
@@ -103,11 +71,8 @@ namespace ECOMMERCE.CORE
         {
             // Aqui hago cosas.
             ididentifier_i = 0;
-            Id_Country_nv = "";
             name_nv = "";
             
-            FechaCreacion_dt = DateTime.MinValue;
-            FechaModificacion_dt = DateTime.MinValue;
         }
 
     }

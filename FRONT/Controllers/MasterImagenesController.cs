@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -78,6 +79,17 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (!(entityImagen.imagen == null || entityImagen.imagen.Length == 0))
+                {
+                    var rutaDeGuardado = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/productos", entityImagen.imagen.FileName);
+
+                    using (var stream = new FileStream(rutaDeGuardado, FileMode.Create))
+                    {
+                        entityImagen.imagen.CopyTo(stream);
+                    }
+                    entityImagen.path_nv = entityImagen.imagen.FileName;// Sustiyo el nombre por el correcto
+                }
+
                 // Si es valido grabamos y salimos al Index.
                 SaveImagen(entityImagen).Wait();
                 return RedirectToAction("Index", new { id = entityImagen.id_producto });
@@ -87,6 +99,11 @@ namespace FRONT.Controllers
         }
         private static async Task<EntityImagen> SaveImagen(EntityImagen entityImagen)
         {
+            // Aqui solo recojo el nombre y borro el binario que ya lo tengo subido.
+            
+            entityImagen.imagen = null;
+
+
             string apiUrl = string.Format(apiUrlactions, entityImagen.ididentifier_i);
 
             HttpClient client = new HttpClient();
@@ -98,6 +115,13 @@ namespace FRONT.Controllers
             return entityImagen;
         }
 
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return View("Delete", Imagen(id));
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(EntityImagen entityImagen)
@@ -106,7 +130,7 @@ namespace FRONT.Controllers
             {
                 // Si es valido grabamos y salimos al Index.
                 DeleteImagen(entityImagen).Wait();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = entityImagen.id_producto });
             }
             // en los demás casos mostramos en pantalla
             return View("Edit",entityImagen);

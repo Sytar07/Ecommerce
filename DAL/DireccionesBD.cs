@@ -40,14 +40,10 @@ namespace DAL
                         {
                             ididentifier_i = (int)reader["ID_DIRECCION"],
                             direccion_nv = (string)reader["DIRECCION"],
-                            calle_nv = (string)reader["CALLE"],
                             numero_i = (int)reader["NUMERO"],
                             puerta_nv = (string)reader["PUERTA"],
                             ciudad_nv = (string)reader["CIUDAD"],
                             pais_i = (int)reader["PAIS"],
-                                                        
-                            FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
-                            FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
 
                         });
 
@@ -99,7 +95,6 @@ namespace DAL
                     {
                         // Añado las direcciones encontradas a la lista de entidades
                         entityDireccion.ididentifier_i = (int)reader["ID_DIRECCION"];
-                        entityDireccion.calle_nv = (string)reader["CALLE"];
                         entityDireccion.numero_i = (int)reader["NUMERO"];
                         entityDireccion.puerta_nv = (string)reader["PUERTA"];
                         entityDireccion.ciudad_nv = (string)reader["CIUDAD"];
@@ -146,7 +141,7 @@ namespace DAL
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityDireccion.ididentifier_i;
                     command.Parameters.Add("@DIRECCION", System.Data.SqlDbType.NVarChar).Value = entityDireccion.direccion_nv;
-                    command.Parameters.Add("@CALLE", System.Data.SqlDbType.NVarChar).Value = entityDireccion.calle_nv;
+                   
                     command.Parameters.Add("@NUMERO", System.Data.SqlDbType.Int).Value = entityDireccion.numero_i;
                     command.Parameters.Add("@PUERTA", System.Data.SqlDbType.NVarChar).Value = entityDireccion.puerta_nv;
                     command.Parameters.Add("@CIUDAD", System.Data.SqlDbType.NVarChar).Value = entityDireccion.ciudad_nv;
@@ -193,7 +188,6 @@ namespace DAL
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = 0;
                     command.Parameters.Add("@DIRECCION", System.Data.SqlDbType.NVarChar).Value = entityDireccion.direccion_nv;
-                    command.Parameters.Add("@CALLE", System.Data.SqlDbType.NVarChar).Value = entityDireccion.calle_nv;
                     command.Parameters.Add("@NUMERO", System.Data.SqlDbType.Int).Value = entityDireccion.numero_i;
                     command.Parameters.Add("@PUERTA", System.Data.SqlDbType.NVarChar).Value = entityDireccion.puerta_nv;
                     command.Parameters.Add("@CIUDAD", System.Data.SqlDbType.NVarChar).Value = entityDireccion.ciudad_nv;
@@ -241,7 +235,6 @@ namespace DAL
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityDireccion.ididentifier_i;
                     command.Parameters.Add("@DIRECCION", System.Data.SqlDbType.NVarChar).Value = entityDireccion.direccion_nv;
-                    command.Parameters.Add("@CALLE", System.Data.SqlDbType.NVarChar).Value = entityDireccion.calle_nv;
                     command.Parameters.Add("@NUMERO", System.Data.SqlDbType.Int).Value = entityDireccion.numero_i;
                     command.Parameters.Add("@PUERTA", System.Data.SqlDbType.NVarChar).Value = entityDireccion.puerta_nv;
                     command.Parameters.Add("@CIUDAD", System.Data.SqlDbType.NVarChar).Value = entityDireccion.ciudad_nv;

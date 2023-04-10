@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ECOMMERCE.CORE
 {
-    public class EntityUser : ICommonEntity
+    public class EntityUser 
     {
+        [Display(Name = "Código")]
         public int ididentifier_i {
             get{
                 // Comprobaciones tipo/null/etc..
@@ -27,6 +30,7 @@ namespace ECOMMERCE.CORE
             } 
         }
 
+        [Display(Name = "Nombre")]
         public string name_nv { 
             get{
                 // Comprobaciones tipo/null/etc..
@@ -36,7 +40,7 @@ namespace ECOMMERCE.CORE
                 _name_nv=value;
             } 
         }
-
+        [Display(Name = "Rol")]
         public int rol_i
         {
             get
@@ -49,6 +53,7 @@ namespace ECOMMERCE.CORE
                 _rol_i = value;
             }
         }
+        [Display(Name = "Email")]
         public string email_nv
         {
             get
@@ -59,33 +64,6 @@ namespace ECOMMERCE.CORE
             set
             {
                 _email_nv = value;
-            }
-        }
-      
-
-        public DateTime? FechaCreacion_dt
-        {
-            get
-            {
-                return _FechaCreacion_dt;
-            }
-            set
-            {
-
-                _FechaCreacion_dt = value;
-            }
-        }
-
-        public DateTime? FechaModificacion_dt
-        {
-            get
-            {
-                // Comprobaciones tipo/null/etc..
-                return _FechaModificacion_dt;
-            }
-            set
-            {
-                _FechaModificacion_dt = value;
             }
         }
         public bool delete
@@ -117,12 +95,8 @@ namespace ECOMMERCE.CORE
             // Aqui hago cosas.
             ididentifier_i = 0;
             name_nv = "";
-            email_nv = "";
-            
+            email_nv = "";           
             _rol_i = 1;
-            FechaCreacion_dt = DateTime.MinValue;
-            FechaModificacion_dt = DateTime.MinValue;
-
         }
 
     }

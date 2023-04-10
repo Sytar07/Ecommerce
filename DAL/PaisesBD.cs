@@ -45,8 +45,8 @@ namespace DAL
                             ididentifier_i = (int)reader["ID_COUNTRY"],
                             name_nv = (string)reader["NAME"],
                             
-                            FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
-                            FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
+                            
+                            
                         });
                         Console.WriteLine((int)reader["ID_PAIS"]);
                     }
@@ -98,9 +98,6 @@ namespace DAL
                         // Añado los paises encontrados a la lista de entidades
                         EntityPais.ididentifier_i = (int)reader["ID_COUNTRY"];
                         EntityPais.name_nv = (string)reader["NAME"];
-                        EntityPais.FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"];
-                        EntityPais.FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"];
-
                         Console.WriteLine((int)reader["ID_USER"]);
                     }
                     // Cierro el READER
@@ -139,7 +136,7 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.ididentifier_i;
                     command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 1;
@@ -181,7 +178,7 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.ididentifier_i;
                     command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
@@ -223,7 +220,7 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.ididentifier_i;
                     command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;

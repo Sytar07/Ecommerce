@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ECOMMERCE.CORE
 {
-    public class EntityCarrito : ICommonEntity
+    public class EntityCarrito 
     {
+        [Display(Name = "Código")]
         public int ididentifier_i {
             get{
                 // Comprobaciones tipo/null/etc..
@@ -26,7 +29,7 @@ namespace ECOMMERCE.CORE
                 _ididentifier_i=value;
             } 
         }
-
+        [Display(Name = "Nombre")]
         public string nombre_nv { 
             get{
                 // Comprobaciones tipo/null/etc..
@@ -37,6 +40,7 @@ namespace ECOMMERCE.CORE
             } 
         }
 
+        [Display(Name = "Usuerio")]
         public int ID_usuario_i
         {
             get
@@ -49,6 +53,7 @@ namespace ECOMMERCE.CORE
                 _ID_Usuario_i = value;
             }
         }
+        [Display(Name = "Dirección")]
         public string direccion_nv
         {
             get
@@ -61,32 +66,8 @@ namespace ECOMMERCE.CORE
                 _direccion_nv = value;
             }
         }
-        public DateTime? FechaCreacion_dt
-        {
-            get
-            {
-                // Comprobaciones tipo/null/etc..
-                return _FechaCreacion_dt;
-            }
-            set
-            {
-                _FechaCreacion_dt = value;
-            }
-        }
-        public DateTime? FechaModificacion_dt
-        {
-            get
-            {
-                // Comprobaciones tipo/null/etc..
-                return _FechaModificacion_dt;
-            }
-            set
-            {
-                _FechaModificacion_dt = value;
-            }
-        }
 
-      
+        [Display(Name = "Producto")]
         public int ID_Producto_i
         {
             get
@@ -146,8 +127,6 @@ namespace ECOMMERCE.CORE
             
             Cantidad_i= 0;
             direccion_nv = "";
-            FechaCreacion_dt = DateTime.MinValue;
-            FechaModificacion_dt = DateTime.MinValue;
 
         }
 

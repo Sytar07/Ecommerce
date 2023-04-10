@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ECOMMERCE.CORE
 {
-    public class EntityFormaPago : ICommonEntity
+    public class EntityFormaPago
     {
+        [Display(Name = "Código")]
         public int ididentifier_i
         {
             get
@@ -30,6 +33,7 @@ namespace ECOMMERCE.CORE
             }
         }
 
+        [Display(Name = "Nombre")]
         public string name_nv
         {
             get
@@ -43,6 +47,7 @@ namespace ECOMMERCE.CORE
             }
         }
 
+        [Display(Name = "Tipo o Categoria")]
         public short type_i
         {
             get
@@ -57,32 +62,6 @@ namespace ECOMMERCE.CORE
         }
 
       
-
-        public DateTime? FechaCreacion_dt
-        {
-            get
-            {
-                return _FechaCreacion_dt;
-            }
-            set
-            {
-
-                _FechaCreacion_dt = value;
-            }
-        }
-
-        public DateTime? FechaModificacion_dt
-        {
-            get
-            {
-                // Comprobaciones tipo/null/etc..
-                return _FechaModificacion_dt;
-            }
-            set
-            {
-                _FechaModificacion_dt = value;
-            }
-        }
 
         public bool delete
         {
@@ -111,8 +90,6 @@ namespace ECOMMERCE.CORE
             name_nv = "";
             type_i = 0;
             
-            FechaCreacion_dt = DateTime.MinValue;
-            FechaModificacion_dt = DateTime.MinValue;
 
         }
 

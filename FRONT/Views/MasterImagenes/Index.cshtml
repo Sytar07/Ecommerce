@@ -9,7 +9,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>Código</th>
                 <th>Path</th>              
                 <th>Tipo</th>
             </tr>
@@ -29,4 +29,9 @@
             }
         </tbody>
     </table>
+    <div class="card-footer text-center">
+
+        <a class="btn btn-primary" asp-area="" asp-controller="MasterProductos" asp-action="Edit" asp-route-id="@ViewBag.id_producto">Ficha Producto</a>
+
+    </div>
 </div>

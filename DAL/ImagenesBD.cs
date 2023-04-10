@@ -42,8 +42,6 @@ namespace DAL
                             path_nv = (string)reader["PATH"],
                             tipo_nv = (string)reader["TIPO"],
                             id_producto = (int)reader["ID_PRODUCTO"],
-                            FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
-                            FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
 
                         });
 
@@ -140,6 +138,7 @@ namespace DAL
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityImagen.ididentifier_i;
                     command.Parameters.Add("@PATH", System.Data.SqlDbType.NVarChar).Value = entityImagen.path_nv;
+                    command.Parameters.Add("@ID_PRODUCTO", System.Data.SqlDbType.Int).Value = entityImagen.id_producto;
                     command.Parameters.Add("@TIPO", System.Data.SqlDbType.NVarChar).Value = entityImagen.tipo_nv;
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 1;
 
@@ -227,6 +226,7 @@ namespace DAL
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityImagen.ididentifier_i;
                     command.Parameters.Add("@PATH", System.Data.SqlDbType.NVarChar).Value = entityImagen.path_nv;
+                    command.Parameters.Add("@ID_PRODUCTO", System.Data.SqlDbType.NVarChar).Value = entityImagen.id_producto;
                     command.Parameters.Add("@TIPO", System.Data.SqlDbType.NVarChar).Value = entityImagen.tipo_nv;
 
 
