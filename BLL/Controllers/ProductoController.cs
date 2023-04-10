@@ -48,18 +48,20 @@ namespace BLL.Controllers
         {
             ProductosBD productos = new ProductosBD();
 
-            var result = productos.GETPRODUCTO(productos.INSERTPRODUCTO(entityProducto));
+            var result = productos.GETPRODUCTO(productos.UPDATEPRODUCTO(entityProducto));
 
             return CreatedAtAction(nameof(Get), new { id = entityProducto.ididentifier_i }, entityProducto);
         }
 
+
+       
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<EntityProducto> Delete(int id)
+        public ActionResult<EntityProducto> Delete(int id_Producto)
         {
             ProductosBD productos = new ProductosBD();
-            EntityProducto entityProducto = productos.GETPRODUCTO(id);
+            EntityProducto entityProducto = productos.GETPRODUCTO(id_Producto);
             productos.DELETEPRODUCTO(entityProducto);
             
             return CreatedAtAction(nameof(Get), new { id = entityProducto.ididentifier_i }, entityProducto);

@@ -10,7 +10,7 @@
                 <h1>USUARIO</h1>
             </div>
 
-            @using (Html.BeginForm("Delete", "MasterProducto", FormMethod.Post))
+            @using (Html.BeginForm("Delete", "MasterProductos", FormMethod.Post))
             {
                 <div class="card-body text-left">
                     @Html.ValidationSummary(true)
@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="card-footer text-center">
-                    <a class="btn btn-primary" asp-area="" asp-controller="MasterProducto" asp-action="Index">Back to Formas de Pago</a>
+                    <a class="btn btn-primary" asp-area="" asp-controller="MasterProductos" asp-action="Index">Back to Productos</a>
                     <input class="btn btn-primary"  type="submit" value="Delete" />
                     
                 </div>

@@ -104,8 +104,6 @@ namespace DAL
                         entityDireccion.puerta_nv = (string)reader["PUERTA"];
                         entityDireccion.ciudad_nv = (string)reader["CIUDAD"];
                         entityDireccion.pais_i = (int)reader["PAIS"];
-                        entityDireccion.FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"];
-                        entityDireccion.FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"];
                         // Aqui falta el correo y los campos adicionales.
 
                         Console.WriteLine((int)reader["ID_DIRECCION"]);
@@ -153,9 +151,6 @@ namespace DAL
                     command.Parameters.Add("@PUERTA", System.Data.SqlDbType.NVarChar).Value = entityDireccion.puerta_nv;
                     command.Parameters.Add("@CIUDAD", System.Data.SqlDbType.NVarChar).Value = entityDireccion.ciudad_nv;
                     command.Parameters.Add("@PAIS", System.Data.SqlDbType.NVarChar).Value = entityDireccion.pais_i;
-                    
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityDireccion.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityDireccion.FechaModificacion_dt;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 1;
 
@@ -203,9 +198,7 @@ namespace DAL
                     command.Parameters.Add("@PUERTA", System.Data.SqlDbType.NVarChar).Value = entityDireccion.puerta_nv;
                     command.Parameters.Add("@CIUDAD", System.Data.SqlDbType.NVarChar).Value = entityDireccion.ciudad_nv;
                     command.Parameters.Add("@PAIS", System.Data.SqlDbType.NVarChar).Value = entityDireccion.pais_i;
-                    
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityDireccion.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityDireccion.FechaModificacion_dt;
+
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 
@@ -253,9 +246,6 @@ namespace DAL
                     command.Parameters.Add("@PUERTA", System.Data.SqlDbType.NVarChar).Value = entityDireccion.puerta_nv;
                     command.Parameters.Add("@CIUDAD", System.Data.SqlDbType.NVarChar).Value = entityDireccion.ciudad_nv;
                     command.Parameters.Add("@PAIS", System.Data.SqlDbType.NVarChar).Value = entityDireccion.pais_i;
-                    
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityDireccion.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityDireccion.FechaModificacion_dt;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 

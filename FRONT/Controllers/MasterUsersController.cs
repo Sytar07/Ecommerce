@@ -96,18 +96,22 @@ namespace FRONT.Controllers
             return entityUser;
         }
 
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return View("Delete",User(id));
+        }
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(EntityUser entityUser)
         {
-            if (ModelState.IsValid)
-            {
-                // Si es valido grabamos y salimos al Index.
-                DeleteUser(entityUser).Wait();
-                return RedirectToAction("Index");
-            }
-            // en los demás casos mostramos en pantalla
-            return View("Edit",entityUser);
+           
+            // Si es valido grabamos y salimos al Index.
+            DeleteUser(entityUser).Wait();
+            return RedirectToAction("Index");
+           
         }
         private static async Task<EntityUser> DeleteUser(EntityUser entityUser)
         {

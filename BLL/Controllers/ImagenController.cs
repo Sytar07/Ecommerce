@@ -48,7 +48,7 @@ namespace BLL.Controllers
         {
             ImagenesBD imagenes = new ImagenesBD();
 
-            var result = imagenes.GETIMAGEN(imagenes.INSERTIMAGEN(EntityImagen));
+            var result = imagenes.GETIMAGEN(imagenes.UPDATEIMAGEN(EntityImagen));
 
             return CreatedAtAction(nameof(Get), new { id = EntityImagen.ididentifier_i }, EntityImagen);
         }

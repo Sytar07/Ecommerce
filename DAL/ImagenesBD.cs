@@ -13,9 +13,9 @@ namespace DAL
 {
     public class ImagenesBD
     {
-        public string cadenaConexion_BBDD { get; set; } = "Data Source=ROCINANTE\\SQLEXPRESS;Imagen ID=sa;Password=sa;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        public string cadenaConexion_BBDD { get; set; } = "Data Source=ROCINANTE\\SQLEXPRESS;Initial Catalog=DEV_MARKET_3;User ID=sa;Password=sa;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-        public EntityImagenes GETALLIMAGENES()
+        public EntityImagenes GETALLIMAGENES(int id_producto)
         {
             EntityImagenes entityImagenes = new EntityImagenes();
 
@@ -28,7 +28,8 @@ namespace DAL
                 try
                 {
                     SqlCommand command = new SqlCommand("GET_IMAGENES", connection);
-                    
+                    command.Parameters.Add("@ID_PRODUCTO", System.Data.SqlDbType.Int).Value = id_producto;
+
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     var reader = command.ExecuteReader();
                     // LO LEO. 
@@ -40,8 +41,8 @@ namespace DAL
                             ididentifier_i = (int)reader["ID_IMAGEN"],
                             path_nv = (string)reader["PATH"],
                             tipo_nv = (string)reader["TIPO"],
-                            
-                            FechaCreacion_dt= (DateTime)reader["FECHA_CREACION"],
+                            id_producto = (int)reader["ID_PRODUCTO"],
+                            FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
                             FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
 
                         });
@@ -84,6 +85,7 @@ namespace DAL
                     SqlCommand command = new SqlCommand("GET_IMAGEN", connection);
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = id_imagen;
+                    
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     // parametro SIMPLE
                     //command.Parameters.Add("@action", System.Data.SqlDbType.VarChar).Value = "GET";                    
@@ -95,9 +97,8 @@ namespace DAL
                         // Añado los usuarios encontrados a la lista de entidades
                         entityImagen.ididentifier_i = (int)reader["ID_IMAGEN"];
                         entityImagen.path_nv = (string)reader["PATH"];
+                        entityImagen.id_producto= (int)reader["ID_PRODUCTO"];
                         entityImagen.tipo_nv = (string)reader["TIPO"];
-                        entityImagen.FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"];
-                        entityImagen.FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"];
                         
                         Console.WriteLine((int)reader["ID_IMAGEN"]);
                     }
@@ -135,15 +136,11 @@ namespace DAL
                 {
                     SqlCommand command = new SqlCommand("CUD_IMAGEN", connection);
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
-
+                    
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityImagen.ididentifier_i;
                     command.Parameters.Add("@PATH", System.Data.SqlDbType.NVarChar).Value = entityImagen.path_nv;
                     command.Parameters.Add("@TIPO", System.Data.SqlDbType.NVarChar).Value = entityImagen.tipo_nv;
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaModificacion_dt;
-
-
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 1;
 
                     command.Parameters.Add("@ID_RETURN", System.Data.SqlDbType.Int).Value = 0;
@@ -181,14 +178,12 @@ namespace DAL
                 {
                     SqlCommand command = new SqlCommand("CUD_IMAGEN", connection);
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
-
+                    //@ID as int, @Path as nvarchar(50), @Tipo as nvarchar(50),  @Fecha_Creacion as datetime, @Fecha_Modificacion as datetime,  @delete as smallint, @ID_RETURN INT OUTPUT
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = 0;
+                    command.Parameters.Add("@ID_PRODUCTO", System.Data.SqlDbType.Int).Value = entityImagen.id_producto;
                     command.Parameters.Add("@PATH", System.Data.SqlDbType.NVarChar).Value = entityImagen.path_nv;
                     command.Parameters.Add("@TIPO", System.Data.SqlDbType.NVarChar).Value = entityImagen.tipo_nv;
-                    
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaModificacion_dt;
 
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
@@ -230,12 +225,10 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID_IMAGEN", System.Data.SqlDbType.Int).Value = entityImagen.id_imagen_nv;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityImagen.ididentifier_i;
                     command.Parameters.Add("@PATH", System.Data.SqlDbType.NVarChar).Value = entityImagen.path_nv;
                     command.Parameters.Add("@TIPO", System.Data.SqlDbType.NVarChar).Value = entityImagen.tipo_nv;
-                    
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityImagen.FechaModificacion_dt;
+
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 

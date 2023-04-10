@@ -27,16 +27,25 @@ namespace ECOMMERCE.CORE
             } 
         }
 
-        public string id_imagen_nv { 
-            get{
+        public int id_producto
+        {
+            get
+            {
                 // Comprobaciones tipo/null/etc..
-                return _id_imagen_nv;
+                if (_id_producto == -1)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return _id_producto;
+                }
             }
-            set{
-                _id_imagen_nv = value;
-            } 
+            set
+            {
+                _id_producto = value;
+            }
         }
-
         public string path_nv {
             get
             {
@@ -105,8 +114,8 @@ namespace ECOMMERCE.CORE
 
 
         private int _ididentifier_i;
-        private string _id_imagen_nv;
         private string _path_nv;
+        private int _id_producto;
         private string _tipo_nv;
         
         private DateTime? _FechaCreacion_dt;
@@ -119,10 +128,9 @@ namespace ECOMMERCE.CORE
         {
             // Aqui hago cosas.
             ididentifier_i = 0;
-            id_imagen_nv = "";
             path_nv = "";
             tipo_nv = "";
-            
+            id_producto = 0;
             FechaCreacion_dt = DateTime.MinValue;
             FechaModificacion_dt = DateTime.MinValue;
 

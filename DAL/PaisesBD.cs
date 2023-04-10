@@ -141,8 +141,6 @@ namespace DAL
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
                     command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
-                    command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaModificacion_dt;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 1;
 
@@ -185,8 +183,6 @@ namespace DAL
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
                     command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
-                    command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaModificacion_dt;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 
@@ -229,8 +225,6 @@ namespace DAL
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPais.Id_Country_nv;
                     command.Parameters.Add("@NAME_NV", System.Data.SqlDbType.NVarChar).Value = entityPais.name_nv;
-                    command.Parameters.Add("@FECHA_CREACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION_DT", System.Data.SqlDbType.DateTime).Value = entityPais.FechaModificacion_dt;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 

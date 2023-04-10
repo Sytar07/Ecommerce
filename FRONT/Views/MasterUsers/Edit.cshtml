@@ -43,7 +43,7 @@
                 <div class="card-footer text-center">
                     <a class="btn btn-primary" asp-area="" asp-controller="MasterUsers" asp-action="Index">Back to Users</a>
                     <input class="btn btn-primary"  type="submit" value="Save" />
-                    <a class="btn btn-primary" asp-area="" asp-controller="MasterUsers" asp-action="Delete">Delete</a>
+                    <a class="btn btn-primary" asp-area="" asp-controller="MasterUsers" asp-action="Delete" asp-route-id="@Model.ididentifier_i">Delete</a>
                 </div>
 
             }

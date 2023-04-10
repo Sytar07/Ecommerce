@@ -15,13 +15,13 @@ namespace BLL.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ImagenesContoller : ControllerBase
+    public class ImagenesController : ControllerBase
     {
-        [HttpGet(Name = "GetAllImagenes")]
-        public IEnumerable<EntityImagen> GetAll()
+        [HttpGet]
+        public IEnumerable<EntityImagen> GetAll(int id_producto)
         {
             ImagenesBD imagenes = new ImagenesBD();
-            return imagenes.GETALLIMAGENES().lista;
+            return imagenes.GETALLIMAGENES(id_producto).lista;
         }
 
 

@@ -42,7 +42,7 @@ namespace DAL
                             nombre_nv = (string)reader["NOMBRE"],
                             stock_f = (int)reader["STOCK"],
                             descripcion_nv = (string)reader["DESCRIPCION"],
-                            precio_f = (float)reader["PRECIO"],
+                            precio_f = (decimal)reader["PRECIO"],
                             
                             FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"],
                             FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"],
@@ -89,8 +89,6 @@ namespace DAL
                     command.Transaction = sqlTransaction; // Le pasamos la transaccion
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = id_producto;
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    // parametro SIMPLE
-                    //command.Parameters.Add("@action", System.Data.SqlDbType.VarChar).Value = "GET";
                     // EJECUTO EL COMANDO
                     var reader = command.ExecuteReader();
                     // LO LEO. 
@@ -101,9 +99,7 @@ namespace DAL
                         entityProducto.nombre_nv = (string)reader["NOMBRE"];
                         entityProducto.stock_f = (int)reader["STOCK"];
                         entityProducto.descripcion_nv = (string)reader["DESCRIPCION"];
-                        entityProducto.precio_f = (int)reader["PRECIO"];
-                        entityProducto.FechaCreacion_dt = (DateTime)reader["FECHA_CREACION"];
-                        entityProducto.FechaModificacion_dt = (DateTime)reader["FECHA_MODIFICACION"];
+                        entityProducto.precio_f = (decimal)reader["PRECIO"];
 
                         Console.WriteLine((int)reader["ID_PRODUCTO"]);
                     }
@@ -139,17 +135,15 @@ namespace DAL
                 SqlTransaction sqlTransaction = connection.BeginTransaction();
                 try
                 {
-                    SqlCommand command = new SqlCommand("CUD_PRODUCTO", connection);
+                    SqlCommand command = new SqlCommand("CUD_PRODUCTOS", connection);
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID_PRODUCTO", System.Data.SqlDbType.Int).Value = entityProducto.id_producto_nv;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityProducto.ididentifier_i;
                     command.Parameters.Add("@NOMBRE", System.Data.SqlDbType.NVarChar).Value = entityProducto.nombre_nv;
-                    command.Parameters.Add("@STOCK", System.Data.SqlDbType.NVarChar).Value = entityProducto.stock_f;
-                    command.Parameters.Add("@DESCRIPCION", System.Data.SqlDbType.Int).Value = entityProducto.descripcion_nv;
+                    command.Parameters.Add("@STOCK", System.Data.SqlDbType.Int).Value = entityProducto.stock_f;
+                    command.Parameters.Add("@DESCRIPCION", System.Data.SqlDbType.NVarChar).Value = entityProducto.descripcion_nv;
                     command.Parameters.Add("@PRECIO", System.Data.SqlDbType.Int).Value = entityProducto.precio_f;
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.Int).Value = entityProducto.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.Int).Value = entityProducto.FechaModificacion_dt;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 1;
 
@@ -186,7 +180,7 @@ namespace DAL
                 SqlTransaction sqlTransaction = connection.BeginTransaction();
                 try
                 {
-                    SqlCommand command = new SqlCommand("CUD_PRODUCTO", connection);
+                    SqlCommand command = new SqlCommand("CUD_PRODUCTOS", connection);
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
@@ -195,8 +189,6 @@ namespace DAL
                     command.Parameters.Add("@STOCK", System.Data.SqlDbType.Int).Value = entityProducto.stock_f;
                     command.Parameters.Add("@DESCRIPCION", System.Data.SqlDbType.NVarChar).Value = entityProducto.descripcion_nv;
                     command.Parameters.Add("@PRECIO", System.Data.SqlDbType.Int).Value = entityProducto.precio_f;
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityProducto.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityProducto.FechaModificacion_dt;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 
@@ -233,7 +225,7 @@ namespace DAL
                 SqlTransaction sqlTransaction = connection.BeginTransaction();
                 try
                 {
-                    SqlCommand command = new SqlCommand("CUD_PRODUCTO", connection);
+                    SqlCommand command = new SqlCommand("CUD_PRODUCTOS", connection);
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
@@ -242,8 +234,6 @@ namespace DAL
                     command.Parameters.Add("@STOCK", System.Data.SqlDbType.Int).Value = entityProducto.stock_f;
                     command.Parameters.Add("@DESCRIPCION", System.Data.SqlDbType.NVarChar).Value = entityProducto.descripcion_nv;
                     command.Parameters.Add("@PRECIO", System.Data.SqlDbType.Int).Value = entityProducto.precio_f;
-                    command.Parameters.Add("@FECHA_CREACION", System.Data.SqlDbType.DateTime).Value = entityProducto.FechaCreacion_dt;
-                    command.Parameters.Add("@FECHA_MODIFICACION", System.Data.SqlDbType.DateTime).Value = entityProducto.FechaModificacion_dt;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 

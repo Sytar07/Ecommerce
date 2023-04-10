@@ -96,6 +96,14 @@ namespace FRONT.Controllers
             return entityProducto;
         }
 
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return View("Delete",Producto(id));
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(EntityProducto entityProducto)

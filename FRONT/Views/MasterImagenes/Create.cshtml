@@ -15,6 +15,7 @@
                 <div class="card-body text-left">
                     @Html.ValidationSummary(true)
                     @Html.HiddenFor(model => model.ididentifier_i)
+                    @Html.HiddenFor(model => model.id_producto)
                     <div class="form-group">
                         @Html.LabelFor(model => model.path_nv, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">

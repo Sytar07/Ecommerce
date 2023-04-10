@@ -49,7 +49,7 @@ namespace ECOMMERCE.CORE
             }
         }
 
-        public double stock_f
+        public int stock_f
         {
             get
             {
@@ -75,7 +75,7 @@ namespace ECOMMERCE.CORE
             }
         }
 
-        public double precio_f
+        public decimal precio_f
         {
             get
             {
@@ -134,9 +134,9 @@ namespace ECOMMERCE.CORE
         private int _ididentifier_i;
         private string _id_producto_nv;
         private string _nombre_nv;
-        private double _stock_f;
+        private int _stock_f;
         private string _descripcion_nv;
-        private double _precio_f;
+        private decimal _precio_f;
         
         private DateTime? _FechaCreacion_dt;
         private DateTime? _FechaModificacion_dt;

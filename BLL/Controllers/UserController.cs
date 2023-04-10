@@ -56,10 +56,10 @@ namespace BLL.Controllers
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<EntityUser> Delete(int id)
+        public ActionResult<EntityUser> Delete(int id_user)
         {
             UsersBD users = new UsersBD();
-            EntityUser entityUser = users.GETUSER(id);
+            EntityUser entityUser = users.GETUSER(id_user);
             users.DELETEUSER(entityUser);
 
             return CreatedAtAction(nameof(Get), new { id = entityUser.ididentifier_i }, entityUser);

@@ -2,6 +2,7 @@
 using FRONT.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
@@ -15,7 +16,7 @@ namespace FRONT.Controllers
     public class MasterImagenesController : Controller
     {
 
-        private const string apiUrlList = "https://localhost:7023/Imagenes";
+        private const string apiUrlList = "https://localhost:7023/Imagenes?id_producto={0}";
         private const string apiUrlactions = "https://localhost:7023/Imagen?id_Imagen={0}";
 
         private readonly ILogger<MasterImagenesController> _logger;
@@ -25,18 +26,19 @@ namespace FRONT.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            List<EntityImagen> EntityImagenList = ListImagenes();            
+            List<EntityImagen> EntityImagenList = ListImagenes(id);
+            ViewBag.ID_PRODUCTO = id;
             return View(EntityImagenList);
         }
-        private static List<EntityImagen> ListImagenes()
+        private static List<EntityImagen> ListImagenes(int id)
         {
             List<EntityImagen> entityImagenes = new List<EntityImagen>();
-           
 
+            string apiUrl = string.Format(apiUrlList, id);
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = client.GetAsync(apiUrlList).Result;
+            HttpResponseMessage response = client.GetAsync(apiUrl).Result;
             if (response.IsSuccessStatusCode)
             {
                 entityImagenes = JsonSerializer.Deserialize<List<EntityImagen>>(response.Content.ReadAsStringAsync().Result);
@@ -78,7 +80,7 @@ namespace FRONT.Controllers
             {
                 // Si es valido grabamos y salimos al Index.
                 SaveImagen(entityImagen).Wait();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = entityImagen.id_producto });
             }
             // en los demás casos mostramos en pantalla
             return View(entityImagen);
@@ -123,10 +125,10 @@ namespace FRONT.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
             EntityImagen entityImagen  =   new EntityImagen();
-
+            entityImagen.id_producto= id;
             return View(entityImagen);
         }
 
@@ -138,7 +140,7 @@ namespace FRONT.Controllers
             {
                 // Si es valido grabamos y salimos al Index.
                 CreateImagen(entityImagen).Wait();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = entityImagen.id_producto});
             }
             // en los demás casos mostramos en pantalla
             return View("Edit", entityImagen);
