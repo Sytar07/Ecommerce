@@ -15,7 +15,7 @@ namespace DAL
     {
         public string cadenaConexion_BBDD { get; set; } = "Data Source=ROCINANTE\\SQLEXPRESS;Initial Catalog=DEV_MARKET_3;User ID=sa;Password=sa;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-        public EntityDirecciones GETALLDIRECCIONES()
+        public EntityDirecciones GETALLDIRECCIONES(int id_user)
         {
             EntityDirecciones entityDirecciones = new EntityDirecciones();
 
@@ -29,7 +29,8 @@ namespace DAL
                 {
                     // Declaro un COMANDO para ejecutar un PROCEDIMIENTO ALMACENADO
                     SqlCommand command = new SqlCommand("GET_DIRECCIONES", connection);
-                    
+                    command.Parameters.Add("@ID_USER", System.Data.SqlDbType.Int).Value = id_user;
+
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     var reader = command.ExecuteReader();
                     // LO LEO. 

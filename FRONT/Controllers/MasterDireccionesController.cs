@@ -15,7 +15,7 @@ namespace FRONT.Controllers
     public class MasterDireccionesController : Controller
     {
 
-        private const string apiUrlList = "https://localhost:7023/Direcciones";
+        private const string apiUrlList = "https://localhost:7023/Direcciones?id_user={0}";
         private const string apiUrlactions = "https://localhost:7023/Direccion?id_Direccion={0}";
 
         private readonly ILogger<MasterDireccionesController> _logger;
@@ -25,18 +25,19 @@ namespace FRONT.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            List<EntityDireccion> EntityDireccionList = ListDirecciones();            
+            List<EntityDireccion> EntityDireccionList = ListDirecciones(id);
+            ViewBag.id_user = id;
             return View(EntityDireccionList);
         }
-        private static List<EntityDireccion> ListDirecciones()
+        private static List<EntityDireccion> ListDirecciones(int id)
         {
             List<EntityDireccion> entityDirecciones = new List<EntityDireccion>();
-           
+            string apiUrl = string.Format(apiUrlList, id);
 
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = client.GetAsync(apiUrlList).Result;
+            HttpResponseMessage response = client.GetAsync(apiUrl).Result;
             if (response.IsSuccessStatusCode)
             {
                 entityDirecciones = JsonSerializer.Deserialize<List<EntityDireccion>>(response.Content.ReadAsStringAsync().Result);

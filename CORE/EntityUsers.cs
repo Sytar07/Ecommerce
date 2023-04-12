@@ -66,6 +66,21 @@ namespace ECOMMERCE.CORE
                 _email_nv = value;
             }
         }
+
+        [Display(Name = "Clave")]
+        public string Clave_nv
+        {
+            get
+            {
+                // Comprobaciones tipo/null/etc..
+                return _clave_nv;
+            }
+            set
+            {
+                _clave_nv = value;
+            }
+        }
+
         public bool delete
         {
             get
@@ -82,6 +97,7 @@ namespace ECOMMERCE.CORE
 
         private int _ididentifier_i;
         private string _name_nv;
+        private string _clave_nv;
         private string _email_nv;
         
         private int _rol_i;

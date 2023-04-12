@@ -18,10 +18,10 @@ namespace BLL.Controllers
     public class DireccionesController : ControllerBase
     {
         [HttpGet(Name = "GetAllDirecciones")]
-        public IEnumerable<EntityDireccion> GetAll()
+        public IEnumerable<EntityDireccion> GetAll(int id_user)
         {
             DireccionesBD direcciones = new DireccionesBD();
-            return direcciones.GETALLDIRECCIONES().lista;
+            return direcciones.GETALLDIRECCIONES(id_user).lista;
         }
 
 
