@@ -56,11 +56,11 @@ namespace BLL.Controllers
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<EntityFormasPago> Delete(int id)
+        public ActionResult<EntityFormasPago> Delete(int id_fpa)
         {
             FormasPagoBD formasPago = new FormasPagoBD();
 
-            EntityFormaPago entityFormaPago = formasPago.GETFORMAPAGO(id);
+            EntityFormaPago entityFormaPago = formasPago.GETFORMAPAGO(id_fpa);
             formasPago.DELETEFORMAPAGO(entityFormaPago);
             
             return CreatedAtAction(nameof(Get), new { id = entityFormaPago.ididentifier_i }, entityFormaPago);
