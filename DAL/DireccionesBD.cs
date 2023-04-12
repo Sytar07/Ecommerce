@@ -42,6 +42,7 @@ namespace DAL
                             ididentifier_i = (int)reader["ID_DIRECCION"],
                             direccion_nv = (string)reader["DIRECCION"],
                             numero_i = (int)reader["NUMERO"],
+                            user_i = (int)reader["ID_USER"],
                             puerta_nv = (string)reader["PUERTA"],
                             ciudad_nv = (string)reader["CIUDAD"],
                             pais_i = (int)reader["PAIS"],
@@ -96,7 +97,9 @@ namespace DAL
                     {
                         // Añado las direcciones encontradas a la lista de entidades
                         entityDireccion.ididentifier_i = (int)reader["ID_DIRECCION"];
+                        entityDireccion.direccion_nv= (string)reader["DIRECCION"];
                         entityDireccion.numero_i = (int)reader["NUMERO"];
+                        entityDireccion.user_i= (int)reader["ID_USER"];
                         entityDireccion.puerta_nv = (string)reader["PUERTA"];
                         entityDireccion.ciudad_nv = (string)reader["CIUDAD"];
                         entityDireccion.pais_i = (int)reader["PAIS"];
@@ -136,17 +139,18 @@ namespace DAL
                 SqlTransaction sqlTransaction = connection.BeginTransaction();
                 try
                 {
-                    SqlCommand command = new SqlCommand("CUD_DIRECCION", connection);
+                    SqlCommand command = new SqlCommand("CUD_DIRECCIONES", connection);
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityDireccion.ididentifier_i;
                     command.Parameters.Add("@DIRECCION", System.Data.SqlDbType.NVarChar).Value = entityDireccion.direccion_nv;
-                   
                     command.Parameters.Add("@NUMERO", System.Data.SqlDbType.Int).Value = entityDireccion.numero_i;
                     command.Parameters.Add("@PUERTA", System.Data.SqlDbType.NVarChar).Value = entityDireccion.puerta_nv;
+                    command.Parameters.Add("@USUARIO", System.Data.SqlDbType.NVarChar).Value = entityDireccion.user_i;
                     command.Parameters.Add("@CIUDAD", System.Data.SqlDbType.NVarChar).Value = entityDireccion.ciudad_nv;
                     command.Parameters.Add("@PAIS", System.Data.SqlDbType.NVarChar).Value = entityDireccion.pais_i;
+
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 1;
 
@@ -183,7 +187,7 @@ namespace DAL
                 SqlTransaction sqlTransaction = connection.BeginTransaction();
                 try
                 {
-                    SqlCommand command = new SqlCommand("CUD_DIRECCION", connection);
+                    SqlCommand command = new SqlCommand("CUD_DIRECCIONES", connection);
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
@@ -191,6 +195,7 @@ namespace DAL
                     command.Parameters.Add("@DIRECCION", System.Data.SqlDbType.NVarChar).Value = entityDireccion.direccion_nv;
                     command.Parameters.Add("@NUMERO", System.Data.SqlDbType.Int).Value = entityDireccion.numero_i;
                     command.Parameters.Add("@PUERTA", System.Data.SqlDbType.NVarChar).Value = entityDireccion.puerta_nv;
+                    command.Parameters.Add("@USUARIO", System.Data.SqlDbType.NVarChar).Value = entityDireccion.user_i;
                     command.Parameters.Add("@CIUDAD", System.Data.SqlDbType.NVarChar).Value = entityDireccion.ciudad_nv;
                     command.Parameters.Add("@PAIS", System.Data.SqlDbType.NVarChar).Value = entityDireccion.pais_i;
 
@@ -230,12 +235,13 @@ namespace DAL
                 SqlTransaction sqlTransaction = connection.BeginTransaction();
                 try
                 {
-                    SqlCommand command = new SqlCommand("CUD_DIRECCION", connection);
+                    SqlCommand command = new SqlCommand("CUD_DIRECCIONES", connection);
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityDireccion.ididentifier_i;
                     command.Parameters.Add("@DIRECCION", System.Data.SqlDbType.NVarChar).Value = entityDireccion.direccion_nv;
+                    command.Parameters.Add("@USUARIO", System.Data.SqlDbType.NVarChar).Value = entityDireccion.user_i;
                     command.Parameters.Add("@NUMERO", System.Data.SqlDbType.Int).Value = entityDireccion.numero_i;
                     command.Parameters.Add("@PUERTA", System.Data.SqlDbType.NVarChar).Value = entityDireccion.puerta_nv;
                     command.Parameters.Add("@CIUDAD", System.Data.SqlDbType.NVarChar).Value = entityDireccion.ciudad_nv;

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
+
 using System.Xml.Linq;
 
 namespace ECOMMERCE.CORE
@@ -110,7 +112,18 @@ namespace ECOMMERCE.CORE
             }
         }
 
-
+        public IEnumerable<EntityPais>? paises
+        {
+            get
+            {
+                return _paises_list;
+            }
+            set
+            {
+                _paises_list = value;
+            }
+        }
+     
         public bool delete
         {
             get
@@ -124,7 +137,7 @@ namespace ECOMMERCE.CORE
             }
         }
 
-
+        private IEnumerable<EntityPais> _paises_list;
         private int _ididentifier_i;
         private string _direccion_nv;
         private string _calle_nv;

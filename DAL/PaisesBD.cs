@@ -48,7 +48,7 @@ namespace DAL
                             
                             
                         });
-                        Console.WriteLine((int)reader["ID_PAIS"]);
+                        
                     }
                     // Cierro el READER
                     reader.Close();

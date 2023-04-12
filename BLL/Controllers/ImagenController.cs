@@ -63,11 +63,11 @@ namespace BLL.Controllers
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<EntityImagen> Delete(int id)
+        public ActionResult<EntityImagen> Delete(int id_Imagen)
         {
             ImagenesBD imagenes = new ImagenesBD();
 
-            EntityImagen EntityImagen = imagenes.GETIMAGEN(id);
+            EntityImagen EntityImagen = imagenes.GETIMAGEN(id_Imagen);
             imagenes.DELETEIMAGEN(EntityImagen);
             
             return CreatedAtAction(nameof(Get), new { id = EntityImagen.ididentifier_i }, EntityImagen);

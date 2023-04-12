@@ -33,6 +33,13 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        @Html.LabelFor(model => model.puerta_nv, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model=>model.puerta_nv, new { htmlAttributes = new { @class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.puerta_nv)
+                        </div>
+                    </div>
+                    <div class="form-group">
                         @Html.LabelFor(model => model.ciudad_nv, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
                             @Html.EditorFor(model=>model.ciudad_nv, new { htmlAttributes = new { @class = "form-control"}})
@@ -42,7 +49,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.pais_i, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model=>model.pais_i, new { htmlAttributes = new { @class = "form-control"}})
+                            @Html.DropDownListFor(model => model.pais_i, new SelectList(Model.paises, "ididentifier_i", "name_nv"), "Seleciona Pais", new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.pais_i)
                         </div>
                     </div>

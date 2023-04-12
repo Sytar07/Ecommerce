@@ -1,9 +1,12 @@
 ﻿using ECOMMERCE.CORE;
 using FRONT.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -16,6 +19,7 @@ namespace FRONT.Controllers
     {
 
         private const string apiUrlList = "https://localhost:7023/Direcciones?id_user={0}";
+        private const string apiUrlPaises = "https://localhost:7023/Paises";
         private const string apiUrlactions = "https://localhost:7023/Direccion?id_Direccion={0}";
 
         private readonly ILogger<MasterDireccionesController> _logger;
@@ -47,12 +51,27 @@ namespace FRONT.Controllers
         }
 
 
+        private static List<EntityPais> DDLPaises()
+        {
+            List<EntityPais> listadopaises = new List<EntityPais>();
+
+
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = client.GetAsync(apiUrlPaises).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                listadopaises = JsonSerializer.Deserialize<List<EntityPais>>(response.Content.ReadAsStringAsync().Result);
+            }
+
+            return listadopaises;
+        }
 
         #region "Actions"
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            
             return View(Direccion(id));
         }
         private static EntityDireccion Direccion(int id)
@@ -65,8 +84,9 @@ namespace FRONT.Controllers
             if (response.IsSuccessStatusCode)
             {
                 entityDireccion = JsonSerializer.Deserialize<EntityDireccion>(response.Content.ReadAsStringAsync().Result);
+                entityDireccion.paises = DDLPaises();
             }
-
+            
             return entityDireccion;
         }
 
@@ -79,7 +99,7 @@ namespace FRONT.Controllers
             {
                 // Si es valido grabamos y salimos al Index.
                 SaveDireccion(entityDireccion).Wait();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = entityDireccion.user_i });
             }
             // en los demás casos mostramos en pantalla
             return View(entityDireccion);
@@ -97,6 +117,12 @@ namespace FRONT.Controllers
             return entityDireccion;
         }
 
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return View("Delete", Direccion(id));
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(EntityDireccion entityDireccion)
@@ -105,7 +131,7 @@ namespace FRONT.Controllers
             {
                 // Si es valido grabamos y salimos al Index.
                 DeleteDireccion(entityDireccion).Wait();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = entityDireccion.user_i });
             }
             // en los demás casos mostramos en pantalla
             return View("Edit",entityDireccion);
@@ -124,10 +150,11 @@ namespace FRONT.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
             EntityDireccion entityDireccion  =   new EntityDireccion();
-
+            entityDireccion.user_i = id;
+            entityDireccion.paises = DDLPaises();
             return View(entityDireccion);
         }
 
@@ -135,11 +162,12 @@ namespace FRONT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(EntityDireccion entityDireccion)
         {
+            ModelState.Remove("Paises");
             if (ModelState.IsValid)
             {
                 // Si es valido grabamos y salimos al Index.
                 CreateDireccion(entityDireccion).Wait();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = entityDireccion.user_i });
             }
             // en los demás casos mostramos en pantalla
             return View("Edit", entityDireccion);

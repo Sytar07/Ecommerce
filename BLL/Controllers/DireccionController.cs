@@ -48,7 +48,7 @@ namespace BLL.Controllers
         {
             DireccionesBD Direcciones = new DireccionesBD();
 
-            var result = Direcciones.GETDIRECCION(Direcciones.INSERTDIRECCION(entityDireccion));
+            var result = Direcciones.GETDIRECCION(Direcciones.UPDATEDIRECCION(entityDireccion));
 
             return CreatedAtAction(nameof(Get), new { id = entityDireccion.ididentifier_i }, entityDireccion);
         }
@@ -56,11 +56,11 @@ namespace BLL.Controllers
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<EntityDireccion> Delete(int id)
+        public ActionResult<EntityDireccion> Delete(int id_direccion)
         {
             DireccionesBD Direcciones = new DireccionesBD();
 
-            EntityDireccion entityDireccion = Direcciones.GETDIRECCION(id);
+            EntityDireccion entityDireccion = Direcciones.GETDIRECCION(id_direccion);
             Direcciones.DELETEDIRECCION(entityDireccion);
             
             return CreatedAtAction(nameof(Get), new { id = entityDireccion.ididentifier_i }, entityDireccion);
