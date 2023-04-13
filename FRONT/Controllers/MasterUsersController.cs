@@ -1,4 +1,5 @@
 ﻿using ECOMMERCE.CORE;
+using FRONT.Code;
 using FRONT.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,9 +13,10 @@ using System.Threading.Tasks;
 
 namespace FRONT.Controllers
 {
+    [Authentication]
     public class MasterUsersController : Controller
     {
-
+        
         private const string apiUrlList = "https://localhost:7023/Users";
         private const string apiUrlactions = "https://localhost:7023/User?id_user={0}";
 

@@ -1,4 +1,5 @@
 ﻿using ECOMMERCE.CORE;
+using FRONT.Code;
 using FRONT.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace FRONT.Controllers
 {
+    [Authentication]
     public class MasterDireccionesController : Controller
     {
 

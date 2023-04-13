@@ -18,9 +18,9 @@ namespace DAL
     {
         public string cadenaConexion_BBDD { get; set; } = "Data Source=ROCINANTE\\SQLEXPRESS;Initial Catalog=DEV_MARKET_3;User ID=sa;Password=sa;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         
-        public EntityUsers GETALLUSERS()
+        public List<EntityUser> GETALLUSERS()
         {
-            EntityUsers entityUsers = new EntityUsers();
+            List<EntityUser> entityUsers = new List<EntityUser>();
 
             // declaro la conexion a BBDD
             using (SqlConnection connection = new SqlConnection(cadenaConexion_BBDD))
@@ -37,12 +37,13 @@ namespace DAL
                     // LO LEO. 
                     while (reader.Read())
                     {
-                        entityUsers.lista.Add(new EntityUser
+                        entityUsers.Add(new EntityUser
                         {
                             ididentifier_i = (int)reader["ID_USER"],
                             name_nv = (string)reader["FULLNAME_NV"],
                             email_nv = (string)reader["EMAIL_NV"],
                             rol_i= (int)reader["ROL"],
+                            Clave_nv = (string)reader["CLAVE"]
                         });
 
                         Console.WriteLine((int)reader["ID_USER"]);

@@ -1,4 +1,5 @@
 ﻿using ECOMMERCE.CORE;
+using FRONT.Code;
 using FRONT.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace FRONT.Controllers
 {
+    [Authentication]
     public class MasterImagenesController : Controller
     {
 

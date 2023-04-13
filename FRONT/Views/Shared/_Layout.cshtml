@@ -1,4 +1,13 @@
 ﻿<!DOCTYPE html>
+@{
+    var username = new Byte[40];
+    ViewData["User"] = null;
+    if(this.Context.Session.TryGetValue("UserName",out username))
+    {
+        ViewData["User"] = System.Text.Encoding.UTF8.GetString(username);
+    }
+
+}
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -14,8 +23,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-opacity-50 border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FRONT</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -38,6 +46,14 @@
                         </li>
                     </ul>
                 </div>
+                @if (ViewData["User"]==null){
+                    <a class="nav-link text-dark" id="login" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                }else
+                {
+                    <span>@ViewData["User"]</span>
+                }
+                
+                
             </div>
         </nav>
     </header>

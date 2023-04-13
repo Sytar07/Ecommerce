@@ -21,7 +21,7 @@ namespace BLL.Controllers
         public IEnumerable<EntityUser> GetAll()
         {
             UsersBD users = new UsersBD();
-            return users.GETALLUSERS().lista;
+            return users.GETALLUSERS();
         }
 
 
