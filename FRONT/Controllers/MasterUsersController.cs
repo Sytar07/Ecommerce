@@ -3,6 +3,7 @@ using FRONT.Code;
 using FRONT.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
@@ -29,7 +30,9 @@ namespace FRONT.Controllers
 
         public IActionResult Index()
         {
-            List<EntityUser> EntityUserList = ListUsers();            
+
+            List<EntityUser> EntityUserList = ListUsers();
+            _logger.LogInformation($"Listado de usuarios las {DateTime.Now.ToFileTimeUtc()}");
             return View(EntityUserList);
         }
         private static List<EntityUser> ListUsers()
@@ -78,6 +81,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
+                _logger.LogInformation($"Grabación de {entityUser.ididentifier_i.ToString()} a las {DateTime.Now.ToFileTimeUtc()}");
                 // Si es valido grabamos y salimos al Index.
                 SaveUser(entityUser).Wait();
                 return RedirectToAction("Index");
@@ -109,7 +113,7 @@ namespace FRONT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(EntityUser entityUser)
         {
-           
+            _logger.LogInformation($"Borrado de {entityUser.ididentifier_i.ToString()} a las {DateTime.Now.ToFileTimeUtc()}");
             // Si es valido grabamos y salimos al Index.
             DeleteUser(entityUser).Wait();
             return RedirectToAction("Index");
@@ -142,6 +146,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
+                _logger.LogInformation($"Grabación de nuevo  {entityUser.email_nv} a las {DateTime.Now.ToFileTimeUtc()}");
                 // Si es valido grabamos y salimos al Index.
                 CreateUser(entityUser).Wait();
                 return RedirectToAction("Index");
@@ -172,7 +177,7 @@ namespace FRONT.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            // Vista y Modelo de ERROR. No tocar por ahora
+            _logger.LogError($"Error: {Activity.Current?.Id ?? HttpContext.TraceIdentifier}");
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }

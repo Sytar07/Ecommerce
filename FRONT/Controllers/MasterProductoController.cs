@@ -31,7 +31,7 @@ namespace FRONT.Controllers
         public IActionResult Index()
         {
             List<EntityProducto> EntityProductoList = ListProductos();
-            _logger.LogInformation($"Listado de productosa las {DateTime.Now.ToFileTimeUtc()}");
+            _logger.LogInformation($"Listado de productos las {DateTime.Now.ToFileTimeUtc()}");
             return View(EntityProductoList);
         }
         private static List<EntityProducto> ListProductos()
@@ -151,7 +151,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
-                _logger.LogInformation($"Grabación de nuevo producto {entityProducto.nombre_nv} a las {DateTime.Now.ToFileTimeUtc()}");
+                _logger.LogInformation($"Grabación de nuevo  {entityProducto.nombre_nv} a las {DateTime.Now.ToFileTimeUtc()}");
                 // Si es valido grabamos y salimos al Index.
                 CreateProducto(entityProducto).Wait();
                 return RedirectToAction("Index");
@@ -182,7 +182,7 @@ namespace FRONT.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            // Vista y Modelo de ERROR. No tocar por ahora
+            _logger.LogError($"Error: {Activity.Current?.Id ?? HttpContext.TraceIdentifier}");
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }

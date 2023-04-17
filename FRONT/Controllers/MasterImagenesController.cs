@@ -1,6 +1,7 @@
 ﻿using ECOMMERCE.CORE;
 using FRONT.Code;
 using FRONT.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -32,6 +33,7 @@ namespace FRONT.Controllers
         public IActionResult Index(int id)
         {
             List<EntityImagen> EntityImagenList = ListImagenes(id);
+            _logger.LogInformation($"Listado de imagenes de {id} las {DateTime.Now.ToFileTimeUtc()}");
             ViewBag.ID_PRODUCTO = id;
             return View(EntityImagenList);
         }
@@ -81,6 +83,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
+                _logger.LogInformation($"Grabación de {entityImagen.ididentifier_i.ToString()} a las {DateTime.Now.ToFileTimeUtc()}");
                 if (!(entityImagen.imagen == null || entityImagen.imagen.Length == 0))
                 {
                     var rutaDeGuardado = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/productos", entityImagen.imagen.FileName);
@@ -130,6 +133,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
+                _logger.LogInformation($"Borrado de {entityImagen.ididentifier_i.ToString()} a las {DateTime.Now.ToFileTimeUtc()}");
                 // Si es valido grabamos y salimos al Index.
                 DeleteImagen(entityImagen).Wait();
                 return RedirectToAction("Index", new { id = entityImagen.id_producto });
@@ -164,6 +168,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
+                _logger.LogInformation($"Grabación de nuevo  {entityImagen.path_nv} a las {DateTime.Now.ToFileTimeUtc()}");
                 // Si es valido grabamos y salimos al Index.
                 CreateImagen(entityImagen).Wait();
                 return RedirectToAction("Index", new { id = entityImagen.id_producto});
@@ -194,7 +199,7 @@ namespace FRONT.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            // Vista y Modelo de ERROR. No tocar por ahora
+            _logger.LogError($"Error: {Activity.Current?.Id ?? HttpContext.TraceIdentifier}");
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
