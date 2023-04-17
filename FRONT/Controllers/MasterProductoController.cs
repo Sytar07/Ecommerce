@@ -3,6 +3,7 @@ using FRONT.Code;
 using FRONT.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
@@ -29,12 +30,14 @@ namespace FRONT.Controllers
 
         public IActionResult Index()
         {
-            List<EntityProducto> EntityProductoList = ListProductos();            
+            List<EntityProducto> EntityProductoList = ListProductos();
+            _logger.LogInformation($"Listado de productosa las {DateTime.Now.ToFileTimeUtc()}");
             return View(EntityProductoList);
         }
         private static List<EntityProducto> ListProductos()
         {
-            List<EntityProducto> entityProductos = new List<EntityProducto>();
+           
+            List <EntityProducto> entityProductos = new List<EntityProducto>();
            
 
             HttpClient client = new HttpClient();
@@ -78,6 +81,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
+                _logger.LogInformation($"Grabación de {entityProducto.ididentifier_i.ToString()} a las {DateTime.Now.ToFileTimeUtc()}");
                 // Si es valido grabamos y salimos al Index.
                 SaveProducto(entityProducto).Wait();
                 return RedirectToAction("Index");
@@ -112,6 +116,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
+                _logger.LogInformation($"Borrado de {entityProducto.ididentifier_i.ToString()} a las {DateTime.Now.ToFileTimeUtc()}");
                 // Si es valido grabamos y salimos al Index.
                 DeleteProducto(entityProducto).Wait();
                 return RedirectToAction("Index");
@@ -146,6 +151,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
+                _logger.LogInformation($"Grabación de nuevo producto {entityProducto.nombre_nv} a las {DateTime.Now.ToFileTimeUtc()}");
                 // Si es valido grabamos y salimos al Index.
                 CreateProducto(entityProducto).Wait();
                 return RedirectToAction("Index");

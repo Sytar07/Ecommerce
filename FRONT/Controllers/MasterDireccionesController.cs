@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -39,6 +40,7 @@ namespace FRONT.Controllers
         }
         private static List<EntityDireccion> ListDirecciones(int id)
         {
+            
             List<EntityDireccion> entityDirecciones = new List<EntityDireccion>();
             string apiUrl = string.Format(apiUrlList, id);
 

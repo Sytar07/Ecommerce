@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,7 +24,9 @@ namespace FRONT.Controllers
 
         public HomeController(ILogger<HomeController> logger)
         {
+            
             _logger = logger;
+            
         }
 
         public IActionResult Index()
@@ -52,7 +55,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                _logger.LogWarning($"Login de {model.email_nv} a las {DateTime.Now.ToFileTimeUtc()} ");
                 DAL.UsersBD usersBD = new DAL.UsersBD();
                 List<EntityUser> Users = usersBD.GETALLUSERS();
 
