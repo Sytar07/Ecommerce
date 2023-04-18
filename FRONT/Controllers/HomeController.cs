@@ -10,8 +10,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -20,17 +22,25 @@ namespace FRONT.Controllers
 {
     public class HomeController : Controller
     {
+        private const string apiUrlactions = "https://localhost:7023/User?id_user={0}";
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
-        {
-            
-            _logger = logger;
-            
+        {            
+            _logger = logger;            
         }
 
         public IActionResult Index()
         {
+            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());// objeto para guardar la ip
+            foreach (IPAddress ip in host.AddressList)
+            {
+                if (ip.AddressFamily.ToString() == "InterNetwork")
+                {                    
+                    HttpContext.Session.SetString("IP", ip.ToString());
+                }
+            }
+
             return View();
         }
 
@@ -53,13 +63,15 @@ namespace FRONT.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(EntityUser model)
         {
+            
+            ModelState.Remove("Clave_nvConfirm");
             if (ModelState.IsValid)
             {
-                _logger.LogWarning($"Login de {model.email_nv} a las {DateTime.Now.ToFileTimeUtc()} ");
+                _logger.LogWarning($"Login de {model.email_nv} a las {DateTime.Now.ToLongTimeString()} ");
                 DAL.UsersBD usersBD = new DAL.UsersBD();
                 List<EntityUser> Users = usersBD.GETALLUSERS();
 
-                List<EntityUser> User = Users.Where(s => s.email_nv.ToUpper().Contains(model.email_nv.ToUpper())).ToList(); ;
+                List<EntityUser> User = Users.Where(s => s.email_nv.ToUpper().Contains(model.email_nv.ToUpper())).ToList();
 
 
                 if (User.Count>0)
@@ -68,11 +80,51 @@ namespace FRONT.Controllers
                     if (User.First().Clave_nv == model.Clave_nv)
                     {
                         HttpContext.Session.SetString("UserName", model.email_nv);
+                        if (User.First().rol_i == 9)
+                        {
+                            HttpContext.Session.SetString("Admin", "ADMIN");
+                        }
                         return RedirectToAction("Index", "Home");
                     }
                 }
             }
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            EntityUser entityUser = new EntityUser();
+            return View(entityUser);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public  ActionResult Register(EntityUser entityUser)
+        {
+            if (ModelState.IsValid)
+            {
+                _logger.LogInformation($"Grabación de nuevo  {entityUser.email_nv} a las {DateTime.Now.ToLongTimeString()}");
+                // Si es valido grabamos y salimos al Index.
+                CreateUser(entityUser).Wait();
+                return RedirectToAction("Login");
+            }
+            // en los demás casos mostramos en pantalla
+            return View("Edit", entityUser);
+        }
+
+        private static async Task<EntityUser> CreateUser(EntityUser entityUser)
+        {
+            string apiUrl = string.Format(apiUrlactions, entityUser.ididentifier_i);
+
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.PostAsJsonAsync(apiUrl, entityUser);
+            response.EnsureSuccessStatusCode();
+
+            entityUser = await response.Content.ReadFromJsonAsync<EntityUser>();
+
+            return entityUser;
+        }
+
     }
 }

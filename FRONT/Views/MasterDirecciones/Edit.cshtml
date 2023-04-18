@@ -1,13 +1,13 @@
 ﻿@model ECOMMERCE.CORE.EntityDireccion
 @{
-    ViewBag.Title = "Editor usuario";
+    ViewBag.Title = "Editar Dirección";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row justify-content-center m-3">
     <div class="col-sm-8">
-        <div class="card">
+        <div class="card" style="background: transparent;">
             <div class="card-header text-center">
-                <h1>DIRECCIÓN</h1>
+                <h1>@ViewData["Title"]</h1>
             </div>
 
             @using (Html.BeginForm("Edit","MasterDirecciones",FormMethod.Post))

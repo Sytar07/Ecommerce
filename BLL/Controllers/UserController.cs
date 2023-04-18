@@ -1,6 +1,7 @@
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using ECOMMERCE.CORE;
-using Microsoft.Extensions.Logging;
+
 using System.Collections.Generic;
 using DAL;
 using Microsoft.AspNetCore.Http;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Routing;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace BLL.Controllers
 {
@@ -15,7 +17,12 @@ namespace BLL.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        
+        private readonly ILogger<UserController> _logger;
+
+        public UserController(ILogger<UserController> logger)
+        {
+            _logger = logger;
+        }
 
         /// <summary>
         /// API: GetUser
@@ -35,7 +42,7 @@ namespace BLL.Controllers
         public ActionResult<EntityUser> Create(EntityUser entityUser)
         {
             UsersBD users = new UsersBD();
-            
+            _logger.LogInformation($"API Create de usuario {entityUser.name_nv} las {DateTime.Now.ToLongTimeString()}");
             var result= users.GETUSER(users.INSERTUSER(entityUser));
 
             return CreatedAtAction(nameof(Get), new { id = entityUser.ididentifier_i }, entityUser);

@@ -1,10 +1,23 @@
 ﻿<!DOCTYPE html>
 @{
     var username = new Byte[40];
+    var admin = new Byte[40];
+    var ip = new Byte[40];
     ViewData["User"] = null;
+    ViewData["IP"] = null;
+    ViewData["Admin"] = null;
+
     if(this.Context.Session.TryGetValue("UserName",out username))
     {
         ViewData["User"] = System.Text.Encoding.UTF8.GetString(username);
+    }
+    if (this.Context.Session.TryGetValue("Admin", out admin))
+    {
+        ViewData["Admin"] = System.Text.Encoding.UTF8.GetString(admin);
+    }
+    if (this.Context.Session.TryGetValue("IP", out ip))
+    {
+        ViewData["IP"] = System.Text.Encoding.UTF8.GetString(ip);
     }
 
 }
@@ -16,18 +29,20 @@
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FRONT.styles.css" asp-append-version="true" />
 </head>
 <body >
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-opacity-50 border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FRONT</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-1" id="mainNav">
+        <div class="container">
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                    @if (ViewData["Admin"] != null)
+                    {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
                         </li>
@@ -40,32 +55,52 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="MasterUsers" asp-action="Index">Usuarios</a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="MasterProductos" asp-action="Index">Productos</a>
                         </li>
-                    </ul>
-                </div>
-                @if (ViewData["User"]==null){
-                    <a class="nav-link text-dark" id="login" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
-                }else
-                {
-                    <span>@ViewData["User"]</span>
-                }
-                
-                
+                    }
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="ListadoProductos" asp-action="Index">Listado de Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Carrito" asp-action="Index">Carrito</a>
+                    </li>
+
+                    
+                        @if (ViewData["User"] == null)
+                        {
+                           
+                            <li class="nav-item"><a class="nav-link text-dark" id="register" asp-area="" asp-controller="Home" asp-action="Register">Registro</a></li>
+                            <li class="nav-item"><a class="nav-link text-dark" id="login" asp-area="" asp-controller="Home" asp-action="Login">Login</a></li>
+                             <li class="nav-item">
+                                <span>Compra sin usuario: @ViewData["IP"]</span>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"><span>@ViewData["User"]</span></li>
+                        }
+                    
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
+    
+    <header class="masthead">
+        <div class="container px-4 px-lg-5 h-100">
+            <div class="row">
+            
+                <div class="align-self-baseline">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - AdminCenter
+            &copy; 2023 - Tienda Online
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

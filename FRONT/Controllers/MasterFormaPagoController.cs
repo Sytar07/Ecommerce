@@ -32,7 +32,7 @@ namespace FRONT.Controllers
         public IActionResult Index()
         {
             List<EntityFormaPago> EntityFormaPagoList = ListFormaPagos();
-            _logger.LogInformation($"Listado de formas de pago las {DateTime.Now.ToFileTimeUtc()}");
+            _logger.LogInformation($"Listado de formas de pago las {DateTime.Now.ToLongTimeString()}");
             return View(EntityFormaPagoList);
         }
         private static List<EntityFormaPago> ListFormaPagos()
@@ -81,7 +81,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
-                _logger.LogInformation($"Grabación de {EntityFormaPago.ididentifier_i.ToString()} a las {DateTime.Now.ToFileTimeUtc()}");
+                _logger.LogInformation($"Grabación de {EntityFormaPago.ididentifier_i.ToString()} a las {DateTime.Now.ToLongTimeString()}");
                 // Si es valido grabamos y salimos al Index.
                 SaveFormaPago(EntityFormaPago).Wait();
                 return RedirectToAction("Index");
@@ -114,7 +114,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
-                _logger.LogInformation($"Borrado de {EntityFormaPago.ididentifier_i.ToString()} a las {DateTime.Now.ToFileTimeUtc()}");
+                _logger.LogInformation($"Borrado de {EntityFormaPago.ididentifier_i.ToString()} a las {DateTime.Now.ToLongTimeString()}");
                 // Si es valido grabamos y salimos al Index.
                 DeleteFormaPago(EntityFormaPago).Wait();
                 return RedirectToAction("Index");
@@ -148,7 +148,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
-                _logger.LogInformation($"Grabación de nuevo  {EntityFormaPago.name_nv} a las {DateTime.Now.ToFileTimeUtc()}");
+                _logger.LogInformation($"Grabación de nuevo  {EntityFormaPago.name_nv} a las {DateTime.Now.ToLongTimeString()}");
                 // Si es valido grabamos y salimos al Index.
                 CreateFormaPago(EntityFormaPago).Wait();
                 return RedirectToAction("Index");

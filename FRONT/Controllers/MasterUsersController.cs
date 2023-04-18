@@ -32,7 +32,7 @@ namespace FRONT.Controllers
         {
 
             List<EntityUser> EntityUserList = ListUsers();
-            _logger.LogInformation($"Listado de usuarios las {DateTime.Now.ToFileTimeUtc()}");
+            _logger.LogInformation($"Listado de usuarios las {DateTime.Now.ToLongTimeString()}");
             return View(EntityUserList);
         }
         private static List<EntityUser> ListUsers()
@@ -81,7 +81,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
-                _logger.LogInformation($"Grabación de {entityUser.ididentifier_i.ToString()} a las {DateTime.Now.ToFileTimeUtc()}");
+                _logger.LogInformation($"Grabación de {entityUser.ididentifier_i.ToString()} a las {DateTime.Now.ToLongTimeString()}");
                 // Si es valido grabamos y salimos al Index.
                 SaveUser(entityUser).Wait();
                 return RedirectToAction("Index");
@@ -113,7 +113,7 @@ namespace FRONT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(EntityUser entityUser)
         {
-            _logger.LogInformation($"Borrado de {entityUser.ididentifier_i.ToString()} a las {DateTime.Now.ToFileTimeUtc()}");
+            _logger.LogInformation($"Borrado de {entityUser.ididentifier_i.ToString()} a las {DateTime.Now.ToLongTimeString()}");
             // Si es valido grabamos y salimos al Index.
             DeleteUser(entityUser).Wait();
             return RedirectToAction("Index");
@@ -146,7 +146,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
-                _logger.LogInformation($"Grabación de nuevo  {entityUser.email_nv} a las {DateTime.Now.ToFileTimeUtc()}");
+                _logger.LogInformation($"Grabación de nuevo  {entityUser.email_nv} a las {DateTime.Now.ToLongTimeString()}");
                 // Si es valido grabamos y salimos al Index.
                 CreateUser(entityUser).Wait();
                 return RedirectToAction("Index");

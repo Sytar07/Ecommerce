@@ -33,7 +33,7 @@ namespace FRONT.Controllers
         public IActionResult Index(int id)
         {
             List<EntityImagen> EntityImagenList = ListImagenes(id);
-            _logger.LogInformation($"Listado de imagenes de {id} las {DateTime.Now.ToFileTimeUtc()}");
+            _logger.LogInformation($"Listado de imagenes de {id} las {DateTime.Now.ToLongTimeString()}");
             ViewBag.ID_PRODUCTO = id;
             return View(EntityImagenList);
         }
@@ -83,7 +83,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
-                _logger.LogInformation($"Grabación de {entityImagen.ididentifier_i.ToString()} a las {DateTime.Now.ToFileTimeUtc()}");
+                _logger.LogInformation($"Grabación de {entityImagen.ididentifier_i.ToString()} a las {DateTime.Now.ToLongTimeString()}");
                 if (!(entityImagen.imagen == null || entityImagen.imagen.Length == 0))
                 {
                     var rutaDeGuardado = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/productos", entityImagen.imagen.FileName);
@@ -133,7 +133,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
-                _logger.LogInformation($"Borrado de {entityImagen.ididentifier_i.ToString()} a las {DateTime.Now.ToFileTimeUtc()}");
+                _logger.LogInformation($"Borrado de {entityImagen.ididentifier_i.ToString()} a las {DateTime.Now.ToLongTimeString()}");
                 // Si es valido grabamos y salimos al Index.
                 DeleteImagen(entityImagen).Wait();
                 return RedirectToAction("Index", new { id = entityImagen.id_producto });
@@ -168,7 +168,7 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
-                _logger.LogInformation($"Grabación de nuevo  {entityImagen.path_nv} a las {DateTime.Now.ToFileTimeUtc()}");
+                _logger.LogInformation($"Grabación de nuevo  {entityImagen.path_nv} a las {DateTime.Now.ToLongTimeString()}");
                 // Si es valido grabamos y salimos al Index.
                 CreateImagen(entityImagen).Wait();
                 return RedirectToAction("Index", new { id = entityImagen.id_producto});

@@ -1,0 +1,78 @@
+﻿@model ECOMMERCE.CORE.EntityUser
+@{
+    ViewData["Title"] = "Registro de usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card" style="background: transparent;">
+            <div class="card-header text-center">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+
+            @using (Html.BeginForm("Register", "Home", FormMethod.Post))
+            {
+                <h4>LOGIN</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.email_nv, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model=>model.email_nv, new { htmlAttributes = new { @class = "form-control", @type = "email"}})
+                        @Html.ValidationMessageFor(model => model.email_nv)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Clave_nv, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model=>model.Clave_nv, new { htmlAttributes = new { @class = "form-control", type = "password"}})
+                        @Html.ValidationMessageFor(model => model.Clave_nv)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Clave_nvConfirm, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model=>model.Clave_nvConfirm, new { htmlAttributes = new { @class = "form-control", type = "password"}})
+                        @Html.ValidationMessageFor(model => model.Clave_nvConfirm)
+                    </div>
+                    <div class="alert alert-danger" id="password-error" style="display:none;">
+                        Las contraseñas no coinciden. Por favor inténtelo de nuevo.
+                    </div>
+                </div>
+                
+
+                <div class="form-group">
+                    <button type="submit" id="submit-button" class="btn btn-primary">Log in</button>
+                </div>
+
+            }
+
+        </div>
+    </div>
+</div>
+<script>
+    var submitButton = document.getElementById("submit-button");
+    var passwordInput = document.getElementById("Clave_nv");
+    var confirmPasswordInput = document.getElementById("Clave_nvConfirm");
+    var passwordError = document.getElementById("password-error");
+
+    function validatePassword() {
+      if (passwordInput.value != confirmPasswordInput.value) {
+        passwordError.style.display = "block";
+        submitButton.disabled = true;
+      } else {
+        passwordError.style.display = "none";
+        submitButton.disabled = false;
+      }
+    }
+
+    passwordInput.addEventListener("input", validatePassword);
+    confirmPasswordInput.addEventListener("input", validatePassword);
+</script>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

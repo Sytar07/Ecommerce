@@ -31,7 +31,7 @@ namespace FRONT.Controllers
         public IActionResult Index()
         {
             List<EntityProducto> EntityProductoList = ListProductos();
-            _logger.LogInformation($"Listado de productos las {DateTime.Now.ToFileTimeUtc()}");
+            _logger.LogInformation($"Listado de productos las {DateTime.Now.ToLongTimeString()}");
             return View(EntityProductoList);
         }
         private static List<EntityProducto> ListProductos()
@@ -79,9 +79,10 @@ namespace FRONT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(EntityProducto entityProducto)
         {
+            ModelState.Remove("imagenes");
             if (ModelState.IsValid)
             {
-                _logger.LogInformation($"Grabación de {entityProducto.ididentifier_i.ToString()} a las {DateTime.Now.ToFileTimeUtc()}");
+                _logger.LogInformation($"Grabación de {entityProducto.ididentifier_i.ToString()} a las {DateTime.Now.ToLongTimeString()}");
                 // Si es valido grabamos y salimos al Index.
                 SaveProducto(entityProducto).Wait();
                 return RedirectToAction("Index");
@@ -114,9 +115,10 @@ namespace FRONT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(EntityProducto entityProducto)
         {
+            ModelState.Remove("imagenes");
             if (ModelState.IsValid)
             {
-                _logger.LogInformation($"Borrado de {entityProducto.ididentifier_i.ToString()} a las {DateTime.Now.ToFileTimeUtc()}");
+                _logger.LogInformation($"Borrado de {entityProducto.ididentifier_i.ToString()} a las {DateTime.Now.ToLongTimeString()}");
                 // Si es valido grabamos y salimos al Index.
                 DeleteProducto(entityProducto).Wait();
                 return RedirectToAction("Index");
@@ -149,9 +151,10 @@ namespace FRONT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(EntityProducto entityProducto)
         {
+            ModelState.Remove("imagenes");
             if (ModelState.IsValid)
             {
-                _logger.LogInformation($"Grabación de nuevo  {entityProducto.nombre_nv} a las {DateTime.Now.ToFileTimeUtc()}");
+                _logger.LogInformation($"Grabación de nuevo  {entityProducto.nombre_nv} a las {DateTime.Now.ToLongTimeString()}");
                 // Si es valido grabamos y salimos al Index.
                 CreateProducto(entityProducto).Wait();
                 return RedirectToAction("Index");

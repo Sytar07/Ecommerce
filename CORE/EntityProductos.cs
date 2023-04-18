@@ -85,7 +85,18 @@ namespace ECOMMERCE.CORE
             }
         }
 
-       
+       public IEnumerable<EntityImagen> imagenes
+        {
+            get
+            {
+                // Comprobaciones tipo/null/etc..
+                return _imagenes;
+            }
+            set
+            {
+                _imagenes = value;
+            }
+        }
    
 
         public bool delete
@@ -101,7 +112,7 @@ namespace ECOMMERCE.CORE
             }
         }
 
-
+        private IEnumerable<EntityImagen> _imagenes;
         private int _ididentifier_i;
         private string _id_producto_nv;
         private string _nombre_nv;

@@ -1,0 +1,10 @@
+﻿@model ECOMMERCE.CORE.EntityProducto
+
+<div class="card" style="background: transparent;">
+    <img class="card-img-top" src="@Model.imagenes.First().path_nv" alt="@Model.nombre_nv">
+
+    <div class="card-body">
+        <h5 class="card-title">@Model.nombre_nv</h5>
+        <p class="card-text">@Model.descripcion_nv</p>
+    </div>
+</div>

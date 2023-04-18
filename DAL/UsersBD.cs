@@ -184,6 +184,7 @@ namespace DAL
                     command.Parameters.Add("@FULLNAME_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.name_nv;
                     command.Parameters.Add("@EMAIL_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.email_nv;
                     command.Parameters.Add("@ROL", System.Data.SqlDbType.Int).Value = entityUser.rol_i;
+                    command.Parameters.Add("@CLAVE", System.Data.SqlDbType.Int).Value = entityUser.Clave_nv;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 
@@ -228,6 +229,7 @@ namespace DAL
                     command.Parameters.Add("@FULLNAME_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.name_nv;
                     command.Parameters.Add("@EMAIL_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.email_nv;
                     command.Parameters.Add("@ROL", System.Data.SqlDbType.Int).Value = entityUser.rol_i;
+                    command.Parameters.Add("@CLAVE", System.Data.SqlDbType.Int).Value = entityUser.Clave_nv;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 

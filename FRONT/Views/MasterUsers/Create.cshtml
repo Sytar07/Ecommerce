@@ -1,13 +1,13 @@
 ﻿@model ECOMMERCE.CORE.EntityUser
 @{
-    ViewBag.Title = "Editor usuario";
+    ViewBag.Title = "Crear Usuario";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row justify-content-center m-3">
     <div class="col-sm-8">
-        <div class="card">
+        <div class="card" style="background: transparent;">
             <div class="card-header text-center">
-                <h1>USUARIO</h1>
+                <h1>@ViewData["Title"]</h1>
             </div>
 
             @using (Html.BeginForm("Create", "MasterUsers", FormMethod.Post))

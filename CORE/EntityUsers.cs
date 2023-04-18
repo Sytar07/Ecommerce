@@ -81,6 +81,19 @@ namespace ECOMMERCE.CORE
             }
         }
 
+        [Display(Name = "Confirme Clave")]
+        public string Clave_nvConfirm
+        {
+            get
+            {
+                // Comprobaciones tipo/null/etc..
+                return _clave2_nv;
+            }
+            set
+            {
+                _clave2_nv = value;
+            }
+        }
         public bool delete
         {
             get
@@ -98,6 +111,7 @@ namespace ECOMMERCE.CORE
         private int _ididentifier_i;
         private string _name_nv;
         private string _clave_nv;
+        private string _clave2_nv;
         private string _email_nv;
         
         private int _rol_i;
