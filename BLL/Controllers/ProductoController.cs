@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Routing;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace BLL.Controllers
 {
@@ -15,7 +16,13 @@ namespace BLL.Controllers
     [Route("[controller]")]
     public class ProductoController : ControllerBase
     {
-        
+
+        private readonly ILogger<ProductoController> _logger;
+
+        public ProductoController(ILogger<ProductoController> logger)
+        {
+            _logger = logger;
+        }
 
         /// <summary>
         /// API: GetUser
@@ -49,7 +56,7 @@ namespace BLL.Controllers
             ProductosBD productos = new ProductosBD();
 
             var result = productos.GETPRODUCTO(productos.UPDATEPRODUCTO(entityProducto));
-
+            _logger.LogInformation($"API Create de producto {entityProducto.nombre_nv} las {DateTime.Now.ToLongTimeString()}");
             return CreatedAtAction(nameof(Get), new { id = entityProducto.ididentifier_i }, entityProducto);
         }
 

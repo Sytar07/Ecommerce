@@ -20,7 +20,12 @@ namespace BLL.Controllers
     public class ImagenController : ControllerBase
     {
 
-         
+        private readonly ILogger<ImagenController> _logger;
+
+        public ImagenController(ILogger<ImagenController> logger)
+        {
+            _logger = logger;
+        }
         /// <summary>
         /// API: GetUser
         /// Espera un ID y resuelve con la entidad del usuario
@@ -41,7 +46,7 @@ namespace BLL.Controllers
            ImagenesBD imagenes = new ImagenesBD();
             
             var result= imagenes.GETIMAGEN(imagenes.INSERTIMAGEN(EntityImagen));
-
+            _logger.LogInformation($"API Create de imagen {EntityImagen.path_nv} las {DateTime.Now.ToLongTimeString()}");
             return CreatedAtAction(nameof(Get), new { id = EntityImagen.ididentifier_i }, EntityImagen);
         }
 

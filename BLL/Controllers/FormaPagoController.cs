@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Routing;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace BLL.Controllers
 {
@@ -15,8 +16,13 @@ namespace BLL.Controllers
     [Route("[controller]")]
     public class FormaPagoController : ControllerBase
     {
-        
 
+        private readonly ILogger<FormaPagoController> _logger;
+
+        public FormaPagoController(ILogger<FormaPagoController> logger)
+        {
+            _logger = logger;
+        }
         /// <summary>
         /// API: GetUser
         /// Espera un ID y resuelve con la entidad del usuario
@@ -35,7 +41,7 @@ namespace BLL.Controllers
         public ActionResult<EntityFormaPago> Create(EntityFormaPago entityFormaPago)
         {
            FormasPagoBD formasPago = new FormasPagoBD();
-            
+            _logger.LogInformation($"API Create de forma pago {entityFormaPago.name_nv} las {DateTime.Now.ToLongTimeString()}");
             var result= formasPago.GETFORMAPAGO(formasPago.INSERTFORMAPAGO(entityFormaPago));
 
             return CreatedAtAction(nameof(Get), new { id = entityFormaPago.ididentifier_i }, entityFormaPago);

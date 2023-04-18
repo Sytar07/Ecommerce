@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Routing;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace BLL.Controllers
 {
@@ -15,8 +16,13 @@ namespace BLL.Controllers
     [Route("[controller]")]
     public class PaisController : ControllerBase
     {
-        
 
+        private readonly ILogger<PaisController> _logger;
+
+        public PaisController(ILogger<PaisController> logger)
+        {
+            _logger = logger;
+        }
         /// <summary>
         /// API: GetUser
         /// Espera un ID y resuelve con la entidad del usuario
@@ -49,7 +55,7 @@ namespace BLL.Controllers
             PaisesBD paises = new PaisesBD();
 
             var result = paises.GETPAIS(paises.INSERTPAIS(entityPais));
-
+            _logger.LogInformation($"API Create de pais {entityPais.name_nv} las {DateTime.Now.ToLongTimeString()}");
             return CreatedAtAction(nameof(Get), new { id = entityPais.ididentifier_i }, entityPais);
         }
 
