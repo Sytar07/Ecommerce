@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Routing;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace BLL.Controllers
 {
@@ -15,8 +16,13 @@ namespace BLL.Controllers
     [Route("[controller]")]
     public class DireccionController : ControllerBase
     {
-        
 
+        private readonly ILogger<DireccionController> _logger;
+
+        public DireccionController(ILogger<DireccionController> logger)
+        {
+            _logger = logger;
+        }
         /// <summary>
         /// API: GetUser
         /// Espera un ID y resuelve con la entidad del usuario
@@ -35,7 +41,7 @@ namespace BLL.Controllers
         public ActionResult<EntityDireccion> Create(EntityDireccion entityDireccion)
         {
            DireccionesBD Direcciones = new DireccionesBD();
-            
+            _logger.LogInformation($"API Create de direccion {entityDireccion.direccion_nv} las {DateTime.Now.ToLongTimeString()}");
             var result= Direcciones.GETDIRECCION(Direcciones.INSERTDIRECCION(entityDireccion));
 
             return CreatedAtAction(nameof(Get), new { id = entityDireccion.ididentifier_i }, entityDireccion);
