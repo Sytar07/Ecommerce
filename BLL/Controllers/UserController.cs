@@ -54,7 +54,7 @@ namespace BLL.Controllers
         public ActionResult<EntityUser> Update(EntityUser entityUser)
         {
             UsersBD users = new UsersBD();
-
+            _logger.LogInformation($"API Grabación de {entityUser.ididentifier_i.ToString()} a las {DateTime.Now.ToLongTimeString()}");
             var result = users.GETUSER(users.UPDATEUSER(entityUser));
 
             return CreatedAtAction(nameof(Get), new { id = entityUser.ididentifier_i }, entityUser);
