@@ -1,0 +1,91 @@
+﻿@model List<ECOMMERCE.CORE.EntityProducto>
+
+
+@{
+    ViewBag.Title = "Crear Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row row-cols-3 g-3">
+
+@foreach (var producto in Model)
+{
+        string imagenproducto = "/images/generic.png";
+        if (producto.imagenes != null && producto.imagenes.Count() > 0)
+        {
+            imagenproducto = "/images/productos/" + producto.imagenes.First().path_nv;
+        }
+
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <img src="@imagenproducto" height="200px" class="card-img-top" alt="...">
+
+                <div class="card-body">
+                    <div class="clearfix mb-3">
+                        <span class="float-start badge rounded-pill bg-primary">@producto.nombre_nv</span>
+                        <span class="float-end price-hp">@producto.precio_f.&euro;</span>
+                    </div>
+
+                    <h5 class="card-title">
+                       @producto.descripcion_nv
+                    </h5>
+
+                    <div class="text-center my-4">
+                        <button class="btn btn-success agregarcarrito flex-shrink-0 w-50" type="button" data-idproducto="@producto.ididentifier_i">
+                            <i class="fas fa-cart-plus"></i>
+                            Agregar al carrito
+                        </button>
+                    </div>
+
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @foreach (var item in producto.imagenes)
+                            {
+                                <div class="carousel-item active">
+                                    <img src="~/images/productos/@item.path_nv" height="200px" lass="d-block w-100">
+                                </div>
+                            }
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+    </div>
+    }   
+   
+</div>
+
+
+
+
+@section scripts{
+    <script>
+        
+        $(document).on("click", "button.agregarcarrito", function () {
+            //console.log($(this).data("idproducto"));
+            jQuery.ajax({
+                url: '@Url.Action("AgregarCarrito","Catalogo")',
+                type: 'post',
+                data: JSON.stringify({ idproducto: $(this).data("idproducto") }),
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data.respuesta) {
+                        MostrarCantidadCarrito(); // POR SER PAGINA MAESTRA, SE ENCUENTRAN REFERENCIADOS TODOS SUS ELEMENTOS Y METODOS
+                        // MENSAJE USUARIOS
+                        swal("Producto Agregado", "Se ha agregado al carrito con exito", "success");
+                    } else {
+                        swal("", data.mensaje, "warning")
+                    }
+                }
+            });
+        })
+    </script>
+}

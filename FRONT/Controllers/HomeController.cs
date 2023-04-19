@@ -39,6 +39,7 @@ namespace FRONT.Controllers
                 {                    
                     HttpContext.Session.SetString("IP", ip.ToString());
                 }
+                
             }
 
             return View();
