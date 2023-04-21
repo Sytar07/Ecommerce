@@ -17,7 +17,7 @@ namespace ECOMMERCE.CORE
         {
             get
             {
-                // Comprobaciones tipo/null/etc..
+                
                 if (_ididentifier_i == -1)
                 {
                     return 0;
@@ -38,7 +38,7 @@ namespace ECOMMERCE.CORE
         {
             get
             {
-                // Comprobaciones tipo/null/etc..
+                
                 return _name_nv;
             }
             set
@@ -52,7 +52,7 @@ namespace ECOMMERCE.CORE
         {
             get
             {
-                // Comprobaciones tipo/null/etc..
+                
                 return _type_i;
             }
             set
@@ -67,7 +67,7 @@ namespace ECOMMERCE.CORE
         {
             get
             {
-                // Comprobaciones tipo/null/etc..
+                
                 return _delete_b;
             }
             set
@@ -85,7 +85,7 @@ namespace ECOMMERCE.CORE
         private bool _delete_b;
         public EntityFormaPago()
         {
-            // Aqui hago cosas.
+            
             ididentifier_i = 0;
             name_nv = "";
             type_i = 0;

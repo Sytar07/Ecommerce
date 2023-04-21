@@ -12,7 +12,7 @@ using System.Xml.Linq;
 
 namespace ECOMMERCE.CORE
 {
-    // JAT: Entidad principal: en singular. Hereda de Interfaz!
+    
     public class EntityDireccion
     {
         [Display(Name = "Código")]
@@ -36,7 +36,7 @@ namespace ECOMMERCE.CORE
         {
             get
             {
-                // Comprobaciones tipo/null/etc..
+                
                 return _user_i;
             }
             set
@@ -49,7 +49,7 @@ namespace ECOMMERCE.CORE
         public string direccion_nv
         { 
             get{
-                // Comprobaciones tipo/null/etc..
+                
                 return _direccion_nv;
             }
             set{
@@ -61,7 +61,7 @@ namespace ECOMMERCE.CORE
         public int? numero_i {
             get
             {
-                // Comprobaciones tipo/null/etc..
+                
                 return _numero_i;
             }
             set
@@ -75,7 +75,7 @@ namespace ECOMMERCE.CORE
         {
             get
             {
-                // Comprobaciones tipo/null/etc..
+                
                 return _puerta_nv;
             }
             set
@@ -89,7 +89,7 @@ namespace ECOMMERCE.CORE
         {
             get
             {
-                // Comprobaciones tipo/null/etc..
+                
                 return _ciudad_nv;
             }
             set
@@ -103,7 +103,7 @@ namespace ECOMMERCE.CORE
         {
             get
             {
-                // Comprobaciones tipo/null/etc..
+                
                 return _pais_i;
             }
             set
@@ -128,7 +128,7 @@ namespace ECOMMERCE.CORE
         {
             get
             {
-                // Comprobaciones tipo/null/etc..
+                
                 return _delete_b;
             }
             set
@@ -148,10 +148,10 @@ namespace ECOMMERCE.CORE
         private bool _delete_b;
         private int _user_i;
 
-        // JAT: contructor
+        // contructor
         public EntityDireccion()
         {
-            // JAT: iniciador/ constructor. 
+            // iniciador/ constructor. 
             ididentifier_i = 0;
             direccion_nv = "";
             numero_i = null;

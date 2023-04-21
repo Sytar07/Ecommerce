@@ -17,7 +17,7 @@ namespace ECOMMERCE.CORE
         [Display(Name = "Código")]
         public int ididentifier_i {
             get{
-                // Comprobaciones tipo/null/etc..
+                
                 if (_ididentifier_i == -1)
                 {
                     return 0;
@@ -37,7 +37,7 @@ namespace ECOMMERCE.CORE
         {
             get
             {
-                // Comprobaciones tipo/null/etc..
+                
                 if (_id_producto == -1)
                 {
                     return 0;
@@ -57,7 +57,7 @@ namespace ECOMMERCE.CORE
         public string path_nv {
             get
             {
-                // Comprobaciones tipo/null/etc..
+                
                 return _path_nv;
             }
             set
@@ -71,7 +71,7 @@ namespace ECOMMERCE.CORE
         {
             get
             {
-                // Comprobaciones tipo/null/etc..
+                
                 return _tipo_nv;
             }
             set
@@ -85,7 +85,7 @@ namespace ECOMMERCE.CORE
         {
             get
             {
-                // Comprobaciones tipo/null/etc..
+                
                 return _delete_b;
             }
             set
@@ -104,7 +104,7 @@ namespace ECOMMERCE.CORE
 
         public  EntityImagen()
         {
-            // Aqui hago cosas.
+            
             ididentifier_i = 0;
             path_nv = "";
             tipo_nv = "";

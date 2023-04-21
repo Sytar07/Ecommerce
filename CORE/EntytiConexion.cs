@@ -15,7 +15,7 @@ namespace ECOMMERCE.CORE
         [Display(Name = "Código")]
         public int ididentifier_i {
             get{
-                // Comprobaciones tipo/null/etc..
+                
                 if (_ididentifier_i == -1)
                 {
                     return 0;
@@ -35,7 +35,7 @@ namespace ECOMMERCE.CORE
         {
             get
             {
-                // Comprobaciones tipo/null/etc..
+                
                 if (_ididentifier_i == -1)
                 {
                     return "";
@@ -53,7 +53,7 @@ namespace ECOMMERCE.CORE
 
         public int ID_Carrito_i { 
             get{
-                // Comprobaciones tipo/null/etc..
+                
                 return _ID_Carrito_i;
             }
             set{
@@ -66,7 +66,7 @@ namespace ECOMMERCE.CORE
         {
             get
             {
-                // Comprobaciones tipo/null/etc..
+                
                 return _FechaInicio_dt;
             }
             set
@@ -79,7 +79,7 @@ namespace ECOMMERCE.CORE
         {
             get
             {
-                // Comprobaciones tipo/null/etc..
+                
                 return _delete_b;
             }
             set
@@ -97,7 +97,7 @@ namespace ECOMMERCE.CORE
 
         public EntityConexion()
         {
-            // Aqui hago cosas.
+            
             ididentifier_i = 0;
             ID_Carrito_i = 0;
             FechaInicio_dt = DateTime.MinValue;

@@ -8,8 +8,8 @@
 
 <div class="row row-cols-3 g-3">
 
-@foreach (var producto in Model)
-{
+    @foreach (var producto in Model)
+    {
         string imagenproducto = "/images/generic.png";
         if (producto.imagenes != null && producto.imagenes.Count() > 0)
         {
@@ -36,30 +36,29 @@
                             Agregar al carrito
                         </button>
                     </div>
+                   
+                    <div class="row">
+                        @foreach (var item in producto.imagenes)
+                        {
+                            var imagennumero = "product_img_" + item.ididentifier_i;
 
-                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            @foreach (var item in producto.imagenes)
-                            {
-                                <div class="carousel-item active">
-                                    <img src="~/images/productos/@item.path_nv" height="200px" lass="d-block w-100">
-                                </div>
-                            }
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+                            <div class="col-3">
+                                <img id="@imagennumero" class="imgproducto" src="~/images/productos/@item.path_nv" style="width:100%;max-width:300px" onclick="openmodal('@imagennumero');">
+                            </div>
+                           
+                        }
+                       
                     </div>
+
+                    
                 </div>
             </div>
     </div>
     }   
-   
+    <div id="modal_image" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
 </div>
 
 
@@ -67,6 +66,19 @@
 
 @section scripts{
     <script>
+        function openmodal(imagen){
+            var modal = document.getElementById("modal_image");
+            var modalImg = document.getElementById("modalImg");
+            var img_scr = document.getElementById(imagen);
+            console.log(img_scr);
+            modal.style.display = "block";
+            modalImg.src = img_scr.src;
+            var span = document.getElementsByClassName("close")[0];
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+        }
+        
         
         $(document).on("click", "button.agregarcarrito", function () {
             //console.log($(this).data("idproducto"));
@@ -89,3 +101,5 @@
         })
     </script>
 }
+
+          
