@@ -56,8 +56,6 @@ namespace BLL.Controllers
         public ActionResult<EntityImagen> Update(EntityImagen EntityImagen)
         {
 
-            
-            
             ImagenesBD imagenes = new ImagenesBD();
 
             var result = imagenes.GETIMAGEN(imagenes.UPDATEIMAGEN(EntityImagen));

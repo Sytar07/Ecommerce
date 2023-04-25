@@ -73,43 +73,76 @@ namespace FRONT.Controllers
             return entityImagenes;
         }
 
-        // AGREGAR PRODUCTOS AL CARRITO
-        [HttpPost]
-        public JsonResult AgregarCarrito(int idproducto)
+
+        
+        public IActionResult Carrito()
         {
-
-
-            var username_b = new Byte[40];
-            var ip_b = new Byte[40];
-
-            string ip; string user_name;
-
-            if (HttpContext.Session.TryGetValue("UserName", out username_b))
+            var conexion = new Byte[40];
+            int id_conexion = 3;
+       
+            if (HttpContext.Session.TryGetValue("CONEXION", out conexion))
             {
-                user_name = System.Text.Encoding.UTF8.GetString(username_b);
-            }
-            
-            if (HttpContext.Session.TryGetValue("IP", out ip_b))
-            {
-                ip = System.Text.Encoding.UTF8.GetString(ip_b);
+                id_conexion =int.Parse(System.Text.Encoding.UTF8.GetString(conexion));
             }
 
-            // TODO: declarar instancia al carrito que es un GET de la conexion con carrito nuevo (si no lo hay)
-            bool existe = false;
-            //bool respuesta = false;
-            string mensaje = string.Empty;
-            if (existe)
-            {
-                // si el producto existe sumamos +1
-                mensaje = "Hemos sumado la cantidad 1!";
-            }
-            else
-            {
-                // si no existe lo añadimos
-                mensaje = "Hemos añadido el producto!";
-            }
-
-            return Json(new { respuesta = "respuesta", mensaje = mensaje });
+            List<EntityCarrito> carritolista = ListCarrito(id_conexion);
+            return PartialView("carrito", carritolista);
         }
+
+        private static List<EntityCarrito> ListCarrito(int id)
+        {
+            List<EntityCarrito> entityCarrito = new List<EntityCarrito>();
+
+            string apiUrl = string.Format("https://localhost:7023/Carrito?id_conexion={0}", id);
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = client.GetAsync(apiUrl).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                entityCarrito = JsonSerializer.Deserialize<List<EntityCarrito>>(response.Content.ReadAsStringAsync().Result);
+            }
+
+            return entityCarrito;
+        }
+
+
+        [HttpPost]
+        public IActionResult AgregarCarrito(int idproducto)
+        {
+            var conexion = new Byte[40];
+            int id_conexion = 0;
+
+            if (HttpContext.Session.TryGetValue("Conexion", out conexion))
+            {
+                id_conexion = int.Parse(System.Text.Encoding.UTF8.GetString(conexion));
+            }
+
+            InsertProducto(id_conexion, idproducto, 1).Wait();
+
+            List<EntityCarrito> carritolista = ListCarrito(id_conexion);
+
+            return PartialView("carrito",carritolista);
+        }
+
+        private static async Task<List<EntityCarrito>> InsertProducto(int conexion, int producto, int cantidad)
+        {
+            string apiUrl = string.Format("https://localhost:7023/Carrito");
+           
+            var myData = new agregarCarrito()
+            {
+                id_conexion = conexion,
+                id_producto = producto,
+                cantidad = cantidad
+            };
+
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.PostAsJsonAsync(apiUrl, myData);
+            response.EnsureSuccessStatusCode();
+
+            List<EntityCarrito> entityCarrito = await response.Content.ReadFromJsonAsync<List<EntityCarrito>>();
+
+            return entityCarrito;
+        }
+
+       
     }
 }

@@ -32,6 +32,9 @@ namespace FRONT.Controllers
 
         public IActionResult Index()
         {
+            HttpContext.Session.SetString("Conexion", "3"); // Para pruebas 
+
+
             IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());// objeto para guardar la ip
             foreach (IPAddress ip in host.AddressList)
             {

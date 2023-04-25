@@ -6,66 +6,92 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row row-cols-3 g-3">
 
-    @foreach (var producto in Model)
-    {
-        string imagenproducto = "/images/generic.png";
-        if (producto.imagenes != null && producto.imagenes.Count() > 0)
+    <div class="row row-cols-3 g-3">
+
+        @foreach (var producto in Model)
         {
-            imagenproducto = "/images/productos/" + producto.imagenes.First().path_nv;
-        }
+            string imagenproducto = "/images/generic.png";
+            if (producto.imagenes != null && producto.imagenes.Count() > 0)
+            {
+                imagenproducto = "/images/productos/" + producto.imagenes.First().path_nv;
+            }
 
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <img src="@imagenproducto" height="200px" class="card-img-top" alt="...">
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="@imagenproducto" height="200px" class="card-img-top" alt="...">
 
-                <div class="card-body">
-                    <div class="clearfix mb-3">
-                        <span class="float-start badge rounded-pill bg-primary">@producto.nombre_nv</span>
-                        <span class="float-end price-hp">@producto.precio_f.&euro;</span>
-                    </div>
+                    <div class="card-body">
+                        <div class="clearfix mb-3">
+                            <span class="float-start badge rounded-pill bg-primary">@producto.nombre_nv</span>
+                            <span class="float-end price-hp">@producto.precio_f.&euro;</span>
+                        </div>
 
-                    <h5 class="card-title">
-                       @producto.descripcion_nv
-                    </h5>
+                        <h5 class="card-title">
+                           @producto.descripcion_nv
+                        </h5>
 
-                    <div class="text-center my-4">
-                        <button class="btn btn-success agregarcarrito flex-shrink-0 w-50" type="button" data-idproducto="@producto.ididentifier_i">
-                            <i class="fas fa-cart-plus"></i>
-                            Agregar al carrito
-                        </button>
-                    </div>
+                        <div class="text-center my-4">
+                            <button class="btn btn-success agregarcarrito flex-shrink-0 w-50" type="button" onclick="agregarcarrito(@producto.ididentifier_i);">
+                                <i class="fas fa-cart-plus"></i>
+                                Agregar al carrito
+                            </button>
+                        </div>
                    
-                    <div class="row">
-                        @foreach (var item in producto.imagenes)
-                        {
-                            var imagennumero = "product_img_" + item.ididentifier_i;
+                        <div class="row">
+                            @foreach (var item in producto.imagenes)
+                            {
+                                var imagennumero = "product_img_" + item.ididentifier_i;
 
-                            <div class="col-3">
-                                <img id="@imagennumero" class="imgproducto" src="~/images/productos/@item.path_nv" style="width:100%;max-width:300px" onclick="openmodal('@imagennumero');">
-                            </div>
+                                <div class="col-3">
+                                    <img id="@imagennumero" class="imgproducto" src="~/images/productos/@item.path_nv" style="width:100%;max-width:300px" onclick="openmodal('@imagennumero');">
+                                </div>
                            
-                        }
+                            }
                        
-                    </div>
+                        </div>
 
                     
+                    </div>
                 </div>
-            </div>
+        </div>
+        }   
+        <div id="modal_image" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="modalImg">
+        </div>
     </div>
-    }   
-    <div id="modal_image" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="modalImg">
+
+
+
+<div class="card position-fixed" style="left: 3px !important; top: 80px !important;">
+    <div class="card-body">
+
+        <button class="btn btn-primary" title="Ver Carrito" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCarrito" aria-expanded="false" aria-controls="collapseCarrito">
+            <i class="bi bi-cart-fill me-2"></i>
+        </button>
+
+        <div class="collapse" id="collapseCarrito">
+            <div class="card card-body" style="margin: 10px;">
+                <div class="container" id="carrito">
+                   
+                </div>
+
+
+
+            </div>
+        </div>
+
+
     </div>
 </div>
 
-
-
-
 @section scripts{
     <script>
+        $.get('@Url.Action("Carrito", "Catalogo")',  function(data){
+            $("#carrito").html(data);
+        });
+
         function openmodal(imagen){
             var modal = document.getElementById("modal_image");
             var modalImg = document.getElementById("modalImg");
@@ -79,26 +105,26 @@
             }
         }
         
-        
-        $(document).on("click", "button.agregarcarrito", function () {
-            //console.log($(this).data("idproducto"));
+        function agregarcarrito(idproducto){
+            
             jQuery.ajax({
                 url: '@Url.Action("AgregarCarrito","Catalogo")',
                 type: 'post',
-                data: JSON.stringify({ idproducto: $(this).data("idproducto") }),
+                data: JSON.stringify({ idproducto: idproducto}),
                 dataType: 'json',
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     if (data.respuesta) {
-                        MostrarCantidadCarrito(); // POR SER PAGINA MAESTRA, SE ENCUENTRAN REFERENCIADOS TODOS SUS ELEMENTOS Y METODOS
-                        // MENSAJE USUARIOS
                         swal("Producto Agregado", "Se ha agregado al carrito con exito", "success");
+                        $("#carrito").html(data);
                     } else {
                         swal("", data.mensaje, "warning")
                     }
                 }
             });
-        })
+        }
+       
+           
     </script>
 }
 

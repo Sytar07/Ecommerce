@@ -1,0 +1,41 @@
+﻿@model List<ECOMMERCE.CORE.EntityCarrito>
+
+
+@{
+    ViewBag.Title = "";
+    decimal total = 0;
+}
+
+
+<table class="table" id="carrito">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            total = total + (item.precio_f * @item.cantidad_i);
+            <tr>
+                <td>@item.nombre_nv</td>
+                <td style="text-align: right;">@item.precio_f€</td>
+                <td style="text-align: right;">@item.cantidad_i</td>
+                <td style="text-align: right;">@(item.precio_f * @item.cantidad_i)€</td>
+            </tr>
+        }
+    
+    </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="text-align: right;"><strong>Total:</strong></td>
+            <td style="text-align: right;"><strong>@total</strong></td>
+        </tr>
+    </tfoot>
+</table>
+              

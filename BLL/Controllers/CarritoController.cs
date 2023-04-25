@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Routing;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace BLL.Controllers
 {
@@ -15,56 +17,29 @@ namespace BLL.Controllers
     [Route("[controller]")]
     public class CarritoController : ControllerBase
     {
-        // TODO: revisar carrito
+        
+        [HttpGet(Name = "GetCarrito")]
+        public List<EntityCarrito> Get(int id_conexion)
+        {
+            CarritoBD carrito = new CarritoBD();
+            return carrito.GETCARRITO(id_conexion).ToList();
+        }
 
-        ///// <summary>
-        ///// API: GetUser
-        ///// Espera un ID y resuelve con la entidad del usuario
-        ///// </summary>
-        ///// <returns></returns>
-        //[HttpGet(Name = "GetCarrito")]
-        //public EntityCarrito Get(int id_carrito)
-        //{
-        //    CarritosBD carritos = new CarritosBD();
-        //    return carritos.get(id_carrito);
-        //}
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<List<EntityCarrito>> Create(agregarCarrito agregarCarrito)
+        {
+            CarritoBD carrito = new CarritoBD();
+            if (carrito.INSERT_PRODUCTO(agregarCarrito.id_conexion, agregarCarrito.id_producto, agregarCarrito.cantidad) > 0)
+            {
+                // 
+            }
+            var carrito_list = carrito.GETCARRITO(agregarCarrito.id_conexion).ToList();
+            return CreatedAtAction(nameof(Get), carrito_list);
+        }
 
-        //[HttpPost]
-        //[ProducesResponseType(StatusCodes.Status201Created)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //public ActionResult<EntityCarrito> Create(EntityCarrito EntityCarrito)
-        //{
-        //   CarritosBD carritos = new CarritosBD();
-            
-        //    var result= carritos.GETALLCARRITOS(carritos.INSERTCARRITO(EntityCarrito));
-
-        //    return CreatedAtAction(nameof(Get), new { id = EntityCarrito.ididentifier_i }, EntityCarrito);
-        //}
-
-        //[HttpPut]
-        //[ProducesResponseType(StatusCodes.Status201Created)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //public ActionResult<EntityCarrito> Update(EntityCarrito EntityCarrito)
-        //{
-        //    CarritosBD carritos = new CarritosBD();
-
-        //    var result = carritos.GETCARRITO(carritos.INSERTCARRITO(EntityCarrito));
-
-        //    return CreatedAtAction(nameof(Get), new { id = EntityCarrito.ididentifier_i }, EntityCarrito);
-        //}
-
-        //[HttpDelete]
-        //[ProducesResponseType(StatusCodes.Status201Created)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //public ActionResult<EntityCarrito> Delete(int id)
-        //{
-        //    CarritosBD carritos = new CarritosBD();
-
-        //    EntityCarrito EntityCarrito = carritos.GETCARRITO(id);
-        //    carritos.DELETECARRITO(EntityCarrito);
-            
-        //    return CreatedAtAction(nameof(Get), new { id = EntityCarrito.ididentifier_i }, EntityCarrito);
-        //}
+       
 
     }
 }
