@@ -27,8 +27,8 @@
                 <td style="text-align: right;">@item.cantidad_i</td>
                 <td style="text-align: right;">@(item.precio_f * @item.cantidad_i)€</td>
                 <td>
-                    <button class="btn btn-success agregarcarrito flex-shrink-0 w-50" type="button" onclick="quitarcarrito(@item.idproducto);">
-                        Eliminar producto
+                    <button title="Eliminar Producto" class="btn btn-success agregarcarrito flex-shrink-0 w-50" type="button" onclick="quitarcarrito(@item.idproducto);">
+                        X
                     </button>
                 </td>
             </tr>
