@@ -143,6 +143,42 @@ namespace FRONT.Controllers
             return entityCarrito;
         }
 
-       
+        [HttpPost]
+        public IActionResult QuitarCarrito(int idproducto)
+        {
+            var conexion = new Byte[40];
+            int id_conexion = 0;
+
+            if (HttpContext.Session.TryGetValue("Conexion", out conexion))
+            {
+                id_conexion = int.Parse(System.Text.Encoding.UTF8.GetString(conexion));
+            }
+
+            DeleteProducto(id_conexion, idproducto, 1).Wait();
+
+            List<EntityCarrito> carritolista = ListCarrito(id_conexion);
+
+            return PartialView("carrito", carritolista);
+        }
+        private static async Task<List<EntityCarrito>> DeleteProducto(int conexion, int producto, int cantidad)
+        {
+            string apiUrl = string.Format("https://localhost:7023/Carrito");
+
+            var myData = new agregarCarrito()
+            {
+                id_conexion = conexion,
+                id_producto = producto,
+                cantidad = cantidad
+            };
+
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.PutAsJsonAsync(apiUrl, myData);
+            response.EnsureSuccessStatusCode();
+
+            List<EntityCarrito> entityCarrito = await response.Content.ReadFromJsonAsync<List<EntityCarrito>>();
+
+            return entityCarrito;
+        }
+
     }
 }

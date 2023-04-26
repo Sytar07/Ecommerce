@@ -32,11 +32,16 @@
                         </h5>
 
                         <div class="text-center my-4">
+                        @if (producto.stock_f > 0)
+                        {
                             <button class="btn btn-success agregarcarrito flex-shrink-0 w-50" type="button" onclick="agregarcarrito(@producto.ididentifier_i);">
                                 <i class="fas fa-cart-plus"></i>
                                 Agregar al carrito
                             </button>
-                        </div>
+                        }else{
+                            <span>Sin Stock</span>
+                        }
+                    </div>
                    
                         <div class="row">
                             @foreach (var item in producto.imagenes)
@@ -67,8 +72,9 @@
 <div class="card position-fixed" style="left: 3px !important; top: 80px !important;">
     <div class="card-body">
 
-        <button class="btn btn-primary" title="Ver Carrito" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCarrito" aria-expanded="false" aria-controls="collapseCarrito">
+        <button class="btn btn-primary" title="Ver Carrito" onclick="$('.cart-count').attr('style', 'display: none'); " type="button" data-bs-toggle="collapse" data-bs-target="#collapseCarrito" aria-expanded="false" aria-controls="collapseCarrito">
             <i class="bi bi-cart-fill me-2"></i>
+            <span class="cart-count" style="display: none">1</span>
         </button>
 
         <div class="collapse" id="collapseCarrito">
@@ -105,24 +111,34 @@
             }
         }
         
-        function agregarcarrito(idproducto){
-            
-            jQuery.ajax({
-                url: '@Url.Action("AgregarCarrito","Catalogo")',
+        function agregarcarrito(id){
+            console.log(id);
+            var request = $.ajax({
+                url: '@Url.Action("AgregarCarrito","Catalogo")/?idproducto='+id,
                 type: 'post',
-                data: JSON.stringify({ idproducto: idproducto}),
-                dataType: 'json',
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    if (data.respuesta) {
-                        swal("Producto Agregado", "Se ha agregado al carrito con exito", "success");
-                        $("#carrito").html(data);
-                    } else {
-                        swal("", data.mensaje, "warning")
-                    }
+                    console.log(data);
+                    $("#carrito").html(data);
+                    $(".cart-count").attr("style", "display: block");
                 }
             });
+            
         }
+        function quitarcarrito(id) {
+            console.log(id);
+            var request = $.ajax({
+                url: '@Url.Action("QuitarCarrito","Catalogo")/?idproducto=' + id,
+                type: 'post',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    console.log(data);
+                    $("#carrito").html(data);
+                }
+            });
+
+        }
+        
        
            
     </script>

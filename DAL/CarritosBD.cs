@@ -81,7 +81,7 @@ namespace DAL
                 try
                 {
                     SqlCommand command = new SqlCommand("AGREGAR_CARRITO", connection);
-                    command.Transaction = sqlTransaction; 
+                    command.Transaction = sqlTransaction;
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = idconexion;
@@ -99,16 +99,55 @@ namespace DAL
                 {
                     sqlTransaction.Rollback();
                     throw new Exception(ex.Message);
-                
+
                 }
                 finally
                 {
+                    sqlTransaction.Commit();
+                }
+                return salida;
+            }
+    }
+        public int DELETE_PRODUCTO(int idconexion, int idproducto, int cantidad)
+        {
+            List<EntityCarrito> entityCarritos = new List<EntityCarrito>();
+
+            int salida = 0;
+            using (SqlConnection connection = new SqlConnection(cadenaConexion_BBDD))
+            {
+                // Abro la conexion
+                connection.Open();
+                SqlTransaction sqlTransaction = connection.BeginTransaction();
+                try
+                {
+                    SqlCommand command = new SqlCommand("QUITAR_CARRITO", connection);
+                    command.Transaction = sqlTransaction;
+
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = idconexion;
+                    command.Parameters.Add("@ID_PRODUCTO", System.Data.SqlDbType.NVarChar).Value = idproducto;
+
+                    command.Parameters.Add("@ID_RETURN", System.Data.SqlDbType.Int).Value = 0;
+                    command.Parameters["@ID_RETURN"].Direction = ParameterDirection.Output;
+                    command.ExecuteNonQuery();
+                    salida = int.Parse(command.Parameters["@ID_RETURN"].Value.ToString());
 
                 }
 
+                catch (Exception ex)
+                {
+                    sqlTransaction.Rollback();
+                    throw new Exception(ex.Message);
+
+                }
+                finally
+                {
+                    sqlTransaction.Commit();
+                }
+                return salida;
             }
 
-            return salida;
+            
         }
     }
 }
