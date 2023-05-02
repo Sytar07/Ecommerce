@@ -51,15 +51,6 @@ namespace ECOMMERCE.CORE
             }
         }
 
-        public int ID_Carrito_i { 
-            get{
-                
-                return _ID_Carrito_i;
-            }
-            set{
-                _ID_Carrito_i = value;
-            } 
-        }
 
         [Display(Name = "Fecha Inicio")]
         public DateTime? FechaInicio_dt
@@ -90,7 +81,6 @@ namespace ECOMMERCE.CORE
 
 
         private int _ididentifier_i;
-        public int _ID_Carrito_i;
         public bool _delete_b;
         public string? _ip;
         public DateTime? _FechaInicio_dt;
@@ -99,7 +89,6 @@ namespace ECOMMERCE.CORE
         {
             
             ididentifier_i = 0;
-            ID_Carrito_i = 0;
             FechaInicio_dt = DateTime.MinValue;
             ip = "";
         }

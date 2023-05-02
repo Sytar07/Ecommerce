@@ -83,18 +83,15 @@ namespace DAL
 
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = id_fpa;
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    // parametro SIMPLE
-                    //command.Parameters.Add("@action", System.Data.SqlDbType.VarChar).Value = "GET";                    
-                    // EJECUTO EL COMANDO
                     var reader = command.ExecuteReader();
-                    // LO LEO. 
+
                     while (reader.Read())
                     {
                         // Añado las formas de pago encontradas a la lista de entidades
                         entityFormaPago.ididentifier_i = (int)reader["ID_FPA"];
                         entityFormaPago.name_nv = (string)reader["NAME"];
                         entityFormaPago.type_i = (short)reader["TYPE"];
-                        // Aqui falta el correo y los campos adicionales.
+
 
                         Console.WriteLine((int)reader["ID_FPA"]);
                     }

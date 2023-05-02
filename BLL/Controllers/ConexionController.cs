@@ -17,7 +17,7 @@ namespace BLL.Controllers
     {
         
         [HttpGet]
-        public int Get(string IP,string User )
+        public EntityConexion Get(string IP,string User )
         {
             ConexionesBD conexiones = new ConexionesBD();
             return conexiones.GETCONEXION(IP,   User);

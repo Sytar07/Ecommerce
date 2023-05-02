@@ -78,9 +78,9 @@ namespace FRONT.Controllers
         public IActionResult Carrito()
         {
             var conexion = new Byte[40];
-            int id_conexion = 3;
+            int id_conexion = 0;
        
-            if (HttpContext.Session.TryGetValue("CONEXION", out conexion))
+            if (HttpContext.Session.TryGetValue("Conexion", out conexion))
             {
                 id_conexion =int.Parse(System.Text.Encoding.UTF8.GetString(conexion));
             }

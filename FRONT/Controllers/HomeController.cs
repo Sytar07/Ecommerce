@@ -17,12 +17,16 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 
 namespace FRONT.Controllers
 {
     public class HomeController : Controller
     {
         private const string apiUrlactions = "https://localhost:7023/User?id_user={0}";
+        private const string apiUrlConexion = "https://localhost:7023/Conexion?IP={0}&User={1}";
+
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -32,8 +36,6 @@ namespace FRONT.Controllers
 
         public IActionResult Index()
         {
-            HttpContext.Session.SetString("Conexion", "3"); // Para pruebas 
-
 
             IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());// objeto para guardar la ip
             foreach (IPAddress ip in host.AddressList)
@@ -41,6 +43,11 @@ namespace FRONT.Controllers
                 if (ip.AddressFamily.ToString() == "InterNetwork")
                 {                    
                     HttpContext.Session.SetString("IP", ip.ToString());
+                    EntityConexion conexion = GetConexion(ip.ToString(),"NONAME");
+                    if (conexion != null)
+                    {
+                        HttpContext.Session.SetString("Conexion", conexion.ididentifier_i.ToString());
+                    }
                 }
                 
             }
@@ -88,11 +95,33 @@ namespace FRONT.Controllers
                         {
                             HttpContext.Session.SetString("Admin", "ADMIN");
                         }
+                        
+                        EntityConexion conexion= GetConexion("1:1:1:0", model.email_nv.ToUpper());
+                        if (conexion != null)
+                        {
+                            HttpContext.Session.SetString("Conexion", conexion.ididentifier_i.ToString());
+                        }
+
                         return RedirectToAction("Index", "Home");
                     }
                 }
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        private static EntityConexion GetConexion(string ip, string email)
+        {
+
+            EntityConexion conexion = new EntityConexion(); 
+
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = client.GetAsync(string.Format(apiUrlConexion,ip,email)).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                conexion = JsonSerializer.Deserialize<EntityConexion>(response.Content.ReadAsStringAsync().Result);
+            }
+
+            return conexion;
         }
 
         [HttpGet]
