@@ -96,7 +96,8 @@ namespace DAL
                         entityUser.ididentifier_i = (int)reader["ID_USER"];
                         entityUser.email_nv = (string)reader["EMAIL_NV"];
                         entityUser.name_nv = (string)reader["FULLNAME_NV"];
-                        // Aqui falta el correo y los campos adicionales.
+                        entityUser.Clave_nv = (string)reader["CLAVE"];
+                        
 
                         Console.WriteLine((int)reader["ID_USER"]);
                     }
@@ -138,6 +139,8 @@ namespace DAL
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityUser.ididentifier_i;
                     command.Parameters.Add("@FULLNAME_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.name_nv;
+                    command.Parameters.Add("@Clave", System.Data.SqlDbType.NVarChar).Value = entityUser.Clave_nv;
+                    
                     command.Parameters.Add("@EMAIL_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.email_nv;
                     command.Parameters.Add("@ROL", System.Data.SqlDbType.Int).Value = entityUser.rol_i;
 
