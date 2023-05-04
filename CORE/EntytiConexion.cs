@@ -51,6 +51,18 @@ namespace ECOMMERCE.CORE
             }
         }
 
+        public int iduser
+        {
+            get
+            {
+                return _id_user;
+            }
+            set
+            {
+                _id_user = value;
+            }
+        }
+
 
         [Display(Name = "Fecha Inicio")]
         public DateTime? FechaInicio_dt
@@ -81,6 +93,7 @@ namespace ECOMMERCE.CORE
 
 
         private int _ididentifier_i;
+        private int _id_user;
         public bool _delete_b;
         public string? _ip;
         public DateTime? _FechaInicio_dt;
@@ -89,6 +102,7 @@ namespace ECOMMERCE.CORE
         {
             
             ididentifier_i = 0;
+            iduser = 0;
             FechaInicio_dt = DateTime.MinValue;
             ip = "";
         }

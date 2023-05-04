@@ -1,0 +1,91 @@
+﻿@model ECOMMERCE.CORE.EntityPedido;
+
+
+@{
+    ViewBag.Title = "Dirección Entrega y forma de pago";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card" style="background: transparent;">
+            <div class="card-header text-center">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+
+            @using (Html.BeginForm("Edit", "MasterDirecciones", FormMethod.Post))
+            {
+                <div class="card-body text-left">
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.Direccion.ididentifier_i)
+                    @Html.HiddenFor(model => model.Direccion.user_i)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Direccion.direccion_nv, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model=>model.Direccion.direccion_nv, new { htmlAttributes = new { @class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.Direccion.direccion_nv)
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Direccion.numero_i, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model=>model.Direccion.numero_i, new { htmlAttributes = new { @class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.Direccion.numero_i)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Direccion.puerta_nv, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model=>model.Direccion.puerta_nv, new { htmlAttributes = new { @class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.Direccion.puerta_nv)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Direccion.ciudad_nv, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model=>model.Direccion.ciudad_nv, new { htmlAttributes = new { @class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.Direccion.ciudad_nv)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Direccion.pais_i, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.Direccion.pais_i, new SelectList(Model.Direccion.paises, "ididentifier_i", "name_nv"), "Seleciona Pais", new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.Direccion.pais_i)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FormaPago.ididentifier_i, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.FormaPago.ididentifier_i, new SelectList(Model.FormaPagos, "ididentifier_i", "name_nv"), "Seleciona Forma de Pago", new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.FormaPago.ididentifier_i)
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer text-center">
+                  
+                    <input class="btn btn-primary" type="submit" value="Guardar" />
+
+                </div>
+
+            }
+
+
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+    </script>
+}
+
+          

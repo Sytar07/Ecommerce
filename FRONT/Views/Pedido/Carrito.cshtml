@@ -28,7 +28,7 @@
                 <td style="text-align: right;">@(item.precio_f * @item.cantidad_i)€</td>
                 <td>
                     <button title="Eliminar Producto" class="btn btn-success agregarcarrito flex-shrink-0 w-50" type="button" onclick="quitarcarrito(@item.idproducto);">
-                        X 
+                        X
                     </button>
                 </td>
             </tr>
@@ -44,5 +44,4 @@
         </tr>
     </tfoot>
 </table>
-    <a class="btn btn-primary" asp-area="" asp-controller="Pedido" asp-action="Index">Ver Pedido</a>
               

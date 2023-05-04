@@ -1,0 +1,67 @@
+﻿@model ECOMMERCE.CORE.EntityPedido
+
+
+@{
+    ViewBag.Title = "Pago con tarjeta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card" style="background: transparent;">
+            <div class="card-header text-center">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+
+            @using (Html.BeginForm("RealizarPago", "Pago", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Tarjeta.NombreTitular, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Tarjeta.NombreTitular, new { @class = "form-control", placeholder = "Nombre del titular" })
+                        @Html.ValidationMessageFor(m => m.Tarjeta.NombreTitular)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Tarjeta.NumeroTarjeta, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Tarjeta.NumeroTarjeta, new { @class = "form-control", placeholder = "Número de tarjeta" })
+                        @Html.ValidationMessageFor(m => m.Tarjeta.NumeroTarjeta)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Tarjeta.FechaVencimiento, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Tarjeta.FechaVencimiento, new { @class = "form-control", placeholder = "Fecha de vencimiento" })
+                        @Html.ValidationMessageFor(m => m.Tarjeta.FechaVencimiento)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Tarjeta.CVV, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Tarjeta.CVV, new { @class = "form-control", placeholder = "CVV" })
+                        @Html.ValidationMessageFor(m => m.Tarjeta.CVV)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-default">Pagar</button>
+                    </div>
+                </div>
+            }
+
+
+
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+   
+
+    </script>
+}
+
+          

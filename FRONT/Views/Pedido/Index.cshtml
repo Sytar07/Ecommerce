@@ -1,0 +1,96 @@
+﻿@model List<ECOMMERCE.CORE.EntityCarrito>
+
+
+@{
+    ViewBag.Title = "Tramitar Pedido";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var conexion = new Byte[40];
+
+    ViewData["Conexion"] = null;
+    decimal total = 0;
+
+    if (this.Context.Session.TryGetValue("Conexion", out conexion))
+    {
+        ViewData["Conexion"] = System.Text.Encoding.UTF8.GetString(conexion);
+    }
+    var conexion_str = ViewData["Conexion"];
+}
+    <div>
+        <h1>Pedido</h1>
+        <h4>Este es el detalle de su pedido, pulse en tramitar para indicar dirección de entraga y forma de pago.</h4>
+
+    </div>
+
+    <div class="table-responsive">
+        <table class="table" id="carrito">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    total = total + (item.precio_f * @item.cantidad_i);
+                    <tr>
+                        <td>@item.nombre_nv</td>
+                        <td style="text-align: right;">@item.precio_f€</td>
+                        <td style="text-align: right;">@item.cantidad_i</td>
+                        <td style="text-align: right;">@(item.precio_f * @item.cantidad_i)€</td>
+                        <td>
+                            <button title="Eliminar Producto" class="btn btn-success agregarcarrito flex-shrink-0 w-50" type="button" onclick="quitarcarrito(@item.idproducto);">
+                                X
+                            </button>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: right;"><strong>Total:</strong></td>
+                    <td style="text-align: right;"><strong>@total</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+
+    
+    </div>
+<div class="card-footer text-center">
+
+    
+            
+    <a class="btn btn-primary" asp-area="" asp-controller="Pedido" asp-action="Tramitar" asp-route-id="@conexion_str">Tramitar</a>
+</div>
+
+
+@section scripts{
+    <script>      ;
+
+        function quitarcarrito(id) {
+            console.log(id);
+            var request = $.ajax({
+                url: '@Url.Action("QuitarCarrito","Catalogo")/?idproducto=' + id,
+                type: 'post',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    console.log(data);
+                    $("#carrito").html(data);
+                }
+            });
+
+        }
+        
+       
+           
+    </script>
+}
+
+          

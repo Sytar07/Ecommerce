@@ -24,7 +24,7 @@ namespace FRONT.Controllers
     public class HomeController : Controller
     {
         private const string apiUrlactions = "https://localhost:7023/User?id_user={0}";
-        private const string apiUrlConexion = "https://localhost:7023/Conexion?IP={0}&User={1}";
+        private const string apiUrlConexion = "https://localhost:7023/Conexion?IP={0}&User={1}&conexion=0";
 
 
         private readonly ILogger<HomeController> _logger;
@@ -36,21 +36,7 @@ namespace FRONT.Controllers
 
         public IActionResult Index()
         {
-
-            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());// objeto para guardar la ip
-            foreach (IPAddress ip in host.AddressList)
-            {
-                if (ip.AddressFamily.ToString() == "InterNetwork")
-                {                    
-                    HttpContext.Session.SetString("IP", ip.ToString());
-                    EntityConexion conexion = GetConexion(ip.ToString(),"NONAME");
-                    if (conexion != null)
-                    {
-                        HttpContext.Session.SetString("Conexion", conexion.ididentifier_i.ToString());
-                    }
-                }
-                
-            }
+           
 
             return View();
         }

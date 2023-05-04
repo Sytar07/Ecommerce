@@ -17,13 +17,13 @@ namespace BLL.Controllers
     {
         
         [HttpGet]
-        public EntityConexion Get(string IP,string User )
+        public EntityConexion Get(string IP,string User, int conexion)
         {
             ConexionesBD conexiones = new ConexionesBD();
-            return conexiones.GETCONEXION(IP,   User);
+            return conexiones.GETCONEXION(IP,   User, conexion);
         }
 
-       
+        
 
     }
 }

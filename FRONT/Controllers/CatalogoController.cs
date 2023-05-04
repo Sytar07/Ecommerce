@@ -14,7 +14,8 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Web.Helpers;
 using System.Linq;
-
+using System.Net;
+using Microsoft.AspNetCore.Http;
 
 namespace FRONT.Controllers
 {
@@ -24,6 +25,7 @@ namespace FRONT.Controllers
         private const string apiUrlList = "https://localhost:7023/Productos";
         private const string apiUrlactions = "https://localhost:7023/Producto?id_Producto={0}";
         private const string apiUrlImagenesList = "https://localhost:7023/Imagenes?id_producto={0}";
+        private const string apiUrlConexion = "https://localhost:7023/Conexion?IP={0}&User={1}&conexion=0";
 
         private readonly ILogger<CatalogoController> _logger;
 
@@ -34,9 +36,50 @@ namespace FRONT.Controllers
 
         public IActionResult Index()
         {
+            var conexionb = new Byte[40];
+            int id_conexion = 0;
+
+
+            if (HttpContext.Session.TryGetValue("Conexion", out conexionb))
+            {
+                id_conexion = int.Parse(System.Text.Encoding.UTF8.GetString(conexionb));
+            }
+
+            if (id_conexion == 0)
+            {
+                IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());// objeto para guardar la ip
+                foreach (IPAddress ip in host.AddressList)
+                {
+                    if (ip.AddressFamily.ToString() == "InterNetwork")
+                    {
+                        HttpContext.Session.SetString("IP", ip.ToString());
+                        EntityConexion conexion = GetConexion(ip.ToString(), "NONAME");
+                        if (conexion != null)
+                        {
+                            HttpContext.Session.SetString("Conexion", conexion.ididentifier_i.ToString());
+                        }
+                    }
+                }
+            }
+
             List<EntityProducto> EntityProductoList = ListProductos();
             _logger.LogInformation($"Listado del catalogo de productos a las {DateTime.Now.ToLongTimeString()}");
             return View(EntityProductoList);
+        }
+
+        private static EntityConexion GetConexion(string ip, string email)
+        {
+
+            EntityConexion conexion = new EntityConexion();
+
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = client.GetAsync(string.Format(apiUrlConexion, ip, email)).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                conexion = JsonSerializer.Deserialize<EntityConexion>(response.Content.ReadAsStringAsync().Result);
+            }
+
+            return conexion;
         }
         private static List<EntityProducto> ListProductos()
         {
