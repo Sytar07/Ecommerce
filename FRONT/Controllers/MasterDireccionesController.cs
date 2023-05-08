@@ -171,6 +171,7 @@ namespace FRONT.Controllers
         public ActionResult Create(EntityDireccion entityDireccion)
         {
             ModelState.Remove("Paises");
+            entityDireccion.paises = new List<EntityPais>();
             if (ModelState.IsValid)
             {
                 _logger.LogInformation($"Grabación de nuevo  {entityDireccion.direccion_nv} a las {DateTime.Now.ToLongTimeString()}");
