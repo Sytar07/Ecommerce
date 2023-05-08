@@ -67,11 +67,15 @@ namespace FRONT.Controllers
                 Pedido.Direcciones = ListDirecciones(conexion.iduser);
                 if (Pedido.Direcciones.Count > 0)
                 {
+                    ViewBag.id_user = conexion.iduser;
                     return View("Direcciones", Pedido.Direcciones);
-                }else
+                    
+                }
+                else
                 {
                     // excepto si np  tiene ninguna que le pedimos que cree una nueva.
                     Pedido.Direccion.user_i = conexion.iduser;
+                    
                     Pedido.Direccion.paises = DDLPaises();
                     return View("Direccion", Pedido);
                 }
@@ -89,12 +93,15 @@ namespace FRONT.Controllers
             }
         }
 
-        public IActionResult SelecionarDireccion(int id, int userid)
+        
+        public ActionResult SelecionarDireccion(int id, int userid)
         {
             ModelState.Remove("Paises");
             EntityPedido pedido = new EntityPedido();
             pedido.Direccion= ListDirecciones(userid).Where(i => i.ididentifier_i==id).FirstOrDefault();
-
+            pedido.FormaPagos = ListFPA();
+            
+            pedido.Direccion.paises = DDLPaises();
             return View("DireccionConfirmacion", pedido);
         }
 
