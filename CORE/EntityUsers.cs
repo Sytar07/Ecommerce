@@ -68,7 +68,7 @@ namespace ECOMMERCE.CORE
         }
 
         [Display(Name = "Clave")]
-        public string Clave_nv
+        public string clave_nv
         {
             get
             {
@@ -82,7 +82,7 @@ namespace ECOMMERCE.CORE
         }
 
         [Display(Name = "Confirme Clave")]
-        public string Clave_nvConfirm
+        public string clave_nvConfirm
         {
             get
             {
@@ -126,7 +126,8 @@ namespace ECOMMERCE.CORE
             ididentifier_i = 0;
             name_nv = "";
             email_nv = "";           
-            _rol_i = 1;
+            rol_i = 1;
+            clave_nv = "";
         }
 
     }

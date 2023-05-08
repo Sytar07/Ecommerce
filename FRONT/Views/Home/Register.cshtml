@@ -25,17 +25,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Clave_nv, new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.clave_nv, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model=>model.Clave_nv, new { htmlAttributes = new { @class = "form-control", type = "password"}})
-                        @Html.ValidationMessageFor(model => model.Clave_nv)
+                        @Html.EditorFor(model=>model.clave_nv, new { htmlAttributes = new { @class = "form-control", type = "password"}})
+                        @Html.ValidationMessageFor(model => model.clave_nv)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Clave_nvConfirm, new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.clave_nvConfirm, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model=>model.Clave_nvConfirm, new { htmlAttributes = new { @class = "form-control", type = "password"}})
-                        @Html.ValidationMessageFor(model => model.Clave_nvConfirm)
+                        @Html.EditorFor(model=>model.clave_nvConfirm, new { htmlAttributes = new { @class = "form-control", type = "password"}})
+                        @Html.ValidationMessageFor(model => model.clave_nvConfirm)
                     </div>
                     <div class="alert alert-danger" id="password-error" style="display:none;">
                         Las contraseñas no coinciden. Por favor inténtelo de nuevo.
@@ -54,8 +54,8 @@
 </div>
 <script>
     var submitButton = document.getElementById("submit-button");
-    var passwordInput = document.getElementById("Clave_nv");
-    var confirmPasswordInput = document.getElementById("Clave_nvConfirm");
+    var passwordInput = document.getElementById("clave_nv");
+    var confirmPasswordInput = document.getElementById("clave_nvConfirm");
     var passwordError = document.getElementById("password-error");
 
     function validatePassword() {

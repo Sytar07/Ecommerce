@@ -19,6 +19,7 @@ namespace FRONT.Controllers
     {
         
         private const string apiUrlList = "https://localhost:7023/Users";
+        private const string apiUrlactionscreate = "https://localhost:7023/User";
         private const string apiUrlactions = "https://localhost:7023/User?id_user={0}";
 
         private readonly ILogger<MasterUsersController> _logger;
@@ -79,6 +80,8 @@ namespace FRONT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(EntityUser entityUser)
         {
+            ModelState.Remove("clave_nvConfirm");
+            entityUser.clave_nvConfirm = entityUser.clave_nv;
             if (ModelState.IsValid)
             {
                 _logger.LogInformation($"Grabación de {entityUser.ididentifier_i.ToString()} a las {DateTime.Now.ToLongTimeString()}");
@@ -144,6 +147,8 @@ namespace FRONT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(EntityUser entityUser)
         {
+            ModelState.Remove("clave_nvConfirm");
+            entityUser.clave_nvConfirm = entityUser.clave_nv;
             if (ModelState.IsValid)
             {
                 _logger.LogInformation($"Grabación de nuevo  {entityUser.email_nv} a las {DateTime.Now.ToLongTimeString()}");
@@ -152,7 +157,7 @@ namespace FRONT.Controllers
                 return RedirectToAction("Index");
             }
             // en los demás casos mostramos en pantalla
-            return View("Edit", entityUser);
+            return View("Create", entityUser);
         }
 
         private static async Task<EntityUser> CreateUser(EntityUser entityUser)

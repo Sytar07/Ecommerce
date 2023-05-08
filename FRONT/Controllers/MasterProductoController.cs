@@ -80,6 +80,7 @@ namespace FRONT.Controllers
         public ActionResult Edit(EntityProducto entityProducto)
         {
             ModelState.Remove("imagenes");
+            entityProducto.imagenes = new List<EntityImagen>();
             if (ModelState.IsValid)
             {
                 _logger.LogInformation($"Grabación de {entityProducto.ididentifier_i.ToString()} a las {DateTime.Now.ToLongTimeString()}");
@@ -116,6 +117,7 @@ namespace FRONT.Controllers
         public ActionResult Delete(EntityProducto entityProducto)
         {
             ModelState.Remove("imagenes");
+            entityProducto.imagenes = new List<EntityImagen>();
             if (ModelState.IsValid)
             {
                 _logger.LogInformation($"Borrado de {entityProducto.ididentifier_i.ToString()} a las {DateTime.Now.ToLongTimeString()}");
@@ -152,6 +154,7 @@ namespace FRONT.Controllers
         public ActionResult Create(EntityProducto entityProducto)
         {
             ModelState.Remove("imagenes");
+            entityProducto.imagenes = new List<EntityImagen>();
             if (ModelState.IsValid)
             {
                 _logger.LogInformation($"Grabación de nuevo  {entityProducto.nombre_nv} a las {DateTime.Now.ToLongTimeString()}");

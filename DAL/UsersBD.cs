@@ -43,7 +43,7 @@ namespace DAL
                             name_nv = (string)reader["FULLNAME_NV"],
                             email_nv = (string)reader["EMAIL_NV"],
                             rol_i= (int)reader["ROL"],
-                            Clave_nv = (string)reader["CLAVE"]
+                            clave_nv = (string)reader["CLAVE"]
                         });
 
                         Console.WriteLine((int)reader["ID_USER"]);
@@ -96,7 +96,7 @@ namespace DAL
                         entityUser.ididentifier_i = (int)reader["ID_USER"];
                         entityUser.email_nv = (string)reader["EMAIL_NV"];
                         entityUser.name_nv = (string)reader["FULLNAME_NV"];
-                        entityUser.Clave_nv = (string)reader["CLAVE"];
+                        entityUser.clave_nv = (string)reader["CLAVE"];
                         
 
                         Console.WriteLine((int)reader["ID_USER"]);
@@ -139,7 +139,7 @@ namespace DAL
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityUser.ididentifier_i;
                     command.Parameters.Add("@FULLNAME_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.name_nv;
-                    command.Parameters.Add("@Clave", System.Data.SqlDbType.NVarChar).Value = entityUser.Clave_nv;
+                    command.Parameters.Add("@Clave", System.Data.SqlDbType.NVarChar).Value = entityUser.clave_nv;
                     
                     command.Parameters.Add("@EMAIL_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.email_nv;
                     command.Parameters.Add("@ROL", System.Data.SqlDbType.Int).Value = entityUser.rol_i;
@@ -187,7 +187,7 @@ namespace DAL
                     command.Parameters.Add("@FULLNAME_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.name_nv;
                     command.Parameters.Add("@EMAIL_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.email_nv;
                     command.Parameters.Add("@ROL", System.Data.SqlDbType.Int).Value = entityUser.rol_i;
-                    command.Parameters.Add("@CLAVE", System.Data.SqlDbType.Int).Value = entityUser.Clave_nv;
+                    command.Parameters.Add("@CLAVE", System.Data.SqlDbType.NVarChar).Value = entityUser.clave_nv;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 
@@ -232,7 +232,7 @@ namespace DAL
                     command.Parameters.Add("@FULLNAME_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.name_nv;
                     command.Parameters.Add("@EMAIL_NV", System.Data.SqlDbType.NVarChar).Value = entityUser.email_nv;
                     command.Parameters.Add("@ROL", System.Data.SqlDbType.Int).Value = entityUser.rol_i;
-                    command.Parameters.Add("@CLAVE", System.Data.SqlDbType.Int).Value = entityUser.Clave_nv;
+                    command.Parameters.Add("@CLAVE", System.Data.SqlDbType.NVarChar).Value = entityUser.clave_nv;
 
                     command.Parameters.Add("@delete", System.Data.SqlDbType.SmallInt).Value = 0;
 

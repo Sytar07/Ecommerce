@@ -61,7 +61,7 @@ namespace FRONT.Controllers
         public async Task<IActionResult> Login(EntityUser model)
         {
             
-            ModelState.Remove("Clave_nvConfirm");
+            ModelState.Remove("clave_nvConfirm");
             if (ModelState.IsValid)
             {
                 _logger.LogWarning($"Login de {model.email_nv} a las {DateTime.Now.ToLongTimeString()} ");
@@ -74,7 +74,7 @@ namespace FRONT.Controllers
                 if (User.Count>0)
                 {
 
-                    if (User.First().Clave_nv == model.Clave_nv)
+                    if (User.First().clave_nv == model.clave_nv)
                     {
                         HttpContext.Session.SetString("UserName", model.email_nv);
                         if (User.First().rol_i == 9)
