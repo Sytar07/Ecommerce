@@ -13,22 +13,37 @@ namespace ECOMMERCE.CORE
     public class EntityPedido
     {
         public int conexion { get; set; }
-        public int pedido { get; set; }
+        public int ididentifier_i { get; set; }
+        public int id_direccion { get; set; }
+        public int id_user { get; set; }
 
-        public EntityDireccion Direccion= new EntityDireccion();
-        public List<EntityDireccion> Direcciones = new List<EntityDireccion>();
-        public EntityFormaPago FormaPago= new EntityFormaPago();
-        public EntityTarjeta Tarjeta= new EntityTarjeta();
-        public List<EntityFormaPago> FormaPagos= new List<EntityFormaPago>();
+        public DateTime Fecha_Pedido { get; set; }
+        public DateTime? Fecha_Envio { get; set; }
+        public decimal? SubTotal { get; set; }
+        public decimal? Total { get; set; }
+        public decimal? Iva { get; set; }
+        public string Estado { get; set; }
 
+
+
+        // Auxiliares.
+        public EntityDireccion? Direccion= new EntityDireccion();        
+        public EntityFormaPago? FormaPago= new EntityFormaPago();
+        public EntityUser? Usuario = new EntityUser();
+        public EntityTarjeta? Tarjeta= new EntityTarjeta();
+
+        public List<EntityFormaPago>? FormaPagos= new List<EntityFormaPago>();
+        public List<EntityDireccion>? Direcciones = new List<EntityDireccion>();
+        
     }
     
     public class EntityTarjeta
     {
-
-
+        public int iduser { get; set; }
+        public int iddireccion { get; set; }
 
         [Required(ErrorMessage = "Campo obligatorio")]
+        [StringLength(10)]
         [Display(Name = "Nombre del titular")]
         public string NombreTitular
         {

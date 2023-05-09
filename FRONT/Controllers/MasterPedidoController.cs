@@ -15,11 +15,12 @@ using System.Threading.Tasks;
 using System.Web.Helpers;
 using System.Linq;
 using System.Reflection;
+using DAL;
 
 
 namespace FRONT.Controllers
 {
-  public class PedidoController : Controller
+  public class MasterPedidoController : Controller
     {
 
         private const string apiUrlList = "https://localhost:7023/FormasPago";
@@ -27,10 +28,12 @@ namespace FRONT.Controllers
         private const string apiUrlConexion = "https://localhost:7023/Conexion?IP={0}&User={1}&conexion={2}";
         private const string apiUrlPaises = "https://localhost:7023/Paises";
         private const string apiUrlDireccion = "https://localhost:7023/Direccion?id_Direccion={0}";
+        private const string apiUrlPedido = "https://localhost:7023/Pedido";
+        
 
-        private readonly ILogger<PedidoController> _logger;
+        private readonly ILogger<MasterPedidoController> _logger;
 
-        public PedidoController(ILogger<PedidoController> logger)
+        public MasterPedidoController(ILogger<MasterPedidoController> logger)
         {
             _logger = logger;
         }
@@ -95,33 +98,38 @@ namespace FRONT.Controllers
 
         
         public ActionResult SelecionarDireccion(int id, int userid)
-        {
-            ModelState.Remove("Paises");
-            EntityPedido pedido = new EntityPedido();
-            pedido.Direccion= ListDirecciones(userid).Where(i => i.ididentifier_i==id).FirstOrDefault();
-            pedido.FormaPagos = ListFPA();
+        {            
+            EntityDireccion direccion = new EntityDireccion();
+
+            direccion = ListDirecciones(userid).Where(i => i.ididentifier_i==id).FirstOrDefault();
+            direccion.paises = DDLPaises();
             
-            pedido.Direccion.paises = DDLPaises();
-            return View("DireccionConfirmacion", pedido);
+            return View("ConfirmarDireccion", direccion);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ConfirmarDireccion(EntityPedido entitypedido)
+        public ActionResult ConfirmarDireccion(EntityDireccion entityDireccion)
         {
-            ModelState.Remove("Paises");
-            EntityDireccion entityDireccion = entitypedido.Direccion;
-
+            EntityTarjeta Tarjeta = new EntityTarjeta();
             entityDireccion.paises = new List<EntityPais>();
+
             if (ModelState.IsValid)
             {
-                _logger.LogInformation($"Grabación de nuevo  {entityDireccion.direccion_nv} a las {DateTime.Now.ToLongTimeString()} para un pedido");
-                // Si es valido grabamos y salimos al Index.
+                // Si es valido grabamos y vamos al pago.
+                Tarjeta.NumeroTarjeta = "";
+                Tarjeta.FechaVencimiento = DateTime.Now;
+                Tarjeta.NombreTitular = "";
+                Tarjeta.CVV = 0;
+                // Los guardamos en el modelo para la sigueinte fase
+                Tarjeta.iddireccion= entityDireccion.ididentifier_i;
+                Tarjeta.iduser= entityDireccion.user_i;
 
-                return View("Pago", entitypedido);
+                return View("RealizarPago", Tarjeta);
             }
             // en los demás casos mostramos en pantalla
-            return View("ConfirmarDireccion", entitypedido);
+            entityDireccion.paises = DDLPaises();
+            return View("ConfirmarDireccion", entityDireccion);
         }
     
 
@@ -136,12 +144,50 @@ namespace FRONT.Controllers
             if (ModelState.IsValid)
             {
                 _logger.LogInformation($"Grabación de nuevo  {entityDireccion.direccion_nv} a las {DateTime.Now.ToLongTimeString()} para un pedido");
-                // Si es valido grabamos y salimos al Index.
+                // Si es valido grabamos y vamos al pago.
+
                 CrearDireccionPedido(entityDireccion).Wait();
+
                 return View("Pago", entitypedido);
             }
             // en los demás casos mostramos en pantalla
             return View("CreateDireccion", entitypedido);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RealizarPago(EntityTarjeta entitytarjeta)
+        {
+         
+            ModelState.Remove("Estado");
+           
+            if (ModelState.IsValid)
+            {
+                EntityPedido entityPedido = new EntityPedido();
+                entityPedido.Tarjeta = entitytarjeta;
+                entityPedido.id_direccion = entitytarjeta.iddireccion;
+                entityPedido.id_user = entitytarjeta.iduser;
+                ProcesarPedido(entityPedido).Wait();
+
+                return View("PedidoPagado", entityPedido);
+            }
+           
+            return View("RealizarPago", entitytarjeta);
+        }
+
+       
+
+        private static async Task<EntityPedido> ProcesarPedido(EntityPedido Pedido)
+        {
+            string apiUrl = string.Format(apiUrlPedido);
+
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.PostAsJsonAsync(apiUrl, Pedido);
+            response.EnsureSuccessStatusCode();
+
+            Pedido = await response.Content.ReadFromJsonAsync<EntityPedido>();
+
+            return Pedido;
         }
 
         private static async Task<EntityDireccion> CrearDireccionPedido(EntityDireccion entityDireccion)
@@ -156,7 +202,6 @@ namespace FRONT.Controllers
 
             return entityDireccion;
         }
-
         private static List<EntityPais> DDLPaises()
         {
             List<EntityPais> listadopaises = new List<EntityPais>();
