@@ -22,7 +22,7 @@ namespace ECOMMERCE.CORE
         public decimal? SubTotal { get; set; }
         public decimal? Total { get; set; }
         public decimal? Iva { get; set; }
-        public string Estado { get; set; }
+        public string? Estado { get; set; }
 
 
 
