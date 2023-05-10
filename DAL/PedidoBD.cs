@@ -111,7 +111,7 @@ namespace DAL
                         EntityPedido.ididentifier_i = (int)reader["ID_PEDIDO"];
 
                         EntityPedido.Fecha_Pedido = (DateTime)reader["FECHA_PEDIDO"];
-                        EntityPedido.Fecha_Envio = (DateTime?)reader["FECHA_ENVIO"];
+                        
                         EntityPedido.SubTotal = (decimal)reader["SUBTOTAL"];
                         EntityPedido.Total = (decimal)reader["TOTAL"];
                         EntityPedido.Iva = (decimal)reader["IVA"];

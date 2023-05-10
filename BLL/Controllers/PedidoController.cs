@@ -44,7 +44,7 @@ namespace BLL.Controllers
             
             var result= Pedidos.GETPedido(Pedidos.INSERTPedido(entityPedido));
 
-            return CreatedAtAction(nameof(Get), new { id = entityPedido.ididentifier_i }, entityPedido);
+            return CreatedAtAction(nameof(Get), new { id = entityPedido.ididentifier_i }, result);
         }
 
         [HttpPut]

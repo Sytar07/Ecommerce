@@ -18,7 +18,7 @@ namespace BLL.Controllers
     public class LPedidoController : ControllerBase
     {
         [HttpGet]
-        public IEnumerable<EntityLineaPedido> GetAll(int id)
+        public IEnumerable<EntityLineaPedido> Get(int id)
         {
             PedidosBD Pedido = new PedidosBD();
             return Pedido.GET_LPedido(id);

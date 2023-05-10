@@ -24,7 +24,7 @@ namespace FRONT.Controllers
     {
 
         private const string apiUrlListFormasPago = "https://localhost:7023/FormasPago";
-        private const string apiUrlLineasPedido = "https://localhost:7023/LPedido?id_pedido={0}";
+        private const string apiUrlLineasPedido = "https://localhost:7023/LPedido?id={0}";
         
         private const string apiUrlListImagenes = "https://localhost:7023/Imagenes?id_producto={0}";
         private const string apiUrlDireccionesList = "https://localhost:7023/Direcciones?id_user={0}";
@@ -32,7 +32,7 @@ namespace FRONT.Controllers
         private const string apiUrlPaises = "https://localhost:7023/Paises";
         private const string apiUrlDireccion = "https://localhost:7023/Direccion?id_Direccion={0}";
         private const string apiUrlPedido = "https://localhost:7023/Pedido";
-        private const string apiUrlGetPedido = "https://localhost:7023/Pedido/{0}";
+        private const string apiUrlGetPedido = "https://localhost:7023/Pedido?id_pedido={0}";
 
 
         private readonly ILogger<MasterPedidoController> _logger;
@@ -262,9 +262,9 @@ namespace FRONT.Controllers
 
         private static List<EntityLineaPedido> LineasPedido(int pedido)
         {
-            string apiUrl = string.Format(apiUrlLineasPedido);
+            string apiUrl = string.Format(apiUrlLineasPedido,pedido);
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = client.PostAsJsonAsync(apiUrl, pedido).Result;
+            HttpResponseMessage response = client.GetAsync(apiUrl).Result;
             response.EnsureSuccessStatusCode();
 
             return JsonSerializer.Deserialize<List<EntityLineaPedido>>(response.Content.ReadAsStringAsync().Result);
