@@ -24,13 +24,16 @@ namespace FRONT.Controllers
     {
 
         private const string apiUrlListFormasPago = "https://localhost:7023/FormasPago";
+        private const string apiUrlLineasPedido = "https://localhost:7023/LPedido?id_pedido={0}";
+        
         private const string apiUrlListImagenes = "https://localhost:7023/Imagenes?id_producto={0}";
         private const string apiUrlDireccionesList = "https://localhost:7023/Direcciones?id_user={0}";
         private const string apiUrlConexion = "https://localhost:7023/Conexion?IP={0}&User={1}&conexion={2}";
         private const string apiUrlPaises = "https://localhost:7023/Paises";
         private const string apiUrlDireccion = "https://localhost:7023/Direccion?id_Direccion={0}";
         private const string apiUrlPedido = "https://localhost:7023/Pedido";
-        
+        private const string apiUrlGetPedido = "https://localhost:7023/Pedido/{0}";
+
 
         private readonly ILogger<MasterPedidoController> _logger;
 
@@ -204,30 +207,70 @@ namespace FRONT.Controllers
 
             if (ModelState.IsValid)
             {
+                var conexion = new Byte[40];
+                int id_conexion = 0;
 
-                ProcesarPedido(entityPedido).Wait();
 
-                return View("PedidoPagado", entityPedido);
+                if (HttpContext.Session.TryGetValue("Conexion", out conexion))
+                {
+                    id_conexion = int.Parse(System.Text.Encoding.UTF8.GetString(conexion));
+                }
+                entityPedido.conexion = id_conexion;
+
+                EntityPedidoCompleto pedidoCompleto = ProcesarPedido(entityPedido);
+                
+
+
+                return View("VerPedido", pedidoCompleto);
             }
 
-            return View("RealizarPagoFase2", entityPedido);
+            return View("RealizarPago", entityPedido);
         }
 
 
 
-        private static async Task<EntityPedido> ProcesarPedido(EntityPedido Pedido)
+        private static EntityPedidoCompleto ProcesarPedido(EntityPedido Pedido)
         {
             string apiUrl = string.Format(apiUrlPedido);
-
+            EntityPedidoCompleto pedidoCompleto;
+            List<EntityLineaPedido> entityLineaPedidos;
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.PostAsJsonAsync(apiUrl, Pedido);
+            HttpResponseMessage response = client.PostAsJsonAsync(apiUrl, Pedido).Result;
             response.EnsureSuccessStatusCode();
 
-            Pedido = await response.Content.ReadFromJsonAsync<EntityPedido>();
+            Pedido = JsonSerializer.Deserialize<EntityPedido>(response.Content.ReadAsStringAsync().Result);
+            
 
-            return Pedido;
+            return GetPedidoCompleto(Pedido);
         }
 
+        private static EntityPedidoCompleto GetPedidoCompleto(EntityPedido Pedido)
+        {
+            string apiUrl = string.Format(apiUrlGetPedido, Pedido.ididentifier_i);
+            EntityPedidoCompleto pedidoCompleto;
+            List<EntityLineaPedido> entityLineaPedidos;
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = client.GetAsync(apiUrl).Result;
+            response.EnsureSuccessStatusCode();
+
+            pedidoCompleto = JsonSerializer.Deserialize<EntityPedidoCompleto>(response.Content.ReadAsStringAsync().Result);
+            pedidoCompleto.direccionEntrega = ListDirecciones(Pedido.id_user).Where(i => i.ididentifier_i == Pedido.id_direccion).FirstOrDefault();
+            pedidoCompleto.entityLineasPedido = LineasPedido(Pedido.ididentifier_i);
+
+            return pedidoCompleto;
+        }
+
+        private static List<EntityLineaPedido> LineasPedido(int pedido)
+        {
+            string apiUrl = string.Format(apiUrlLineasPedido);
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = client.PostAsJsonAsync(apiUrl, pedido).Result;
+            response.EnsureSuccessStatusCode();
+
+            return JsonSerializer.Deserialize<List<EntityLineaPedido>>(response.Content.ReadAsStringAsync().Result);
+
+            
+        }
         private static  EntityDireccion CrearDireccionPedido(EntityDireccion entityDireccion)
         {
             string apiUrl = string.Format(apiUrlDireccion, entityDireccion.ididentifier_i);

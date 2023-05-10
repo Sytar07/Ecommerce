@@ -11,14 +11,22 @@
         <div class="col-md-6 text-center">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Logotipo_de_BBVA.svg/147px-Logotipo_de_BBVA.svg.png" alt="Logo del Banco de Prueba" class="img-fluid" />
             <h1 class="mt-3">Ingresa tu código numérico</h1>
-            <form action="@Url.Action("RealizarPagoFase2", "MasterPedido")" method="post" class="mt-4">
+            @using (Html.BeginForm("RealizarPagoFase2", "MasterPedido", FormMethod.Post))
+            {
+                @Html.HiddenFor(model => model.id_direccion)
+                @Html.HiddenFor(model => model.id_user)
+                @Html.HiddenFor(model => model.id_fpa)
+
                 <div class="form-group">
                     <h4>Le hemos enviado un mensaje a numero de telefono relacionado con su tarjeta con un código numerico, para aceptar el cargo introduzca el número y pulse en continuar.</h4>
                     <input type="text" class="form-control" name="codigo" placeholder="Código numérico de 5 dígitos" pattern="[0-9]{5}" required />
                 </div>
+
                 <button type="submit" class="btn btn-primary mr-3">Continuar</button>
+
                 <a href="@Url.Action("Index", "MasterPedido")" class="btn btn-secondary">Cancelar</a>
-            </form>
+            
+            }
         </div>
     </div>
 </div>

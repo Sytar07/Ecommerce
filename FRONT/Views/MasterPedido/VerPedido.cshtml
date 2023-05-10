@@ -1,0 +1,99 @@
+﻿@model ECOMMERCE.CORE.EntityPedidoCompleto
+
+
+@{
+    ViewBag.Title = "Su Pedido está en marcha!!";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="container">
+        <h1>Pedido Completo</h1>
+       
+
+        <h2>Dirección de Entrega</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Dirección</th>
+                    <th>Número o Portal</th>
+                    <th>Puerta</th>
+                    <th>Ciudad</th>
+                    <th>País</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.direccionEntrega.ididentifier_i</td>
+                    <td>@Model.direccionEntrega.direccion_nv</td>
+                    <td>@(Model.direccionEntrega.numero_i.HasValue ? Model.direccionEntrega.numero_i.Value.ToString() : "-")</td>
+                    <td>@Model.direccionEntrega.puerta_nv</td>
+                    <td>@Model.direccionEntrega.ciudad_nv</td>
+                    <td>@Model.direccionEntrega.pais_i</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Líneas de Pedido</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Código Producto</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                    <th>Foto</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var linea in Model.entityLineasPedido)
+                {
+                    <tr>
+                        <td>@linea.idproducto</td>
+                        <td>@linea.nombre_nv</td>
+                        <td>@linea.cantidad_i</td>
+                        <td>@linea.precio_f.ToString("C")</td>
+                        <td>@linea.total_f.ToString("C")</td>
+                        <td><img src="@linea.foto" alt="@linea.nombre_nv" width="100px" /></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID Pedido</th>
+                    <th>Fecha Pedido</th>
+                    <th>Fecha Envío</th>
+                    <th>Subtotal</th>
+                    <th>Total</th>
+                    <th>IVA</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.ididentifier_i</td>
+                    <td>@Model.Fecha_Pedido.ToShortDateString()</td>
+                    <td>@(Model.Fecha_Envio.HasValue ? Model.Fecha_Envio.Value.ToShortDateString() : "-")</td>
+                    <td>@(Model.SubTotal.HasValue ? Model.SubTotal.Value.ToString("C") : "-")</td>
+                    <td>@(Model.Total.HasValue ? Model.Total.Value.ToString("C") : "-")</td>
+                    <td>@(Model.Iva.HasValue ? Model.Iva.Value.ToString("C") : "-")</td>
+                    <td>@Model.Estado</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+@section scripts{
+    <script>
+   
+
+    </script>
+}
+
+          

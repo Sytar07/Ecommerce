@@ -229,5 +229,58 @@ namespace DAL
             return salida;
         }
 
+        public List<EntityLineaPedido> GET_LPedido(int id_Pedido)
+        {
+            List<EntityLineaPedido> entityLineaPedido = new List<EntityLineaPedido>();  
+
+            // declaro la conexion a BBDD
+            using (SqlConnection connection = new SqlConnection(cadenaConexion_BBDD))
+            {
+
+                // Abro la conexion
+                connection.Open();
+                
+                try
+                {
+                    // Declaro un COMANDO para ejecutar un PROCEDIMIENTO ALMACENADO
+                    SqlCommand command = new SqlCommand("GET_LPedido", connection);
+
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = id_Pedido;
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    var reader = command.ExecuteReader();
+
+                    
+                    while (reader.Read())
+                    {
+                        entityLineaPedido.Add(new EntityLineaPedido()
+                        {
+                            idproducto = (int)reader["ID_PRODUCTO"],
+                            cantidad_i = (int)reader["CANTIDAD"],
+                            precio_f = (decimal)reader["PRECIO"],
+                            total_f = (decimal)reader["TOTAL"],
+                        });
+
+                    }
+                    // Cierro el READER
+                    reader.Close();
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+
+                }
+
+            }
+
+            return entityLineaPedido;
+        }
+
     }
 }
