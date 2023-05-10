@@ -89,7 +89,7 @@ namespace ECOMMERCE.CORE
                 _total_f = value;
             }
         }
-
+        public string foto { get; set; }
 
         private int _idproducto;
         private string _id_producto_nv;

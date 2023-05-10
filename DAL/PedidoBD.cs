@@ -56,9 +56,9 @@ namespace DAL
                             Iva = (decimal)reader["IVA"],
                             Estado = reader["ESTADO"].ToString(),
 
-                            Direccion = DireccionesBD.GETDIRECCION((int)reader["ID_DIRECCION"]),
-                            FormaPago = FormasPagoBD.GETFORMAPAGO((int)reader["ID_FORMA_PAGO"]),
-                            Usuario = UsersBD.GETUSER((int)reader["ID_USUARIO"]),
+                            id_direccion = (int)reader["ID_DIRECCION"],
+                            id_fpa = (int)reader["ID_FORMA_PAGO"],
+                            id_user = (int)reader["ID_USUARIO"],
 
                         });
                         
@@ -117,9 +117,9 @@ namespace DAL
                         EntityPedido.Iva = (decimal)reader["IVA"];
                         EntityPedido.Estado = reader["ESTADO"].ToString();
 
-                        EntityPedido.Direccion = DireccionesBD.GETDIRECCION((int)reader["ID_DIRECCION"]);
-                        EntityPedido.FormaPago = FormasPagoBD.GETFORMAPAGO((int)reader["ID_FORMA_PAGO"]);
-                        EntityPedido.Usuario= UsersBD.GETUSER((int)reader["ID_USUARIO"]);
+                        EntityPedido.id_direccion = (int)reader["ID_DIRECCION"];
+                        EntityPedido.id_fpa= (int)reader["ID_FORMA_PAGO"];
+                        EntityPedido.id_user= (int)reader["ID_USUARIO"];
 
                     }
                     // Cierro el READER
@@ -159,9 +159,9 @@ namespace DAL
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID_CONEXION", System.Data.SqlDbType.Int).Value = entityPedido.conexion;
-                    command.Parameters.Add("@ID_FPA", System.Data.SqlDbType.NVarChar).Value = entityPedido.FormaPago.ididentifier_i;
-                    command.Parameters.Add("@ID_DIRECCION", System.Data.SqlDbType.NVarChar).Value = entityPedido.Direccion.ididentifier_i;
-                    command.Parameters.Add("@id_user", System.Data.SqlDbType.NVarChar).Value = entityPedido.Direccion.user_i;
+                    command.Parameters.Add("@ID_FPA", System.Data.SqlDbType.NVarChar).Value = entityPedido.id_fpa;
+                    command.Parameters.Add("@ID_DIRECCION", System.Data.SqlDbType.NVarChar).Value = entityPedido.id_direccion;
+                    command.Parameters.Add("@id_user", System.Data.SqlDbType.NVarChar).Value = entityPedido.id_user;
                     // Los datos de la tarjeta no se guardan en BBDD 
 
                     command.Parameters.Add("@ID_RETURN", System.Data.SqlDbType.Int).Value = 0;

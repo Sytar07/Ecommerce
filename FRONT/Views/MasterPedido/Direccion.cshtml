@@ -1,4 +1,4 @@
-﻿@model ECOMMERCE.CORE.EntityPedido;
+﻿@model ECOMMERCE.CORE.EntityDireccion;
 
 
 @{
@@ -17,56 +17,46 @@
             {
                 <div class="card-body text-left">
                     @Html.ValidationSummary(true)
-                    @Html.HiddenFor(model => model.Direccion.ididentifier_i)
-                    @Html.HiddenFor(model => model.Direccion.user_i)
+                    @Html.HiddenFor(model => model.ididentifier_i)
+                    @Html.HiddenFor(model => model.user_i)
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Direccion.direccion_nv, new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.direccion_nv, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model=>model.Direccion.direccion_nv, new { htmlAttributes = new { @class = "form-control"}})
-                            @Html.ValidationMessageFor(model => model.Direccion.direccion_nv)
+                            @Html.EditorFor(model=>model.direccion_nv, new { htmlAttributes = new { @class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.direccion_nv)
                         </div>
                     </div>
 
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Direccion.numero_i, new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.numero_i, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model=>model.Direccion.numero_i, new { htmlAttributes = new { @class = "form-control"}})
-                            @Html.ValidationMessageFor(model => model.Direccion.numero_i)
+                            @Html.EditorFor(model=>model.numero_i, new { htmlAttributes = new { @class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.numero_i)
                         </div>
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Direccion.puerta_nv, new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.puerta_nv, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model=>model.Direccion.puerta_nv, new { htmlAttributes = new { @class = "form-control"}})
-                            @Html.ValidationMessageFor(model => model.Direccion.puerta_nv)
+                            @Html.EditorFor(model=>model.puerta_nv, new { htmlAttributes = new { @class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.puerta_nv)
                         </div>
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Direccion.ciudad_nv, new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.ciudad_nv, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model=>model.Direccion.ciudad_nv, new { htmlAttributes = new { @class = "form-control"}})
-                            @Html.ValidationMessageFor(model => model.Direccion.ciudad_nv)
+                            @Html.EditorFor(model=>model.ciudad_nv, new { htmlAttributes = new { @class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.ciudad_nv)
                         </div>
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Direccion.pais_i, new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.pais_i, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.Direccion.pais_i, new SelectList(Model.Direccion.paises, "ididentifier_i", "name_nv"), "Seleciona Pais", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.pais_i, new SelectList(Model.paises, "ididentifier_i", "name_nv"), "Seleciona Pais", new { @class = "form-control" })
 
-                            @Html.ValidationMessageFor(model => model.Direccion.pais_i)
+                            @Html.ValidationMessageFor(model => model.pais_i)
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.FormaPago.ididentifier_i, new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.FormaPago.ididentifier_i, new SelectList(Model.FormaPagos, "ididentifier_i", "name_nv"), "Seleciona Forma de Pago", new { @class = "form-control" })
-
-                            @Html.ValidationMessageFor(model => model.FormaPago.ididentifier_i)
-                        </div>
-                    </div>
-
                 </div>
 
                 <div class="card-footer text-center">

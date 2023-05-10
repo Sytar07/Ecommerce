@@ -23,7 +23,8 @@ namespace FRONT.Controllers
   public class MasterPedidoController : Controller
     {
 
-        private const string apiUrlList = "https://localhost:7023/FormasPago";
+        private const string apiUrlListFormasPago = "https://localhost:7023/FormasPago";
+        private const string apiUrlListImagenes = "https://localhost:7023/Imagenes?id_producto={0}";
         private const string apiUrlDireccionesList = "https://localhost:7023/Direcciones?id_user={0}";
         private const string apiUrlConexion = "https://localhost:7023/Conexion?IP={0}&User={1}&conexion={2}";
         private const string apiUrlPaises = "https://localhost:7023/Paises";
@@ -54,7 +55,20 @@ namespace FRONT.Controllers
       
 
             _logger.LogInformation($"Tramitación y Pago del pedido a las {DateTime.Now.ToLongTimeString()}");
+            
+
             List<EntityCarrito> carritolista = ListCarrito(id_conexion);
+            foreach(EntityCarrito entityCarrito in carritolista)
+            {
+                string imagenproducto = "/images/generic.png";
+                string fototmp= ListImagenes(entityCarrito.idproducto)?.FirstOrDefault()?.path_nv;
+                if (fototmp != null)
+                {
+                    imagenproducto = "/images/productos/" + fototmp;
+                }
+                
+                entityCarrito.foto = imagenproducto;
+            }
             return View("Index", carritolista);
         }
        
@@ -62,36 +76,37 @@ namespace FRONT.Controllers
         {
             EntityConexion conexion = GetConexion(id);
             EntityPedido Pedido = new EntityPedido();
-            Pedido.FormaPagos = ListFPA();
+            EntityDireccion Direccion = new EntityDireccion();
+            List<EntityDireccion> Direcciones;
 
             if (conexion.iduser != 0)
             {
                 // Si es usuario registrado le mostramos sus direcciónes.
-                Pedido.Direcciones = ListDirecciones(conexion.iduser);
-                if (Pedido.Direcciones.Count > 0)
+                Direcciones = ListDirecciones(conexion.iduser);
+                if (Direcciones.Count > 0)
                 {
                     ViewBag.id_user = conexion.iduser;
-                    return View("Direcciones", Pedido.Direcciones);
+                    return View("Direcciones", Direcciones);
                     
                 }
                 else
                 {
                     // excepto si np  tiene ninguna que le pedimos que cree una nueva.
-                    Pedido.Direccion.user_i = conexion.iduser;
+                    Direccion.user_i = conexion.iduser;
                     
-                    Pedido.Direccion.paises = DDLPaises();
+                    Direccion.paises = DDLPaises();
                     return View("Direccion", Pedido);
                 }
                 
             }
             else
             {
-                Pedido.Direccion = new EntityDireccion()
+                Direccion = new EntityDireccion()
                 {
                     user_i = 0
                 };
 
-                Pedido.Direccion.paises = DDLPaises();
+                Direccion.paises = DDLPaises();
                 return View("Direccion", Pedido);
             }
         }
@@ -135,23 +150,30 @@ namespace FRONT.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateDireccion(EntityPedido entitypedido)
+        public ActionResult CreateDireccion(EntityDireccion entityDireccion)
         {
-            ModelState.Remove("Paises");
-            EntityDireccion entityDireccion = entitypedido.Direccion;
-
             entityDireccion.paises = new List<EntityPais>();
             if (ModelState.IsValid)
             {
                 _logger.LogInformation($"Grabación de nuevo  {entityDireccion.direccion_nv} a las {DateTime.Now.ToLongTimeString()} para un pedido");
                 // Si es valido grabamos y vamos al pago.
 
-                CrearDireccionPedido(entityDireccion).Wait();
+                EntityDireccion nuevadireccion = CrearDireccionPedido(entityDireccion);
 
-                return View("Pago", entitypedido);
+                EntityTarjeta Tarjeta = new EntityTarjeta();
+                
+                Tarjeta.NumeroTarjeta = "";
+                Tarjeta.FechaVencimiento = DateTime.Now;
+                Tarjeta.NombreTitular = "";
+                Tarjeta.CVV = 0;
+                // Los guardamos en el modelo para la sigueinte fase
+                Tarjeta.iddireccion = nuevadireccion.ididentifier_i;
+                Tarjeta.iduser = nuevadireccion.user_i;
+                Tarjeta.id_fpa = 1; // Como solo hacemos pedidos por tarjheta lo dejamos fijo.
+                return View("RealizarPago", Tarjeta);
             }
             // en los demás casos mostramos en pantalla
-            return View("CreateDireccion", entitypedido);
+            return View("CreateDireccion", entityDireccion);
         }
 
         [HttpPost]
@@ -164,18 +186,34 @@ namespace FRONT.Controllers
             if (ModelState.IsValid)
             {
                 EntityPedido entityPedido = new EntityPedido();
-                entityPedido.Tarjeta = entitytarjeta;
                 entityPedido.id_direccion = entitytarjeta.iddireccion;
                 entityPedido.id_user = entitytarjeta.iduser;
-                ProcesarPedido(entityPedido).Wait();
+                entityPedido.id_fpa = entitytarjeta.id_fpa;
 
                 return View("PedidoPagado", entityPedido);
             }
            
             return View("RealizarPago", entitytarjeta);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RealizarPagoFase2(EntityPedido entityPedido)
+        {
 
-       
+            ModelState.Remove("Estado");
+
+            if (ModelState.IsValid)
+            {
+
+                ProcesarPedido(entityPedido).Wait();
+
+                return View("PedidoPagado", entityPedido);
+            }
+
+            return View("RealizarPagoFase2", entityPedido);
+        }
+
+
 
         private static async Task<EntityPedido> ProcesarPedido(EntityPedido Pedido)
         {
@@ -190,15 +228,15 @@ namespace FRONT.Controllers
             return Pedido;
         }
 
-        private static async Task<EntityDireccion> CrearDireccionPedido(EntityDireccion entityDireccion)
+        private static  EntityDireccion CrearDireccionPedido(EntityDireccion entityDireccion)
         {
             string apiUrl = string.Format(apiUrlDireccion, entityDireccion.ididentifier_i);
 
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.PostAsJsonAsync(apiUrl, entityDireccion);
+            HttpResponseMessage response = client.PostAsJsonAsync(apiUrl, entityDireccion).Result;
             response.EnsureSuccessStatusCode();
 
-            entityDireccion = await response.Content.ReadFromJsonAsync<EntityDireccion>();
+            entityDireccion = JsonSerializer.Deserialize<EntityDireccion>(response.Content.ReadAsStringAsync().Result);
 
             return entityDireccion;
         }
@@ -259,13 +297,28 @@ namespace FRONT.Controllers
 
             return entityCarrito;
         }
+
+        private static List<EntityImagen> ListImagenes(int id)
+        {
+            List<EntityImagen> entityImagenes = new List<EntityImagen>();
+
+            string apiUrl = string.Format(apiUrlListImagenes, id);
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = client.GetAsync(apiUrl).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                entityImagenes = JsonSerializer.Deserialize<List<EntityImagen>>(response.Content.ReadAsStringAsync().Result);
+            }
+
+            return entityImagenes;
+        }
         private static List<EntityFormaPago> ListFPA()
         {
 
             List<EntityFormaPago> formasdepago = new List<EntityFormaPago>();
 
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = client.GetAsync(apiUrlList).Result;
+            HttpResponseMessage response = client.GetAsync(apiUrlListFormasPago).Result;
             if (response.IsSuccessStatusCode)
             {
                 formasdepago = JsonSerializer.Deserialize<List<EntityFormaPago>>(response.Content.ReadAsStringAsync().Result);
