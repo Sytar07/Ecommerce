@@ -77,6 +77,8 @@ namespace FRONT.Controllers
                     if (User.First().clave_nv == model.clave_nv)
                     {
                         HttpContext.Session.SetString("UserName", model.email_nv);
+                        HttpContext.Session.SetString("UserId", User.First().ididentifier_i.ToString());
+
                         if (User.First().rol_i == 9)
                         {
                             HttpContext.Session.SetString("Admin", "ADMIN");

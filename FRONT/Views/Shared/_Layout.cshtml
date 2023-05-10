@@ -1,10 +1,12 @@
 ﻿<!DOCTYPE html>
 @{
     var username = new Byte[40];
+    var userid = new Byte[40];
     var admin = new Byte[40];
     var ip = new Byte[40];
     var conexion = new Byte[40];
     ViewData["User"] = null;
+    ViewData["UserId"] = null;
     ViewData["IP"] = null;
     ViewData["Admin"] = null;
     ViewData["Conexion"] = null;
@@ -12,6 +14,10 @@
     if(this.Context.Session.TryGetValue("UserName",out username))
     {
         ViewData["User"] = System.Text.Encoding.UTF8.GetString(username);
+    }
+    if (this.Context.Session.TryGetValue("UserId", out userid))
+    {
+        ViewData["UserId"] = System.Text.Encoding.UTF8.GetString(userid);
     }
     if (this.Context.Session.TryGetValue("Admin", out admin))
     {
@@ -25,6 +31,8 @@
     {
         ViewData["Conexion"] = System.Text.Encoding.UTF8.GetString(conexion);
     }
+
+    
 }
 <html lang="en">
 <head>
@@ -91,7 +99,11 @@
                     }
                     else
                     {
-                        <li class="nav-item"><span class="navbar-brand text-20">@ViewData["User"]</span></li>
+                        <li class="nav-item">
+                            <a class="navbar-brand text-20 " id="userid" asp-area="" asp-controller="MasterUsers" asp-action="Edit" asp-route-id="@ViewData["UserId"]">
+                                @ViewData["User"]
+                            </a>                           
+                        </li>
                     }
                     
                 </ul>

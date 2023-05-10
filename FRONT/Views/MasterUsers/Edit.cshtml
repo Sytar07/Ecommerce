@@ -46,12 +46,14 @@
                     </div>
 
                 </div>
-
-                <div class="card-footer text-center">
-                    <a class="btn btn-primary" asp-area="" asp-controller="MasterUsers" asp-action="Index">Volver a Usuarios</a>
+                @if (ViewData["Admin"] != null)
+                {
+                    <div class="card-footer text-center">
+                        <a class="btn btn-primary" asp-area="" asp-controller="MasterUsers" asp-action="Index">Volver a Usuarios</a>
                     <input class="btn btn-primary"  type="submit" value="Guardar" />
                     <a class="btn btn-primary" asp-area="" asp-controller="MasterUsers" asp-action="Delete" asp-route-id="@Model.ididentifier_i">Borrar</a>
                 </div>
+                }
                 <div class="card-footer text-center">
                     <a class="btn btn-primary" asp-area="" asp-controller="MasterDirecciones" asp-action="Index" asp-route-id="@Model.ididentifier_i">Ver Direcciones del Usuario</a>
                 </div>
