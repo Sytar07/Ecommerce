@@ -49,12 +49,12 @@ namespace BLL.Controllers
                 ididentifier_i = result.ididentifier_i,
                 id_user = result.id_user,
                 id_fpa = result.id_fpa,
-                fecha_Envio = result.Fecha_Envio,
-                fecha_Pedido = result.Fecha_Pedido,
-                subTotal = result.SubTotal,
-                total = result.Total,
-                iva = result.Iva,
-                estado = result.Estado
+                fecha_Envio = result.fecha_Envio,
+                fecha_Pedido = result.fecha_Pedido,
+                subTotal = result.subTotal,
+                total = result.total,
+                iva = result.iva,
+                estado = result.estado
             };
 
             return CreatedAtAction(nameof(Get), new { id = entityPedido.ididentifier_i }, entityPedidoCompleto);

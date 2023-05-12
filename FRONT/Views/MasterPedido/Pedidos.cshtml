@@ -1,0 +1,36 @@
+﻿@model List<ECOMMERCE.CORE.EntityPedido>
+@{
+    ViewBag.Title = "Pedidos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-responsive">
+    <a class="btn btn-primary" asp-area="" asp-controller="MasterDirecciones" asp-action="Create" asp-route-id="@ViewBag.id_user">Crear</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fecha_Pedido</th>
+                <th>Fecha_Envio</th>
+                <th>Total</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Pedido in Model)
+            {
+                <tr>
+                    <td>@Pedido.fecha_Pedido</td>
+                    <td>@Pedido.fecha_Envio</td>
+                    <td>@Pedido.total</td>
+                    <td>@Pedido.estado</td>
+                   
+
+                    <td class="text-center">
+                        <a class="btn btn-primary" asp-area="" asp-controller="MasterPedido" asp-action="VerPedido" asp-route-id="@Pedido.ididentifier_i">Ficha</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+  
+</div>

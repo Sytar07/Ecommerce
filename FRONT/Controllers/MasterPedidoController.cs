@@ -31,7 +31,9 @@ namespace FRONT.Controllers
         private const string apiUrlConexion = "https://localhost:7023/Conexion?IP={0}&User={1}&conexion={2}";
         private const string apiUrlPaises = "https://localhost:7023/Paises";
         private const string apiUrlDireccion = "https://localhost:7023/Direccion?id_Direccion={0}";
+
         private const string apiUrlPedido = "https://localhost:7023/Pedido";
+        private const string apiUrlPedidos = "https://localhost:7023/Pedidos?id_user={0}";
         private const string apiUrlGetPedido = "https://localhost:7023/Pedido?id_pedido={0}";
 
 
@@ -42,6 +44,8 @@ namespace FRONT.Controllers
             _logger = logger;
         }
 
+
+        // PROCESO DE PEDIDO
         public IActionResult Index()
         {
             var conexion = new Byte[40];
@@ -235,7 +239,38 @@ namespace FRONT.Controllers
             return View("RealizarPago", entityPedido);
         }
 
+        // END Proceso PEDIDO
 
+
+        public IActionResult MisPedidos()
+        {
+            
+            int id_user = 0;
+            byte[]? UserId;
+            if (HttpContext.Session.TryGetValue("UserId", out UserId))
+            {
+                id_user = int.Parse(System.Text.Encoding.UTF8.GetString(UserId));
+            }
+            
+
+            _logger.LogInformation($"GET de los pedidos a las {DateTime.Now.ToLongTimeString()}");
+            
+            return View("Pedidos", GetPedidos(id_user));
+        }
+
+        public IActionResult TodosPedidos()
+        {
+            _logger.LogInformation($"GET de los TODOS pedidos a las {DateTime.Now.ToLongTimeString()}");
+
+            return View("Pedidos", GetPedidos(0));
+        }
+
+        public IActionResult VerPedido(int id_pedido)
+        {
+
+            return View("VerPedido", GetPedidoCompleto(new EntityPedido() { ididentifier_i = id_pedido }));
+        }
+        
 
         private static EntityPedidoCompleto ProcesarPedido(EntityPedido Pedido)
         {
@@ -251,7 +286,20 @@ namespace FRONT.Controllers
 
             return GetPedidoCompleto(Pedido);
         }
+        private static List<EntityPedido> GetPedidos(int id_user)
+        {
+            string apiUrl = string.Format(apiUrlPedidos, id_user);
+            List<EntityPedido> Pedidos;
+            List<EntityLineaPedido> entityLineaPedidos;
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = client.GetAsync(apiUrl).Result;
+            response.EnsureSuccessStatusCode();
 
+            Pedidos = JsonSerializer.Deserialize<List<EntityPedido>>(response.Content.ReadAsStringAsync().Result);
+
+
+            return Pedidos;
+        }
         private static EntityPedidoCompleto GetPedidoCompleto(EntityPedido Pedido)
         {
             string apiUrl = string.Format(apiUrlGetPedido, Pedido.ididentifier_i);
@@ -269,7 +317,6 @@ namespace FRONT.Controllers
 
             return pedidoCompleto;
         }
-
         private static EntityDireccion Direccion(int id)
         {
             EntityDireccion entityDireccion = new EntityDireccion();
@@ -365,7 +412,6 @@ namespace FRONT.Controllers
 
             return entityCarrito;
         }
-
         private static List<EntityImagen> ListImagenes(int id)
         {
             List<EntityImagen> entityImagenes = new List<EntityImagen>();

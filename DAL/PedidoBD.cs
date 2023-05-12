@@ -49,12 +49,12 @@ namespace DAL
                         {
                             ididentifier_i = (int)reader["ID_PEDIDO"],
 
-                            Fecha_Pedido = (DateTime)reader["FECHA_PEDIDO"],
-                            Fecha_Envio = (DateTime?)reader["FECHA_ENVIO"],
-                            SubTotal = (decimal)reader["SUBTOTAL"],
-                            Total = (decimal)reader["TOTAL"],
-                            Iva = (decimal)reader["IVA"],
-                            Estado = reader["ESTADO"].ToString(),
+                            fecha_Pedido = (DateTime)reader["FECHA_PEDIDO"],
+                            fecha_Envio = reader["FECHA_ENVIO"].ToString()!="" ? (DateTime?)reader["FECHA_ENVIO"] : null,
+                            subTotal = (decimal)reader["SUBTOTAL"],
+                            total = (decimal)reader["TOTAL"],
+                            iva = (decimal)reader["IVA"],
+                            estado = reader["ESTADO"].ToString(),
 
                             id_direccion = (int)reader["ID_DIRECCION"],
                             id_fpa = (int)reader["ID_FORMA_PAGO"],
@@ -110,12 +110,12 @@ namespace DAL
                         // Añado los Pedidos encontrados a la lista de entidades
                         EntityPedido.ididentifier_i = (int)reader["ID_PEDIDO"];
 
-                        EntityPedido.Fecha_Pedido = (DateTime)reader["FECHA_PEDIDO"];
+                        EntityPedido.fecha_Pedido = (DateTime)reader["FECHA_PEDIDO"];
                         
-                        EntityPedido.SubTotal = (decimal)reader["SUBTOTAL"];
-                        EntityPedido.Total = (decimal)reader["TOTAL"];
-                        EntityPedido.Iva = (decimal)reader["IVA"];
-                        EntityPedido.Estado = reader["ESTADO"].ToString();
+                        EntityPedido.subTotal = (decimal)reader["SUBTOTAL"];
+                        EntityPedido.total = (decimal)reader["TOTAL"];
+                        EntityPedido.iva = (decimal)reader["IVA"];
+                        EntityPedido.estado = reader["ESTADO"].ToString();
 
                         EntityPedido.id_direccion = (int)reader["ID_DIRECCION"];
                         EntityPedido.id_fpa= (int)reader["ID_FORMA_PAGO"];

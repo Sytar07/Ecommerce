@@ -19,12 +19,12 @@ namespace ECOMMERCE.CORE
         public int? id_user { get; set; }
         public int id_fpa { get; set; }
 
-        public DateTime Fecha_Pedido { get; set; }
-        public DateTime? Fecha_Envio { get; set; }
-        public decimal? SubTotal { get; set; }
-        public decimal? Total { get; set; }
-        public decimal? Iva { get; set; }
-        public string? Estado { get; set; }
+        public DateTime fecha_Pedido { get; set; }
+        public DateTime? fecha_Envio { get; set; }
+        public decimal? subTotal { get; set; }
+        public decimal? total { get; set; }
+        public decimal? iva { get; set; }
+        public string? estado { get; set; }
 
     }
 
