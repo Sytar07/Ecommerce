@@ -149,11 +149,19 @@ namespace FRONT.Controllers
             entityDireccion.paises = DDLPaises();
             return View("ConfirmarDireccion", entityDireccion);
         }
-    
+
+        [HttpGet]
+        public IActionResult CrearDireccion(int id)
+        {
+            EntityDireccion direccion = new EntityDireccion();
+            direccion.paises = DDLPaises();
+            direccion.user_i = id;
+            return View("Direccion",direccion);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateDireccion(EntityDireccion entityDireccion)
+        public ActionResult CrearDireccion(EntityDireccion entityDireccion)
         {
             entityDireccion.paises = new List<EntityPais>();
             if (ModelState.IsValid)
