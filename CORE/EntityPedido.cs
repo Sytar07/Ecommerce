@@ -16,7 +16,7 @@ namespace ECOMMERCE.CORE
         public int conexion { get; set; }
         public int ididentifier_i { get; set; }
         public int id_direccion { get; set; }
-        public int id_user { get; set; }
+        public int? id_user { get; set; }
         public int id_fpa { get; set; }
 
         public DateTime Fecha_Pedido { get; set; }
@@ -33,15 +33,15 @@ namespace ECOMMERCE.CORE
         public int conexion { get; set; }
         public int ididentifier_i { get; set; }
         public int id_direccion { get; set; }
-        public int id_user { get; set; }
+        public int? id_user { get; set; }
         public int id_fpa { get; set; }
 
-        public DateTime Fecha_Pedido { get; set; }
-        public DateTime? Fecha_Envio { get; set; }
-        public decimal? SubTotal { get; set; }
-        public decimal? Total { get; set; }
-        public decimal? Iva { get; set; }
-        public string? Estado { get; set; }
+        public DateTime fecha_Pedido { get; set; }
+        public DateTime? fecha_Envio { get; set; }
+        public decimal? subTotal { get; set; }
+        public decimal? total { get; set; }
+        public decimal? iva { get; set; }
+        public string? estado { get; set; }
 
         public EntityDireccion direccionEntrega { get; set; }
         public List<EntityLineaPedido> entityLineasPedido { get; set; }
@@ -156,7 +156,7 @@ namespace ECOMMERCE.CORE
 
     public class EntityTarjeta
     {
-        public int iduser { get; set; }
+        public int? iduser { get; set; }
         public int id_fpa { get; set; }
         public int iddireccion { get; set; }
 

@@ -32,7 +32,7 @@ namespace ECOMMERCE.CORE
             } 
         }
 
-        public int user_i
+        public int? user_i
         {
             get
             {
@@ -146,7 +146,7 @@ namespace ECOMMERCE.CORE
         private string _ciudad_nv;
         private int _pais_i;
         private bool _delete_b;
-        private int _user_i;
+        private int? _user_i;
 
         // contructor
         public EntityDireccion()

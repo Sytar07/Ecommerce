@@ -44,7 +44,7 @@ namespace BLL.Controllers
             _logger.LogInformation($"API Create de direccion {entityDireccion.direccion_nv} las {DateTime.Now.ToLongTimeString()}");
             var result= Direcciones.GETDIRECCION(Direcciones.INSERTDIRECCION(entityDireccion));
 
-            return CreatedAtAction(nameof(Get), new { id = entityDireccion.ididentifier_i }, entityDireccion);
+            return CreatedAtAction(nameof(Get), new { id = result.ididentifier_i }, result);
         }
 
         [HttpPut]
@@ -56,7 +56,7 @@ namespace BLL.Controllers
 
             var result = Direcciones.GETDIRECCION(Direcciones.UPDATEDIRECCION(entityDireccion));
 
-            return CreatedAtAction(nameof(Get), new { id = entityDireccion.ididentifier_i }, entityDireccion);
+            return CreatedAtAction(nameof(Get), new { id = result.ididentifier_i }, result);
         }
 
         [HttpDelete]

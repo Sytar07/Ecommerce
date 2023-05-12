@@ -80,12 +80,12 @@ namespace DAL
                 // Abro la conexion
                 connection.Open();
                 // Declaro una transaccion
-                SqlTransaction sqlTransaction = connection.BeginTransaction();
+
                 try
                 {
                     // Declaro un COMANDO para ejecutar un PROCEDIMIENTO ALMACENADO
                     SqlCommand command = new SqlCommand("GET_DIRECCION", connection);
-                    command.Transaction = sqlTransaction; // LE pasamos la transaccion
+
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = id_direccion;
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     // parametro SIMPLE
@@ -99,7 +99,7 @@ namespace DAL
                         entityDireccion.ididentifier_i = (int)reader["ID_DIRECCION"];
                         entityDireccion.direccion_nv= (string)reader["DIRECCION"];
                         entityDireccion.numero_i = (int)reader["NUMERO"];
-                        entityDireccion.user_i= (int)reader["ID_USER"];
+                        entityDireccion.user_i= reader["ID_USER"].ToString()!=""? (int)reader["ID_USER"]: null;
                         entityDireccion.puerta_nv = (string)reader["PUERTA"];
                         entityDireccion.ciudad_nv = (string)reader["CIUDAD"];
                         entityDireccion.pais_i = (int)reader["PAIS"];
@@ -114,14 +114,12 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    // Ha fallado ROLLBACK a la transaccion
-                    sqlTransaction.Rollback();
+                    
                     throw new Exception(ex.Message);
                 }
                 finally
                 {
-                    // SI funciona la transaccion le damos adelante. COMMIT
-                    sqlTransaction.Commit();
+                    
                 }
 
             }
@@ -195,7 +193,7 @@ namespace DAL
                     command.Parameters.Add("@DIRECCION", System.Data.SqlDbType.NVarChar).Value = entityDireccion.direccion_nv;
                     command.Parameters.Add("@NUMERO", System.Data.SqlDbType.Int).Value = entityDireccion.numero_i;
                     command.Parameters.Add("@PUERTA", System.Data.SqlDbType.NVarChar).Value = entityDireccion.puerta_nv;
-                    command.Parameters.Add("@USUARIO", System.Data.SqlDbType.NVarChar).Value = entityDireccion.user_i;
+                    command.Parameters.Add("@USUARIO", System.Data.SqlDbType.Int).Value = entityDireccion.user_i;
                     command.Parameters.Add("@CIUDAD", System.Data.SqlDbType.NVarChar).Value = entityDireccion.ciudad_nv;
                     command.Parameters.Add("@PAIS", System.Data.SqlDbType.NVarChar).Value = entityDireccion.pais_i;
 
@@ -221,8 +219,10 @@ namespace DAL
                     // SI funciona la transaccion le damos adelante. COMMIT
                     sqlTransaction.Commit();
                 }
-            }
+                connection.Close();
 
+            }
+            
             return salida;
         }
         public int UPDATEDIRECCION(EntityDireccion entityDireccion)

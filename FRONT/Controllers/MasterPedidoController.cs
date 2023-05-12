@@ -25,7 +25,7 @@ namespace FRONT.Controllers
 
         private const string apiUrlListFormasPago = "https://localhost:7023/FormasPago";
         private const string apiUrlLineasPedido = "https://localhost:7023/LPedido?id={0}";
-        
+        private const string apiUrlDireccionactions = "https://localhost:7023/Direccion?id_Direccion={0}";
         private const string apiUrlListImagenes = "https://localhost:7023/Imagenes?id_producto={0}";
         private const string apiUrlDireccionesList = "https://localhost:7023/Direcciones?id_user={0}";
         private const string apiUrlConexion = "https://localhost:7023/Conexion?IP={0}&User={1}&conexion={2}";
@@ -98,7 +98,7 @@ namespace FRONT.Controllers
                     Direccion.user_i = conexion.iduser;
                     
                     Direccion.paises = DDLPaises();
-                    return View("Direccion", Pedido);
+                    return View("Direccion", Direccion);
                 }
                 
             }
@@ -110,7 +110,7 @@ namespace FRONT.Controllers
                 };
 
                 Direccion.paises = DDLPaises();
-                return View("Direccion", Pedido);
+                return View("Direccion", Direccion);
             }
         }
 
@@ -262,12 +262,29 @@ namespace FRONT.Controllers
             response.EnsureSuccessStatusCode();
 
             pedidoCompleto = JsonSerializer.Deserialize<EntityPedidoCompleto>(response.Content.ReadAsStringAsync().Result);
-            pedidoCompleto.direccionEntrega = ListDirecciones(Pedido.id_user).Where(i => i.ididentifier_i == Pedido.id_direccion).FirstOrDefault();
-            pedidoCompleto.entityLineasPedido = LineasPedido(Pedido.ididentifier_i);
+
+
+            pedidoCompleto.direccionEntrega = Direccion(pedidoCompleto.id_direccion);
+            pedidoCompleto.entityLineasPedido = LineasPedido(pedidoCompleto.ididentifier_i);
 
             return pedidoCompleto;
         }
 
+        private static EntityDireccion Direccion(int id)
+        {
+            EntityDireccion entityDireccion = new EntityDireccion();
+            string apiUrl = string.Format(apiUrlDireccionactions, id);
+
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = client.GetAsync(apiUrl).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                entityDireccion = JsonSerializer.Deserialize<EntityDireccion>(response.Content.ReadAsStringAsync().Result);
+                entityDireccion.paises = DDLPaises();
+            }
+
+            return entityDireccion;
+        }
         private static List<EntityLineaPedido> LineasPedido(int pedido)
         {
             string apiUrl = string.Format(apiUrlLineasPedido,pedido);
@@ -305,7 +322,7 @@ namespace FRONT.Controllers
 
             return listadopaises;
         }
-        private static List<EntityDireccion> ListDirecciones(int id)
+        private static List<EntityDireccion> ListDirecciones(int? id)
         {
 
             List<EntityDireccion> entityDirecciones = new List<EntityDireccion>();

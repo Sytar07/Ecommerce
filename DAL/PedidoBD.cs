@@ -160,8 +160,8 @@ namespace DAL
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add("@ID_CONEXION", System.Data.SqlDbType.Int).Value = entityPedido.conexion;
                     command.Parameters.Add("@ID_FPA", System.Data.SqlDbType.NVarChar).Value = entityPedido.id_fpa;
-                    command.Parameters.Add("@ID_DIRECCION", System.Data.SqlDbType.NVarChar).Value = entityPedido.id_direccion;
-                    command.Parameters.Add("@id_user", System.Data.SqlDbType.NVarChar).Value = entityPedido.id_user;
+                    command.Parameters.Add("@ID_DIRECCION", System.Data.SqlDbType.Int).Value = entityPedido.id_direccion;
+                    command.Parameters.Add("@id_user", System.Data.SqlDbType.Int).Value = entityPedido.id_user!=null ? entityPedido.id_user : 0;
                     // Los datos de la tarjeta no se guardan en BBDD 
 
                     command.Parameters.Add("@ID_RETURN", System.Data.SqlDbType.Int).Value = 0;
@@ -257,6 +257,7 @@ namespace DAL
                         {
                             idproducto = (int)reader["ID_PRODUCTO"],
                             cantidad_i = (int)reader["CANTIDAD"],
+                            nombre_nv = reader["NOMBRE"].ToString(),
                             precio_f = (decimal)reader["PRECIO"],
                             total_f = (decimal)reader["TOTAL"],
                         });

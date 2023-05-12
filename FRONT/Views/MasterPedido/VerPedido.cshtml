@@ -44,7 +44,7 @@
                     <th>Cantidad</th>
                     <th>Precio</th>
                     <th>Total</th>
-                    <th>Foto</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -56,7 +56,7 @@
                         <td>@linea.cantidad_i</td>
                         <td>@linea.precio_f.ToString("C")</td>
                         <td>@linea.total_f.ToString("C")</td>
-                        <td><img src="@linea.foto" alt="@linea.nombre_nv" width="100px" /></td>
+                        
                     </tr>
                 }
             </tbody>
@@ -76,12 +76,12 @@
             <tbody>
                 <tr>
                     <td>@Model.ididentifier_i</td>
-                    <td>@Model.Fecha_Pedido.ToShortDateString()</td>
-                    <td>@(Model.Fecha_Envio.HasValue ? Model.Fecha_Envio.Value.ToShortDateString() : "-")</td>
-                    <td>@(Model.SubTotal.HasValue ? Model.SubTotal.Value.ToString("C") : "-")</td>
-                    <td>@(Model.Total.HasValue ? Model.Total.Value.ToString("C") : "-")</td>
-                    <td>@(Model.Iva.HasValue ? Model.Iva.Value.ToString("C") : "-")</td>
-                    <td>@Model.Estado</td>
+                    <td>@Model.fecha_Pedido.ToShortDateString()</td>
+                    <td>@(Model.fecha_Envio.HasValue ? Model.fecha_Envio.Value.ToShortDateString() : "-")</td>
+                    <td>@(Model.subTotal.HasValue ? Model.subTotal.Value.ToString("C") : "-")</td>
+                    <td>@(Model.total.HasValue ? Model.total.Value.ToString("C") : "-")</td>
+                    <td>@(Model.iva.HasValue ? Model.iva.Value.ToString("C") : "-")</td>
+                    <td>@Model.estado</td>
                 </tr>
             </tbody>
         </table>

@@ -38,13 +38,26 @@ namespace BLL.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<EntityPedido> Create(EntityPedido entityPedido)
+        public ActionResult<EntityPedidoCompleto> Create(EntityPedido entityPedido)
         {
            PedidosBD Pedidos = new PedidosBD();
             
             var result= Pedidos.GETPedido(Pedidos.INSERTPedido(entityPedido));
+            EntityPedidoCompleto entityPedidoCompleto = new EntityPedidoCompleto()
+            {
+                conexion = result.conexion,
+                ididentifier_i = result.ididentifier_i,
+                id_user = result.id_user,
+                id_fpa = result.id_fpa,
+                fecha_Envio = result.Fecha_Envio,
+                fecha_Pedido = result.Fecha_Pedido,
+                subTotal = result.SubTotal,
+                total = result.Total,
+                iva = result.Iva,
+                estado = result.Estado
+            };
 
-            return CreatedAtAction(nameof(Get), new { id = entityPedido.ididentifier_i }, result);
+            return CreatedAtAction(nameof(Get), new { id = entityPedido.ididentifier_i }, entityPedidoCompleto);
         }
 
         [HttpPut]
