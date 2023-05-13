@@ -265,12 +265,17 @@ namespace FRONT.Controllers
             return View("Pedidos", GetPedidos(0));
         }
 
-        public IActionResult VerPedido(int id_pedido)
+        public IActionResult VerPedido(int id)
         {
 
-            return View("VerPedido", GetPedidoCompleto(new EntityPedido() { ididentifier_i = id_pedido }));
+            return View("VerPedido", GetPedidoCompleto(new EntityPedido() { ididentifier_i = id }));
         }
-        
+        public IActionResult CambiarEstadoPedido(int id)
+        {
+
+            return View("VerPedido", GetPedidoCompleto(EstadoPedido(new EntityPedido() { ididentifier_i = id })));
+        }
+
 
         private static EntityPedidoCompleto ProcesarPedido(EntityPedido Pedido)
         {
@@ -299,6 +304,20 @@ namespace FRONT.Controllers
 
 
             return Pedidos;
+        }
+        private static EntityPedido EstadoPedido(EntityPedido Pedido)
+        {
+            string apiUrl = string.Format(apiUrlGetPedido, Pedido.ididentifier_i);
+            
+            List<EntityLineaPedido> entityLineaPedidos;
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = client.PutAsJsonAsync(apiUrl, Pedido).Result;
+            response.EnsureSuccessStatusCode();
+
+            EntityPedido result_pedidoCompleto = JsonSerializer.Deserialize<EntityPedido>(response.Content.ReadAsStringAsync().Result);
+
+
+            return result_pedidoCompleto;
         }
         private static EntityPedidoCompleto GetPedidoCompleto(EntityPedido Pedido)
         {

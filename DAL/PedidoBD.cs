@@ -201,9 +201,10 @@ namespace DAL
                     command.Transaction = sqlTransaction; // LE pasamos la transaccion
 
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = entityPedido.ididentifier_i;
-
-                    command.Parameters.Add("@ESTADO", System.Data.SqlDbType.SmallInt).Value = "ENVIADO";
+                    
+                    command.Parameters.Add("@ID_PEDIDO", System.Data.SqlDbType.Int).Value = entityPedido.ididentifier_i;
+                    
+                    command.Parameters.Add("@ESTADO", System.Data.SqlDbType.NVarChar).Value = "ENVIADO";
 
                     command.Parameters.Add("@ID_RETURN", System.Data.SqlDbType.Int).Value = 0;
                     command.Parameters["@ID_RETURN"].Direction = ParameterDirection.Output;

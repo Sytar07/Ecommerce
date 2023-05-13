@@ -69,7 +69,7 @@ namespace BLL.Controllers
 
             var result = Pedidos.GETPedido(Pedidos.UPDATEEstadoPedido(entityPedido));
             _logger.LogInformation($"API Create de Pedido {entityPedido.ididentifier_i} a las {DateTime.Now.ToLongTimeString()}");
-            return CreatedAtAction(nameof(Get), new { id = entityPedido.ididentifier_i }, entityPedido);
+            return CreatedAtAction(nameof(Get), new { id = result.ididentifier_i }, result);
         }
 
       
