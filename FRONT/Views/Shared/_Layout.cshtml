@@ -78,7 +78,7 @@
 
                         @if (ViewData["Admin"] != null)
                         {
-                            <li class="nav-item"><a class="navbar-brand text-20 " id="login" asp-area="" asp-controller="MasterPedido" asp-action="TodosPedidos">Pedidos</a></li>
+                            <li class="nav-item"><a class="navbar-brand text-20 " id="login" asp-area="" asp-controller="MasterPedido" asp-action="TodosPedidos">Gestión de Pedidos</a></li>
                        
                             <li class="nav-item">
                                 <a class="navbar-brand text-20 " asp-area="" asp-controller="MasterUsers" asp-action="Index">Usuarios</a>
@@ -88,9 +88,7 @@
                                 <a class="navbar-brand text-20 " asp-area="" asp-controller="MasterProductos" asp-action="Index">Productos</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="navbar-brand text-20 " asp-area="" asp-controller="MasterPedido" asp-action="Index">Pedidos</a>
-                            </li>
+                          
                         }else{
                         <li class="nav-item">
                             <a class="navbar-brand text-20 " asp-area="" asp-controller="Catalogo" asp-action="Index">Catalogo de Productos</a>
