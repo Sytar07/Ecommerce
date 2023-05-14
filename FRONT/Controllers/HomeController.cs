@@ -83,8 +83,8 @@ namespace FRONT.Controllers
                         {
                             HttpContext.Session.SetString("Admin", "ADMIN");
                         }
-                        
-                        EntityConexion conexion= GetConexion("1:1:1:0", model.email_nv.ToUpper());
+                        // si estamos con un usuario debemos ignorar su IP. por eso le paso el nombre de usuario en la IP
+                        EntityConexion conexion= GetConexion(model.email_nv.ToUpper(), model.email_nv.ToUpper());
                         if (conexion != null)
                         {
                             HttpContext.Session.SetString("Conexion", conexion.ididentifier_i.ToString());

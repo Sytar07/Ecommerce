@@ -23,9 +23,9 @@
             total = total + (item.precio_f * @item.cantidad_i);
             <tr>
                 <td>@item.nombre_nv</td>
-                <td style="text-align: right;">@item.precio_f€</td>
-                <td style="text-align: right;">@item.cantidad_i</td>
-                <td style="text-align: right;">@(item.precio_f * @item.cantidad_i)€</td>
+                <td style="text-align: right;">@item.precio_f.ToString("C")</td>
+                <td style="text-align: right;">@item.cantidad_i.ToString()</td>
+                <td style="text-align: right;">@(item.precio_f * @item.cantidad_i).ToString("C")</td>
                 <td>
                     <button title="Eliminar Producto" class="btn btn-success agregarcarrito flex-shrink-0 w-50" type="button" onclick="quitarcarrito(@item.idproducto);">
                         X 
@@ -40,7 +40,7 @@
             <td></td>
             <td></td>
             <td style="text-align: right;"><strong>Total:</strong></td>
-            <td style="text-align: right;"><strong>@total</strong></td>
+            <td style="text-align: right;"><strong>@total.ToString("C")</strong></td>
         </tr>
     </tfoot>
 </table>

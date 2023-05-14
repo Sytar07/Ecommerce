@@ -2,10 +2,23 @@
 @{
     ViewBag.Title = "Pedidos";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    var admin = new Byte[40];
+    
+    
+    ViewData["Admin"] = null;
+    
+
+    
+    if (this.Context.Session.TryGetValue("Admin", out admin))
+    {
+        ViewData["Admin"] = System.Text.Encoding.UTF8.GetString(admin);
+    }
+    
 }
 
 <div class="table-responsive">
-    <a class="btn btn-primary" asp-area="" asp-controller="MasterDirecciones" asp-action="Create" asp-route-id="@ViewBag.id_user">Crear</a>
+    
     <table class="table">
         <thead>
             <tr>
@@ -33,7 +46,7 @@
                     </td>
                     
                     <td class="text-center">
-                        @if (Pedido.estado == "PAGADO")
+                        @if (Pedido.estado == "PAGADO" && ViewData["Admin"] != null)
                         {
                             <a class="btn btn-primary" asp-area="" asp-controller="MasterPedido" asp-action="CambiarEstadoPedido" asp-route-id="@Pedido.ididentifier_i">Tramitar pedido y enviar</a>
                         }
