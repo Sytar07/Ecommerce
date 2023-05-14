@@ -168,6 +168,20 @@ namespace FRONT.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (!(entityImagen.imagen == null || entityImagen.imagen.Length == 0))
+                {
+                    var rutaDeGuardado = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/productos", entityImagen.imagen.FileName);
+
+                    using (var stream = new FileStream(rutaDeGuardado, FileMode.Create))
+                    {
+                        entityImagen.imagen.CopyTo(stream);
+                    }
+                    entityImagen.path_nv = entityImagen.imagen.FileName;// Sustiyo el nombre por el correcto
+                }
+
+                // Si es valido grabamos y salimos al Index.
+                SaveImagen(entityImagen).Wait();
+
                 _logger.LogInformation($"Grabación de nuevo  {entityImagen.path_nv} a las {DateTime.Now.ToLongTimeString()}");
                 // Si es valido grabamos y salimos al Index.
                 CreateImagen(entityImagen).Wait();

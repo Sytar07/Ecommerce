@@ -54,7 +54,7 @@ namespace ECOMMERCE.CORE
         }
 
         [Display(Name = "Ruta URL")]
-        public string path_nv {
+        public string? path_nv {
             get
             {
                 
@@ -96,7 +96,7 @@ namespace ECOMMERCE.CORE
 
 
         private int _ididentifier_i;
-        private string _path_nv;
+        private string? _path_nv;
         private int _id_producto;
         private string _tipo_nv;
         
